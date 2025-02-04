@@ -1,0 +1,35 @@
+[manager]
+linemode = "size"
+sort_by = "mtime"
+sort_reverse = true
+
+[plugin]
+prepend_previewers = [
+  # Archive previewer
+  { mime = "application/zip", run = "ouch" },
+  { mime = "application/x-tar", run = "ouch" },
+  { mime = "application/x-bzip2", run = "ouch" },
+  { mime = "application/x-7z-compressed", run = "ouch" },
+  { mime = "application/x-rar", run = "ouch" },
+  { mime = "application/x-xz", run = "ouch" },
+  { mime = "application/epub+zip", run = "epub-preview" },
+  { name = "*.md", run = "glow" },
+]
+
+[opener]
+extract = [
+  { run = 'ouch d -y "$@"', desc = "Extract here with ouch", for = "unix" },
+]
+play = [
+  { run = 'xdg-open "$@"', desc = "xdg open", for = "unix", orphan = true },
+]
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*/"
+run = "git"

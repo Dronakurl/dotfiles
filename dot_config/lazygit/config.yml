@@ -1,0 +1,6 @@
+os:
+  editPreset: "nvim"
+promptToReturnFromSubprocess: false
+gui:
+  expandFocusedSidePanel: true
+  # windowSize: half

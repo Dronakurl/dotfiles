@@ -1,0 +1,212 @@
+-- local vimtips = {
+--   {
+--     title = "visual paste with shift P",
+--     description = "Shift P in visual mode to paste without overwriting the unnamed register",
+--   },
+--   {
+--     title = "gw to format docstrings",
+--     description = "docstrings can be long and the formatter does not handle this. Visual select and hit `gw` to to format with the right line width ",
+--   },
+--   { title = "paste from insert", description = "use C-R to paste from insert mode" },
+--   { title = "gf", description = "Edits the filepath under your cursor" },
+--   {
+--     title = ":norm",
+--     description = "Allows for input of commands as if in NORMAL mode. Example: ':norm daw' will delete the word under the cursor.",
+--   },
+--   {
+--     title = "Marks",
+--     description = "Set marks at specific positions with m in NORMAL mode, followed by a character. Example: 'ma' sets a mark at current position.",
+--   },
+--   {
+--     title = "'<mark>",
+--     description = "Move to the first non-blank character of the line where the mark was set. Example: ''a' moves to the start of the line of mark a.",
+--   },
+--   {
+--     title = "`<mark>",
+--     description = "Move to the exact position where the mark was set. Example: '`a' moves to the exact position of mark a.",
+--   },
+--   { title = ":marks", description = "Displays set marks. Example: ':marks' shows all current marks." },
+--   { title = ":delmarks <mark>", description = "Deletes a mark. Example: ':delmarks a' deletes mark 'a'." },
+--   {
+--     title = "CTRL+a",
+--     description = "Increases the first digit or number in a line. Example: (Where [] is the cursor) 4[2]1 -> 4[3]1.",
+--   },
+--   {
+--     title = "CTRL+x",
+--     description = "Decreases the first digit or number a line. Example: (Where [] is the cursor) 4[2]1 -> 4[1]1.",
+--   },
+--   { title = ":sort", description = "Sorts lines in a document. Example: ':sort' will sort all lines." },
+--   {
+--     title = "Using Multiple Separators in Substitute Commands (S&R)",
+--     description = "You can use different separators in S&R commands. Avoid 'backslashitis' by instead using ':'. Sample command: s:/dir1/dir2/dir3/file:/dir4/dir5/file2:g",
+--   },
+--   {
+--     title = "Regular Expressions and Search & Replace Basics",
+--     description = "There are a variety of metacharacters in regular expressions that can be used for writing patterns. Each metacharacter represents a type of character or numeric, while quantifiers indicate quantity. Combining these can create powerful patterns for text manipulation.",
+--   },
+--   {
+--     title = "Grouping and Backreferences",
+--     description = "You can group parts of regexps with '\\()' and refer to them in the replacement pattern by their special number \\1, \\2, etc. These techniques are useful for swapping the places of words or correcting grammar.",
+--   },
+--   {
+--     title = "Character Ranges",
+--     description = "Character ranges can be created by including a set of characters within brackets '[ ]'. This can simplify the creation of patterns. In addition, putting a negation sign '^' as the first character in the range will result in all characters except those noted being matched.",
+--   },
+--   {
+--     title = "Regex Operator Precedence",
+--     description = "Regexps, like arithmetic expressions, are executed in a certain order of precedence. The equivalents of normal, exponential, multilpication, and addition/subtraction evaluative methods are grouping \\( \\), quantifiers \\1, sequences abc\\t\\.\\w, and alternation \\|, respectively.",
+--   },
+--   {
+--     title = "Global Command",
+--     description = "The global command is written as ':range g[lobal][!]/pattern/cmd' and can execute Ex commands for lines in an indicated range where a pattern matches or does not match. This can be great for actions like deleting all empty lines from a file or copying all matched lines to a new file.",
+--   },
+--   {
+--     title = "Handling UNIX file paths in S&R",
+--     description = "When needing to do S&R in a text containing UNIX file paths, you need to escape every slash in your pattern, i.e., use '\\/' for every '/' in your pattern. Sample command: s/\\/dir1\\/dir2\\/dir3\\/file/dir4\\/dir5\\/file2/g",
+--   },
+--
+--   {
+--     title = "Keyboard Mappings in S&R",
+--     description = "Save some keystrokes by using these mappings: noremap ;; :%s:::g<Left><Left><Left> and noremap ;' :%s:::cg<Left><Left><Left><Left>. They put you where you start typing your search pattern.",
+--   },
+--
+--   {
+--     title = "Character Ranges",
+--     description = "The range [0-9a-zA-Z] represents all letters and digits. '[0123]' and '0123' are not the same, as the former matches any number and the latter matches the literal sequence.",
+--   },
+--
+--   {
+--     title = "Alternations",
+--     description = "Use '\\|' to combine several expressions into one which matches any of its components. The first one matching will be used.",
+--   },
+--
+--   {
+--     title = "Global Search and Execution command",
+--     description = "The ':g' command allows for execution of Ex commands on lines matching a pattern, i.e., usage- [optional range] g[lobal][!]/pattern/command. Some uses include deleting all empty lines ':g/^$/d', reducing multiple blank lines to a single blank ':g/^$/,/./-j'",
+--   },
+--
+--   {
+--     title = ":s/pattern/replacement/[flags]",
+--     description = "Substitutes the first match of the pattern on each line with the replacement specified.",
+--   },
+--   { title = ":s/pattern/[flags]", description = "Deletes the first match of the pattern on each line." },
+--   {
+--     title = ":%s/pattern/replacement/[flags]",
+--     description = "Substitutes every first occurrence of the pattern on each line of the current buffer.",
+--   },
+--   {
+--     title = ":1,10s/pattern/replacement/[flags]",
+--     description = "Substitutes every first occurrence of the pattern on the first ten lines of the current buffer.",
+--   },
+--   {
+--     title = ":s/pattern/replacement/[flags] 10",
+--     description = "Substitutes every first occurrence of the pattern for the current line and the 10 next lines.",
+--   },
+--   { title = ":&&", description = "Repeats the last substitute with its flags." },
+--   {
+--     title = ":~",
+--     description = "Repeats the last substitute command with the same replacement, but with the last used search pattern.",
+--   },
+--   { title = ":", description = ": && - Repeat the last substitute with its flags." },
+--   {
+--     title = ":",
+--     description = ": ~ - Repeat the last substitute command with the same replacement, but with the last used search pattern.",
+--   },
+--   { title = ":", description = ": s/[pattern]/[replacement]/[flags] - The basic substitute command in Vim." },
+--   {
+--     title = ":",
+--     description = ": g& - Repeat the last substitute with the same flags but without the same range (it’s global), and replace its pattern with the last search pattern.",
+--   },
+--   {
+--     title = ":",
+--     description = ": help :substitute/:sm/:sno/:s_flags - Use these to help yourself understand Vim better.",
+--   },
+--   { title = ":", description = ": g/pattern/command - Lets you execute a command in Vim." },
+--   {
+--     title = "Specifying a Register",
+--     description = 'Here’s a command and a NORMAL mode keystroke to display and specify registers: :registers or :reg - Display the content of your registers. "<reg> - This keystroke specifies the register <reg> to be read or written.',
+--   },
+--   {
+--     title = "Writing to a Register",
+--     description = 'Hit "a in NORMAL mode to specify what register you want to write on. Yank, change, or delete some content to write it to a.',
+--   },
+--   {
+--     title = "Reading a Register",
+--     description = 'Hit "a in NORMAL mode to specify what register you want to read. Use a put keystroke in NORMAL mode to spit out the content of the register in your current buffer.',
+--   },
+--   {
+--     title = "Types of Registers",
+--     description = 'There are 10 different types of registers in Vim: The unnamed register("), numbered registers(0-9), small delete register(-), named registers(a-z), read only registers(., %, and :), alternate buffer register(#), expression register(=), selection registers(+ and *), black hole register(_), last search pattern register(/).',
+--   },
+--   {
+--     title = "Using Registers in INSERT and COMMAND LINE modes",
+--     description = "CTRL+R <reg> can be used to put the content of register <reg> in your current buffer.",
+--   },
+--   {
+--     title = "Using the Expression Register",
+--     description = "In INSERT mode, hit CTRL+r =, then type any Vimscript expression you want. Hitting ENTER will run the expression and insert the output into your buffer.",
+--   },
+--   {
+--     title = "Clearing a Register",
+--     description = "Clear a register by beginning a recording with 'q', then immediately stopping it again with 'q'.",
+--   },
+--   {
+--     title = "Vim Range Commands",
+--     description = "Commands such as :d can accept a range. For example, :1,40d deletes lines 1 to 40.",
+--   },
+--   {
+--     title = "Arithmetic with Ranges",
+--     description = "You can do arithmetic with ranges. e.g., if your cursor is on line 60, .,.+10 will be equivalent to 60,70.",
+--   },
+--   {
+--     title = "Selection Marks",
+--     description = "'< and '> represent first and last lines of a selection in VISUAL mode.",
+--   },
+--   {
+--     title = "vimgrep command",
+--     description = ":vimgrep command can search a pattern in every file of your working directory and populate a quickfix list with positions matching the pattern.",
+--   },
+--   {
+--     title = "Quickfix list",
+--     description = "Quickfix list is used to display specific errors in a codebase. It can be navigated with commands like :cl or :cnext.",
+--   },
+--   {
+--     title = "The cdo command",
+--     description = ":cdo command is used to execute a command on each valid entry of the quickfix list.",
+--   },
+--   {
+--     title = "cexpr and caddexpr",
+--     description = "Commands :cexpr and :caddexpr can help in manipulating the quickfix list using the result of evaluating a Vimscript expression.",
+--   },
+--   {
+--     title = "Quickfix Window",
+--     description = "The command :copen or :cope is used to open a quickfix windows which shows the current quickfix list.",
+--   },
+--   {
+--     title = "Location Lists",
+--     description = "A location list is similar to a quickfix list, but is local to a window instead of global to your Vim instance.",
+--   },
+--   {
+--     title = "Location List Commands",
+--     description = "Commands for location lists are similar to quickfix lists and often, you'll only have to replace the first c (quickfix of the command with l (location) e.g., :lli or :ll <number>.",
+--   },
+--   { title = "gf", description = "Edits the filepath under your cursor" },
+--   { title = "gx", description = "Opens the filepath under your cursor using your OS's default application" },
+--   { title = "gi", description = "Moves to the last insertion and switches to INSERT mode" },
+--   { title = "gv", description = "Starts VISUAL mode with the selection from the last VISUAL session" },
+--   { title = "gn", description = "Selects the match of your last search and moves selection" },
+--   { title = "gI", description = "Inserts text at the beginning of the line" },
+--   { title = "ga", description = "Prints the ascii value of the cursor character" },
+--   { title = "gu", description = "Lowercases using a motion" },
+--   { title = "gU", description = "Uppercases using a motion" },
+-- }
+--
+-- local function getvimtip()
+--   math.randomseed(os.time())
+--   local N = math.random(1, #vimtips)
+--   return vimtips[N]
+-- end
+--
+-- -- vim.print(getvimtip())
+--
+-- return getvimtip

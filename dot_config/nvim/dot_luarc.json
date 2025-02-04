@@ -1,0 +1,10 @@
+{
+    "diagnostics.disable": [
+        "redundant-parameter"
+    ],
+    "diagnostics.globals": [
+        "img_previewer"
+    ]
+}
+
+

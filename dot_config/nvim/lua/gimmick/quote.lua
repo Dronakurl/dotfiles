@@ -1,0 +1,35 @@
+-- local new_quote = function()
+--   local curl = require("plenary.curl")
+--   local api_key = os.getenv("X_API_KEY")
+--   if api_key == nil then
+--     return "no api key"
+--   end
+--   local body = {
+--     category = "happiness",
+--   }
+--   body = {}
+--   local response = curl.get({
+--     url = "https://api.api-ninjas.com/v1/quotes",
+--     headers = { x_api_key = api_key },
+--     -- query = vim.fn.json_encode(body),
+--     query = body,
+--   })
+--
+--   if response.status == 200 then
+--     local ok, result = pcall(function()
+--       local responsetab = vim.fn.json_decode(response.body)[1]
+--       return responsetab.quote .. " - " .. responsetab.author
+--     end)
+--
+--     if ok then
+--       return result
+--     else
+--       error(result)
+--     end
+--   else
+--     vim.notify(string.format("Request failed with status: %s", response.status), vim.log.levels.ERROR)
+--     return string.format("Failed with status %s", response.status)
+--   end
+-- end
+--
+-- return new_quote

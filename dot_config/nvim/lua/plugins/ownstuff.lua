@@ -1,0 +1,44 @@
+-- if no_weak_machine == false then
+--   vim.notify("Weak machine mode enabled", vim.log.levels.WARN)
+-- end
+return {
+  -- {
+  --   cond = no_weak_machine,
+  --   "lukas-reineke/headlines.nvim",
+  --   -- dir = "/home//nvimplugins/headlines.nvim/",
+  --   dependencies = "nvim-treesitter/nvim-treesitter",
+  --   ft = "markdown",
+  --   config = true,
+  -- },
+  -- {
+  --   -- "gaborvecsei/usage-tracker.nvim",
+  --   "usage-tracker",
+  --   dir = "/home//nvimplugins/usage-tracker.nvim",
+  --   cond = no_weak_machine,
+  --   config = function()
+  --     require("usage-tracker").setup({
+  --       -- telemetry_endpoint = "http://localhost:8000",
+  --       json_file = "/home//.cache/usage.json",
+  --       -- keep_eventlog_days = 14,
+  --       -- cleanup_freq_days = 7,
+  --       -- event_wait_period_in_sec = 5,
+  --       -- inactivity_threshold_in_min = 5,
+  --       -- inactivity_check_freq_in_sec = 5,
+  --       -- verbose = 0,
+  --       -- telemetry_endpoint = "", -- you'll need to start the restapi for this feature
+  --     })
+  --   end,
+  -- },
+  -- {
+  --   -- "Dronakurl/injectme.nvim",
+  --   cond = no_weak_machine,
+  --   "injectme.nvim",
+  --   dir = "/home//nvimplugins/injectme.nvim/",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --   },
+  --   -- cmd = { "InjectmeToggle", "InjectmeSave", "InjectmeInfo", "InjectmeLeave" },
+  -- },
+}

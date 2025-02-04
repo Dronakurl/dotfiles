@@ -1,0 +1,64 @@
+[[manager.prepend_keymap]]
+on = ["C"]
+run = "plugin ouch --args=zip"
+desc = "Compress with ouch"
+
+[[manager.prepend_keymap]]
+on = ["d"]
+run = "remove --permanently"
+desc = "Delete permanently"
+
+[[manager.prepend_keymap]]
+on = ["D"]
+run = "remove"
+desc = "Delete to trash"
+
+[[manager.append_keymap]]
+on = ["<C-x>"]
+run = "remove --permanently --force"
+desc = "Delete permanently immediately"
+
+[[manager.prepend_keymap]]
+on = ["g", "i"]
+run = "plugin lazygit"
+desc = "run lazygit"
+
+[[manager.prepend_keymap]]
+on = ["z"]
+run = "plugin what-size"
+desc = "Calc size of selection or cwd"
+
+[[manager.prepend_keymap]]
+on = ["s"]
+run = "search fd --args='-IHg -E .venv -E .archiv'"
+desc = "Search files by name using fd"
+
+[[manager.prepend_keymap]]
+on = ["<A-k>"]
+run = "peek -5"
+desc = "Peek up 5 units in the preview"
+
+[[manager.prepend_keymap]]
+on = ["<A-j>"]
+run = "peek 5"
+desc = "Peek down 5 units in the preview"
+
+[[manager.prepend_keymap]]
+on = ["M"]
+run = "plugin bookmarks --args=save"
+desc = "Save current position as a bookmark"
+
+[[manager.prepend_keymap]]
+on = ["'"]
+run = "plugin bookmarks --args=jump"
+desc = "Jump to a bookmark"
+
+[[manager.prepend_keymap]]
+on = ["b", "d"]
+run = "plugin bookmarks --args=delete"
+desc = "Delete a bookmark"
+
+[[manager.prepend_keymap]]
+on = ["b", "D"]
+run = "plugin bookmarks --args=delete_all"
+desc = "Delete all bookmarks"

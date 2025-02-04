@@ -1,0 +1,86 @@
+-- -- copied from https://github.com/MunifTanjim/nui.nvim/blob/main/lua/nui/table/init.lua
+-- local border = {
+--   hor = "─",
+--   ver = "│",
+--   down_right = "┌",
+--   down_hor = "┬",
+--   down_left = "┐",
+--   ver_right = "├",
+--   ver_hor = "┼",
+--   ver_left = "┤",
+--   up_right = "└",
+--   up_hor = "┴",
+--   up_left = "┘",
+-- }
+--
+-- local function wrap_string_in_box(input_string, width)
+--   if width < 3 then
+--     error("Minimum width is 3.")
+--     return ""
+--   end
+--
+--   local words = {}
+--   for word in input_string:gmatch("[%S\n]+") do
+--     if word:find("\n") ~= nil then
+--       local tmpwords = {}
+--       for w in word:gmatch("%S+") do
+--         table.insert(tmpwords, w .. "\n")
+--       end
+--       for n, v in ipairs(tmpwords) do
+--         if n == #tmpwords then
+--           table.insert(words, v:match("%S*"))
+--         else
+--           table.insert(words, v)
+--         end
+--       end
+--     else
+--       table.insert(words, word)
+--     end
+--   end
+--
+--   local processLines = {}
+--   local currentLine = ""
+--   for _, word in ipairs(words) do
+--     local hasnewline = (word:find("\n") ~= nil)
+--     word = word:gsub("\n", "")
+--     if #currentLine == 0 then
+--       currentLine = word
+--     elseif #currentLine + #word + 3 > width - 4 then
+--       table.insert(processLines, currentLine)
+--       currentLine = word
+--     else
+--       currentLine = currentLine .. " " .. word
+--     end
+--     if hasnewline then
+--       table.insert(processLines, currentLine)
+--       currentLine = ""
+--     end
+--   end
+--   table.insert(processLines, currentLine)
+--
+--   local boxString = ""
+--   boxString = boxString .. border.down_right .. string.rep(border.hor, width - 3) .. border.down_left .. "\n"
+--   for _, line in ipairs(processLines) do
+--     boxString = boxString
+--       .. border.ver
+--       .. " "
+--       .. line
+--       .. string.rep(" ", width - 5 - #line)
+--       .. " "
+--       .. border.ver
+--       .. "\n"
+--   end
+--   boxString = boxString .. border.up_right .. string.rep(border.hor, width - 3) .. border.up_left .. "\n"
+--
+--   return boxString
+-- end
+--
+-- -- print(
+-- --   wrap_string_in_box(
+-- --     [[Using Multiple Separators in Substitute Commands (S&R)
+-- -- You can use different separators in S&R commands. Avoid 'backslashitis' by instead using ':'. Sample command: s:/dir1/dir2/dir3/file:/dir4/dir5/file2:g",]],
+-- --     60
+-- --   )
+-- -- )
+--
+-- return wrap_string_in_box

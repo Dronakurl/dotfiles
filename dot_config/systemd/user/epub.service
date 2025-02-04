@@ -1,0 +1,17 @@
+; Copy this to HOME/.config/systemd/user/ 
+; alongth with epub.timer. Start / enable service with
+; systemctl --user enable epub.timer
+
+[Unit]
+Description=Epub download from einfach vorlesen.de
+; After=network.target
+
+[Service]
+; Type=simple
+WorkingDirectory=%h/epub
+ExecStart=%h/epub/main.py
+; CPUSchedulingPolicy=idle
+; IOSchedulingClass=3
+
+; [Install]
+; WantedBy=default.target 

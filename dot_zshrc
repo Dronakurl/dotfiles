@@ -1,6 +1,7 @@
 # vim: set filetype=sh :
 
 # Profiling
+#
 # zmodload zsh/zprof
 
 export ZSH_DISABLE_COMPFIX=true
@@ -85,6 +86,7 @@ alias 'gitui'='eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa && gitui && ssh-agent 
 alias gu='gitui'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias cl='lazygit --use-config-file "$HOME/.config/lazygit/tweak.yml" --work-tree ~ --git-dir ~/.cfg'
+alias cz='lazygit --work-tree $HOME/.local/share/chezmoi/'
 alias lz='lazygit'
 alias c="clear"
 if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
