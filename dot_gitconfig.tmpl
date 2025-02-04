@@ -1,0 +1,38 @@
+[user]
+	email = {{ .email | quote }}
+	name = Dronakurl
+[alias]
+        lol = log --graph --decorate --pretty=oneline --abbrev-commit
+        lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[color]
+        branch = auto
+        diff = auto
+        interactive = auto
+        status = auto
+[pull]
+	rebase = false
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[init]
+	defaultBranch = main
+[sendemail]
+	smtpserver = {{ .smtpserver | quote }}
+  smtpuser = {{ .email | quote }}
+  smtpencryption = ssl
+	smtpserverport = 465
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[diff]
+	submodule = log
+	tool = nvimdiff
+[diif]
+	tool = nvimdiff
+[core]
+	editor = nvim
