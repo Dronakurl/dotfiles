@@ -1,0 +1,176 @@
+# vim: set filetype=sh :
+
+# Profiling
+# zmodload zsh/zprof
+
+export ZSH_DISABLE_COMPFIX=true
+export LC_ALL=en_US.UTF-8
+export LANG="C.UTF-8"
+fpath+=~/.zfunc
+
+# Old performance stuff, I played around with
+# autoload -Uz compinit && compinit
+# if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+# 	compinit;
+# else
+# 	compinit -C;
+# fi;
+
+export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/share/bob/nvim-bin:$PATH
+export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+export PATH=$HOME/.my/bin:${PATH}
+export PATH=/usr/local/texlive/2024/bin/x86_64-linux/:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PYTHONPYCACHEPREFIX=/tmp/pycache
+export TEXMFHOME=$HOME/.local/share/texmf
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+
+export ZSH="$HOME/.oh-my-zsh"
+# ZSH_THEME="agnoster"
+export COMPLETION_WAITING_DOTS="true"
+
+export plugins=(git vi-mode dotenv zsh-autosuggestions docker docker-compose)
+
+source "$ZSH/oh-my-zsh.sh"
+
+# Preferred editor for local and remote sessions
+export EDITOR='nvim'
+export VISUAL='nvim'
+
+bindkey \^K kill-line
+
+dockerpruneall() {
+  docker container prune -f
+  docker image prune -f
+  docker system prune -a -f
+}
+dockerprune() {
+  docker container prune -f
+  docker image prune -f
+  docker volume prune -f
+}
+
+if [ -f ~/.env ]; then
+  set -a
+  source $HOME/.env
+  set +a
+fi
+
+hxv() {
+  if [[ -z "$VIRTUAL_ENV" ]]; then
+    if [[ -d ".venv" ]]; then
+      source .venv/bin/activate
+    else
+      echo "No virtual environment found."
+    fi
+  else
+    echo "Already in a virtual environment."
+  fi
+  hx "$@"
+}
+
+ghc() {
+  gh copilot suggest "$@"
+}
+
+alias pacold="sudo pacman -Qtdq | sudo pacman -Rns -; yay -Syyu; paccache -r "
+alias pac="yay -Syyu; paccache -r "
+alias ta="tmux attach"
+alias isodate="date -u +%Y-%m-%dT%H:%M:%S%Z"
+
+rclon_ssh() {
+  eval $(ssh-agent -s) && ssh-add
+}
+alias 'gitui'='eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa && gitui && ssh-agent -k'
+alias gu='gitui'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cl='lazygit --use-config-file "$HOME/.config/lazygit/tweak.yml" --work-tree ~ --git-dir ~/.cfg'
+alias lz='lazygit'
+alias c="clear"
+if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+alias dp="docker ps --format 'table {{.Image}}\t{{.Names}}\t{{.Status}}\t{{.Command}}'"
+alias gss="git status -s"
+alias gsl="git status"
+alias nvimdiff='nvim -d'
+alias pr="poetry run"
+alias pss="poetry shell"
+alias py="poetry run python"
+alias uy="uv run"
+alias ur="uv run"
+alias pdev="poetry run python -X dev"
+alias pd="poetry run python -m pdb -c continue"
+alias jos='joshuto --output-file /tmp/joshutodir; LASTDIR=`cat /tmp/joshutodir`; cd "$LASTDIR"'
+function y() {
+  # yazi file manager, but exit to the terminal in the last visited directory within yazi
+  if [ -f "$HOME/.env" ]; then
+    source "$HOME/.env"
+  fi
+  local tmp
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd" || return 1
+  fi
+  rm -f -- "$tmp"
+}
+alias j='y'
+alias v="source ~/.venv/bin/activate"
+alias zrc="chezmoi edit ~/.zshrc"
+alias apt="sudo apt-get update; sudo apt-get upgrade; sudo apt-get autoremove "
+alias f="cd ~ && cd \$(find * -type d | fzf)"
+alias dropboxmama="rclone mount dropboxmama: ~/mnt --daemon --vfs-cache-mode writes --dropbox-encoding 'Slash,BackSlash,Del,RightSpace,InvalidUtf8,Dot,LeftPeriod' -vv"
+alias tabbyon="docker compose -f \$HOME/Archiv/tabby/docker-compose.yml up -d"
+alias tabbyup="tabbyon"
+alias tabbyoff="docker compose -f \$HOME/Archiv/tabby/docker-compose.yml down"
+alias tabbydn="tabbyoff"
+
+dcf() {
+  docker compose -f ./docker/docker-compose.yml "$@"
+}
+
+if [ -x /usr/bin/dircolors ]; then
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+fi
+
+export ZK_NOTEBOOK_DIR=$HOME/Dropbox/notes/
+
+NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+export NVM_DIR
+
+# NOTE: I don't why this is needed for anything, but it slows down everything
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+setopt completealiases
+
+# Don't (or do, when you switch to the command below) use less for simple
+# commands like ls (for oh-my-zsh it's the standard otherwise)
+unset LESS
+# export LESS=-R
+
+if [[ -f "$HOME/.atuin/bin/env" ]]; then
+  . "$HOME/.atuin/bin/env"
+fi
+if command -v fzf &>/dev/null; then
+  source <(fzf --zsh)
+fi
+if command -v atuin &>/dev/null; then
+  eval "$(atuin init zsh --disable-up-arrow)"
+fi
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
+if command -v starship &>/dev/null; then
+  eval "$(starship init zsh)"
+fi
+if command -v uv &>/dev/null; then
+  eval "$(uv generate-shell-completion zsh)"
+fi
+if command -v chezmoi &>/dev/null; then
+  eval "$(chezmoi completion zsh)"
+fi
+
+# zprof
+fpath+=${ZDOTDIR:-~}/.zsh_functions
