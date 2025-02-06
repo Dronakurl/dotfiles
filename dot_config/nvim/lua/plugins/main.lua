@@ -95,43 +95,43 @@ return {
       skip_ts = {},
     },
   },
-  -- {
-  --   "folke/noice.nvim",
-  --   enabled = true,
-  --   opts = function(_, opts)
-  --     table.insert(opts.routes, {
-  --       filter = {
-  --         -- event = "msg_show",
-  --         -- kind = "",
-  --         any = {
-  --           { find = "[.]*L, [.]*B" },
-  --           { find = "%d fewer lines" },
-  --           { find = "written" },
-  --           { find = "%d more lines" },
-  --           { find = "%d lines <ed %d time[s]?" },
-  --           { find = "%d lines >ed %d time[s]?" },
-  --           { find = "%d lines yanked" },
-  --         },
-  --       },
-  --       opts = { skip = true },
-  --     })
-  --     table.insert(opts.routes, {
-  --       filter = {
-  --         event = "notify",
-  --         find = "No information available",
-  --       },
-  --       opts = { skip = true },
-  --     })
-  --     table.insert(opts.routes, {
-  --       filter = {
-  --         event = "notify",
-  --         find = ".-Registered '.-' with .- LSP",
-  --       },
-  --     })
-  --     opts.lsp.progress = { enabled = false }
-  --     opts.presets.bottom_search = false
-  --   end,
-  -- },
+  {
+    "folke/noice.nvim",
+    enabled = true,
+    opts = function(_, opts)
+      table.insert(opts.routes, {
+        filter = {
+          -- event = "msg_show",
+          -- kind = "",
+          any = {
+            { find = "[.]*L, [.]*B" },
+            { find = "%d fewer lines" },
+            { find = "written" },
+            { find = "%d more lines" },
+            { find = "%d lines <ed %d time[s]?" },
+            { find = "%d lines >ed %d time[s]?" },
+            { find = "%d lines yanked" },
+          },
+        },
+        opts = { skip = true },
+      })
+      table.insert(opts.routes, {
+        filter = {
+          event = "notify",
+          find = "No information available",
+        },
+        opts = { skip = true },
+      })
+      table.insert(opts.routes, {
+        filter = {
+          event = "notify",
+          find = ".-Registered '.-' with .- LSP",
+        },
+      })
+      opts.lsp.progress = { enabled = false }
+      opts.presets.bottom_search = false
+    end,
+  },
   {
     "echasnovski/mini.indentscope",
     cond = no_weak_machine,

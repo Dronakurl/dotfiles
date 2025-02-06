@@ -26,6 +26,37 @@ vim.keymap.set(
   { desc = "Put empty line below" }
 )
 
+local wurst = function()
+  -- Get clients that match the name 'typos_lsp'
+  local clients = vim.lsp.get_clients({ name = "typos_lsp" })
+
+  -- If no clients are running, notify the user
+  if #clients == 0 then
+    vim.notify("typos not running!", vim.log.levels.INFO)
+    return
+  end
+
+  -- Get the client ID of the first client
+  local client_id = clients[1].id
+
+  -- Get the current buffer number
+  local bufnr = vim.api.nvim_get_current_buf()
+
+  -- Get buffers associated with the client
+  local bufs = vim.lsp.get_buffers_by_client_id(client_id)
+
+  -- Check if current buffer is in the list
+  if vim.tbl_contains(bufs, bufnr) then
+    -- Detach the client from the buffer
+    vim.lsp.buf_detach_client(bufnr, client_id)
+  else
+    -- Attach the client to the buffer
+    vim.lsp.buf_attach_client(bufnr, client_id)
+  end
+end
+
+vim.keymap.set("n", "<leader>ut", wurst, { desc = "toggle typos" })
+
 -- vim.keymap.set("n", "<c-h>", ":echo expand('%:p')<cr>", { desc = "Full file path" })
 vim.keymap.set("n", "<c-7>", ":lua Snacks.terminal()<cr>", { desc = "Terminal (root dir)" })
 vim.keymap.set("t", "<c-7>", "<cmd>close<cr>", { desc = "Hide Terminal" })
@@ -48,6 +79,9 @@ vim.keymap.set(
   vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true),
   { desc = "exit terminal mode" }
 )
+-- vim.keymap.set("n", "<leader>t", ":term<ENTER>", { desc = "open terminal" })
+-- vim.keymap.set("n", "<M-l>", ":BufferLineCycleNext<ENTER>", { desc = "next buffer", silent = true })
+-- vim.keymap.set("n", "<M-h>", ":BufferLineCyclePrev<ENTER>", { desc = "previous buffer", silent = true })
 vim.keymap.set("n", "<M-l>", ":bn<ENTER>", { desc = "next buffer", silent = true })
 vim.keymap.set("n", "<M-h>", ":bp<ENTER>", { desc = "previous buffer", silent = true })
 vim.keymap.set("n", "<leader>l", ":b#<ENTER>", { desc = "last buffer", silent = true })
@@ -57,6 +91,7 @@ vim.keymap.set("n", "<leader>B", ":norm obreakpoint()<ESC>", { desc = "insert br
 vim.keymap.set("n", "q:", "<Nop>", { desc = "No command history" })
 
 local ruffme = function()
+  -- local choice = vim.fn.confirm("Are you sure you want to run 'ruff -q .'?", "&Yes\n&No", 2)
   local choice = 1
   if choice == 1 then
     -- vim.notify("Running ruff -q " .. vim.inspect(vim.fn.getcwd()), "debug", { icon = "", title = "Ruff" })
