@@ -9,7 +9,7 @@ if [ "$answer" != "yes" ]; then
   exit 0
 fi
 
-sudo apt-get install 7z jq poppler zsh ripgrep openssl tmux git curl build-essential
+sudo apt-get install 7zip jq zsh ripgrep openssl tmux git curl build-essential gnupg poppler-utils
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
