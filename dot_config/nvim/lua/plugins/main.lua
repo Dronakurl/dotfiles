@@ -179,40 +179,31 @@ return {
     keys = {
       {
         "<leader>zn",
-        "<Cmd>ZkNew { notebook_path=" .. os.getenv("ZK_NOTEBOOK_DIR") .. "} <CR>",
+        "<Cmd>ZkNew <CR>",
         noremap = false,
         silent = true,
         desc = "New note",
       },
       {
         "<leader>zo",
-        "<Cmd>ZkNotes { sort = { 'modified' }, notebook_path=" .. os.getenv("ZK_NOTEBOOK_DIR") .. " }<CR>",
+        "<Cmd>ZkNotes { sort = { 'modified' }}<CR>",
         noremap = false,
         silent = true,
         desc = "Open notes",
       },
       {
         "<leader>zt",
-        "<Cmd>ZkTags {  notebook_path=" .. os.getenv("ZK_NOTEBOOK_DIR") .. "} <CR>",
+        "<Cmd>ZkTags<CR>",
         noremap = false,
         silent = true,
         desc = "Open notes associated with the selected tags.",
       },
       {
         "<leader>zf",
-        "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } , notebook_path=" .. os.getenv(
-          "ZK_NOTEBOOK_DIR"
-        ) .. " }<CR>",
+        "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') }}<CR>",
         noremap = false,
         silent = true,
         desc = "Search for the notes matching a given query.",
-      },
-      {
-        "<leader>zf",
-        ":'<,'>ZkMatch { notebook_path=" .. os.getenv("ZK_NOTEBOOK_DIR") .. " } <CR>",
-        noremap = false,
-        silent = true,
-        desc = "Search for the notes matching the current visual selection.",
       },
     },
     config = function()

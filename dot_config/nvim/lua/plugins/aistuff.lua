@@ -123,11 +123,31 @@ return {
     dependencies = {
       "olimorris/codecompanion.nvim",
     },
-    opts = {
-      sources = {
-        default = { "codecompanion" },
-      },
-    },
+    -- opts = {
+    --   sources = {
+    --     default = { "codecompanion" },
+    --   },
+    -- },
+    opts = function(_, opts)
+      opts.sources.default = opts.sources.default or {}
+      table.insert(opts.sources.default, "codecompanion")
+      vim.b.completion = true
+
+      Snacks.toggle({
+        name = "Completion",
+        get = function()
+          return vim.b.completion
+        end,
+        set = function(state)
+          vim.b.completion = state
+        end,
+      }):map("<leader>uk")
+
+      opts.enabled = function()
+        return vim.b.completion ~= false
+      end
+      return opts
+    end,
     -- opts = {
     --   sources = {
     --     default = { "codecompanion", "tabby" },

@@ -13,6 +13,12 @@ vim.keymap.set("n", "gm", "`", { desc = "Goto mark" })
 -- vim.keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode" })
 -- vim.keymap.set("t", "jj", "<ESC>", { desc = "Exit terminal mode" })
 
+vim.keymap.set("n", "ä", "]", { remap = true })
+vim.keymap.set("n", "ö", "[", { remap = true })
+vim.keymap.set("n", "ü", "}", { remap = true })
+vim.keymap.set("n", "ß", "{", { remap = true })
+vim.keymap.set("n", "<leader>fz", "<leader>sz", { noremap = false, expr = false })
+
 vim.keymap.set(
   "n",
   "gO",
@@ -49,9 +55,11 @@ local wurst = function()
   if vim.tbl_contains(bufs, bufnr) then
     -- Detach the client from the buffer
     vim.lsp.buf_detach_client(bufnr, client_id)
+    vim.notify("🔕 Typo diagnostic turned off", vim.log.levels.INFO)
   else
     -- Attach the client to the buffer
     vim.lsp.buf_attach_client(bufnr, client_id)
+    vim.notify("🔔 Typo diagnostic turned on", vim.log.levels.INFO)
   end
 end
 
