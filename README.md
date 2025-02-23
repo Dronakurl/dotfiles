@@ -1,10 +1,6 @@
 # dotfiles
 
-Run:
-
-```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
-```
+Create the chezmoi config for your machine:
 
 ```toml
 # .config/chezmoi/chezmoi.toml
@@ -20,3 +16,10 @@ autoPush = false
 email = ""
 smtpserver = ""
 ```
+
+Run:
+
+```bash
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Dronakurl
+```
+
