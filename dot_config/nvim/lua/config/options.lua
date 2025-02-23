@@ -34,7 +34,7 @@ if vim.g.neovide then
   -- vim.o.guifont = "Neon:h14"
   -- vim.o.guifont = "Mononoki Nerd Font Mono:h14"
   -- vim.o.guifont = "Iosevka Nerd Font Mono:h13"
-  vim.o.guifont = "JetBrains Mono:h12"
+  -- vim.o.guifont = "JetBrains Mono:h12"
   vim.api.nvim_set_keymap("v", "<sc-c>", '"+y', { noremap = true })
   vim.api.nvim_set_keymap("n", "<sc-v>", 'l"+P', { noremap = true })
   vim.api.nvim_set_keymap("v", "<sc-v>", '"+P', { noremap = true })

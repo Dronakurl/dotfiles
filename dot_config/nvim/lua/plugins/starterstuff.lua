@@ -81,24 +81,24 @@ return {
             { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
             -- { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
             { icon = "󰝂 ", key = "p", desc = "Projects", action = ":lua Snacks.dashboard.pick('projects')" },
-            {
-              icon = "",
-              key = "o",
-              desc = "Objectmvp",
-              action = function()
-                require("mini.bufremove").delete(0)
-                require("neo-tree.command").execute({ toggle = true, dir = os.getenv("HOME") .. "/objectmvp" })
-              end,
-            },
-            {
-              icon = "󰚑",
-              key = "d",
-              desc = "DDT frontend",
-              action = function()
-                require("mini.bufremove").delete(0)
-                require("neo-tree.command").execute({ toggle = true, dir = os.getenv("HOME") .. "/ddt-frontend" })
-              end,
-            },
+            -- {
+            --   icon = "",
+            --   key = "o",
+            --   desc = "Objectmvp",
+            --   action = function()
+            --     require("mini.bufremove").delete(0)
+            --     require("neo-tree.command").execute({ toggle = true, dir = os.getenv("HOME") .. "/objectmvp" })
+            --   end,
+            -- },
+            -- {
+            --   icon = "󰚑",
+            --   key = "d",
+            --   desc = "DDT frontend",
+            --   action = function()
+            --     require("mini.bufremove").delete(0)
+            --     require("neo-tree.command").execute({ toggle = true, dir = os.getenv("HOME") .. "/ddt-frontend" })
+            --   end,
+            -- },
             { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
             { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
             {

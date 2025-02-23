@@ -17,10 +17,10 @@ fpath+=~/.zfunc
 # 	compinit -C;
 # fi;
 
-export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/share/bob/nvim-bin:$PATH
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/share/bob/nvim-bin:$PATH
 export PATH=$HOME/.my/bin:${PATH}
-export PATH=/usr/local/texlive/2024/bin/x86_64-linux/:$PATH
+export PATH=/usr/local/texlive/2024/bin/x86_64-linux:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export PYTHONPYCACHEPREFIX=/tmp/pycache
 export TEXMFHOME=$HOME/.local/share/texmf
@@ -99,13 +99,8 @@ alias dp="docker ps --format 'table {{.Image}}\t{{.Names}}\t{{.Status}}\t{{.Comm
 alias gss="git status -s"
 alias gsl="git status"
 alias nvimdiff='nvim -d'
-alias pr="poetry run"
-alias pss="poetry shell"
-alias py="poetry run python"
 alias uy="uv run"
 alias ur="uv run"
-alias pdev="poetry run python -X dev"
-alias pd="poetry run python -m pdb -c continue"
 alias jos='joshuto --output-file /tmp/joshutodir; LASTDIR=`cat /tmp/joshutodir`; cd "$LASTDIR"'
 function y() {
   # yazi file manager, but exit to the terminal in the last visited directory within yazi
