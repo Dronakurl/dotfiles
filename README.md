@@ -20,6 +20,5 @@ smtpserver = ""
 Run:
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply Dronakurl
+sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply Dronakurl
 ```
-

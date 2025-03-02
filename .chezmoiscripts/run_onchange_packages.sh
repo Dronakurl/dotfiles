@@ -18,6 +18,7 @@ rustup component add rust-analyzer
 cargo install bob-nvim
 cargo install --locked yazi-fm yazi-cli
 cargo install fd-find
+ya-pack -u
 
 bob use nightly
 sudo apt-get install nodejs xclip
@@ -28,6 +29,7 @@ curl -sS https://starship.rs/install.sh | sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install zk
 brew install fzf
+brew install lazygit
 # brew install ripgrep
 
 # Install github command line tool

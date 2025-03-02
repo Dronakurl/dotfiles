@@ -27,18 +27,18 @@ return {
   --   dir = "/home//nvimplugins/blink-cmp-tabby/",
   --   lazy = false,
   -- },
-  -- {
-  --   "TabbyML/vim-tabby",
-  --   enabled = container_running,
-  --   lazy = false,
-  --   dependencies = {
-  --     "neovim/nvim-lspconfig",
-  --   },
-  --   init = function()
-  --     vim.g.tabby_agent_start_command = { "npx", "tabby-agent", "--stdio" }
-  --     vim.g.tabby_inline_completion_trigger = "auto"
-  --   end,
-  -- },
+  {
+    "TabbyML/vim-tabby",
+    enabled = container_running,
+    lazy = false,
+    dependencies = {
+      "neovim/nvim-lspconfig",
+    },
+    init = function()
+      vim.g.tabby_agent_start_command = { "npx", "tabby-agent", "--stdio" }
+      vim.g.tabby_inline_completion_trigger = "auto"
+    end,
+  },
   {
     "olimorris/codecompanion.nvim",
     dependencies = {
@@ -131,21 +131,21 @@ return {
     opts = function(_, opts)
       opts.sources.default = opts.sources.default or {}
       table.insert(opts.sources.default, "codecompanion")
-      -- vim.b.completion = true
-      --
-      -- Snacks.toggle({
-      --   name = "Completion",
-      --   get = function()
-      --     return vim.b.completion
-      --   end,
-      --   set = function(state)
-      --     vim.b.completion = state
-      --   end,
-      -- }):map("<leader>uk")
-      --
-      -- opts.enabled = function()
-      --   return vim.b.completion ~= false
-      -- end
+      vim.b.completion = true
+
+      Snacks.toggle({
+        name = "Completion",
+        get = function()
+          return vim.b.completion
+        end,
+        set = function(state)
+          vim.b.completion = state
+        end,
+      }):map("<leader>uk")
+
+      opts.enabled = function()
+        return vim.b.completion ~= false
+      end
       return opts
     end,
     -- opts = {
