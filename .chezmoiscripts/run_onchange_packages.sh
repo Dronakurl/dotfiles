@@ -16,6 +16,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 curl https://sh.rustup.rs -sSf | sh
 rustup component add rust-analyzer
 cargo install bob-nvim
+cargo install ouch
 cargo install --locked yazi-fm yazi-cli
 cargo install fd-find
 ya-pack -u

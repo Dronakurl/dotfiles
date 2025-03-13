@@ -54,36 +54,36 @@ return {
       exclude_ft = { "neo-tree" },
     },
   },
-  {
-    "nvim-neo-tree/neo-tree.nvim",
-    opts = {
-      sources = { "filesystem" },
-      window = {
-        width = 30,
-      },
-    },
-    keys = {
-      {
-        "<leader>e",
-        function()
-          if vim.bo.filetype == "snacks_dashboard" then
-            require("mini.bufremove").delete(0)
-            --- --- @diagnostic disable-next-line: missing-fields
-            --- require("snacks").dashboard({ sections = { { section = "keys", gap = 1 } } })
-          end
-          require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
-        end,
-        desc = "Explorer NeoTree (Root Dir)",
-      },
-      {
-        "<leader>ge",
-        function()
-          Snacks.picker("git_status")
-        end,
-        desc = "Git status",
-      },
-    },
-  },
+  -- {
+  --   "nvim-neo-tree/neo-tree.nvim",
+  --   opts = {
+  --     sources = { "filesystem" },
+  --     window = {
+  --       width = 30,
+  --     },
+  --   },
+  --   keys = {
+  --     {
+  --       "<leader>e",
+  --       function()
+  --         if vim.bo.filetype == "snacks_dashboard" then
+  --           require("mini.bufremove").delete(0)
+  --           --- --- @diagnostic disable-next-line: missing-fields
+  --           --- require("snacks").dashboard({ sections = { { section = "keys", gap = 1 } } })
+  --         end
+  --         require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
+  --       end,
+  --       desc = "Explorer NeoTree (Root Dir)",
+  --     },
+  --     {
+  --       "<leader>ge",
+  --       function()
+  --         Snacks.picker("git_status")
+  --       end,
+  --       desc = "Git status",
+  --     },
+  --   },
+  -- },
   {
     "folke/persistence.nvim",
     keys = {
