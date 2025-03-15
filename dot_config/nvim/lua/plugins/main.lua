@@ -4,6 +4,10 @@ if no_weak_machine == false then
 end
 
 return {
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    enabled = false,
+  },
   -- {
   -- 	"goerz/jupytext.nvim",
   -- 	version = "0.2.0",
