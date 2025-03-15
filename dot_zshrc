@@ -152,7 +152,7 @@ unset LESS
 if [[ -f "$HOME/.atuin/bin/env" ]]; then
   . "$HOME/.atuin/bin/env"
 fi
-if command -v fzf &>/dev/null; then
+if command -v fzf &>/dev/null && fzf --help | grep -- '--zsh' &>/dev/null; then
   source <(fzf --zsh)
 fi
 if command -v atuin &>/dev/null; then
