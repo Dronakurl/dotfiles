@@ -18,8 +18,8 @@ rustup component add rust-analyzer
 cargo install bob-nvim
 cargo install ouch
 cargo install --locked yazi-fm yazi-cli
-cargo install fd-find
 ya-pack -u
+cargo install fd-find
 
 bob use nightly
 sudo apt-get install nodejs xclip
