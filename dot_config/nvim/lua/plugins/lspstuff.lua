@@ -10,6 +10,7 @@ return {
         javascript = { "prettierd" },
         json = { "prettierd" },
         latex = { "latexindent" },
+        -- cmake = { "cmake-format" },
         cmake = { "cmakelang" },
       },
     },

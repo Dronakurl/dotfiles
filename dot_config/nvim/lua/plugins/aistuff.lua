@@ -48,10 +48,20 @@ return {
     config = function()
       require("codecompanion").setup({
         strategies = {
-          chat = { adapter = "openai" },
-          inline = { adapter = "openai" },
+          chat = { adapter = "mistral" },
+          inline = { adapter = "mistral" },
         },
         adapters = {
+          codestral = function()
+            return require("codecompanion.adapters").extend("mistral", {
+              name = "codestral", -- Give this adapter a different name to differentiate it from the default ollama adapter
+              schema = {
+                model = {
+                  default = "codestral-latest",
+                },
+              },
+            })
+          end,
           deepseek = function()
             return require("codecompanion.adapters").extend("ollama", {
               name = "deepseek", -- Give this adapter a different name to differentiate it from the default ollama adapter
@@ -113,6 +123,13 @@ return {
         "<leader>ao",
         ":CodeCompanionChat openai<CR>",
         desc = "Open chat (openai)",
+        -- icon = "🧠",
+        mode = { "n", "v" },
+      },
+      {
+        "<leader>am",
+        ":CodeCompanionChat codestral<CR>",
+        desc = "Open chat (mistral)",
         -- icon = "🧠",
         mode = { "n", "v" },
       },
