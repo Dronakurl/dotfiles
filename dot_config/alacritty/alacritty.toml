@@ -1,17 +1,17 @@
 [general]
-import = ["~/.config/alacritty/tokyonight/tokyonight_night.toml"]
+#  import = ["~/.config/alacritty/tokyonight/tokyonight_night.toml"]
 
 [env]
 TERM = "xterm-256color"
 
 [font]
 size = 12
-offset.y = 3
+offset.y = 1
 
 [font.bold]
 # family = "Krypton"
-# family = "JetBrainsMono Nerd Font"
-family = "Neon"
+family = "JetBrainsMono Nerd Font"
+# family = "Neon"
 # family = "Agave Nerd Font Mono"
 # family = "Mononoki Nerd Font Mono "
 # family: "Argon"
@@ -24,7 +24,7 @@ family = "Neon"
 style = "Bold"
 
 [font.bold_italic]
-family = "Radon"
+# family = "Radon"
 # family = "JetBrainsMono Nerd Font"
 # family = "CodeNewRoman Nerd Font"
 # family = "Neon"
@@ -36,7 +36,7 @@ family = "Radon"
 style = "Bold Italic"
 
 [font.italic]
-family = "Radon"
+# family = "Radon"
 # family = "JetBrainsMono Nerd Font"
 # family = "CodeNewRoman Nerd Font"
 # family = "Neon"
@@ -47,12 +47,12 @@ family = "Radon"
 style = "Italic"
 
 [font.normal]
-family = "Neon"
+# family = "Neon"
 # family = "JetBrainsMono Nerd Font"
 # family = "CodeNewRoman Nerd Font"
 # family = "Agave Nerd Font Mono"
 # family = "Mononoki Nerd Font Mono "
-# family = "FiraCode Nerd Font Mono"
+#family = "FiraCode Nerd Font Mono"
 # family= "Neon"
 # family = "Ubuntu Mono Nerd Font "
 

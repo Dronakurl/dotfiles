@@ -22,11 +22,6 @@ if thandle then
 end
 
 return {
-  -- {
-  --   "blink-cmp-tabby",
-  --   dir = "/home//nvimplugins/blink-cmp-tabby/",
-  --   lazy = false,
-  -- },
   {
     "TabbyML/vim-tabby",
     enabled = container_running,
@@ -51,20 +46,27 @@ return {
           chat = { adapter = "mistral" },
           inline = { adapter = "mistral" },
         },
+        opts = {
+          stream = true,
+        },
         adapters = {
-          codestral = function()
+          mistral = function()
             return require("codecompanion.adapters").extend("mistral", {
-              name = "codestral", -- Give this adapter a different name to differentiate it from the default ollama adapter
+              name = "codestral",
               schema = {
                 model = {
-                  default = "codestral-latest",
+                  default = "open-codestral-mamba",
                 },
+                -- temperature = {
+                --   default = 0.2,
+                --   mapping = "parameters", -- not supported in default parameters.options
+                -- },
               },
             })
           end,
           deepseek = function()
             return require("codecompanion.adapters").extend("ollama", {
-              name = "deepseek", -- Give this adapter a different name to differentiate it from the default ollama adapter
+              name = "deepseek",
               schema = {
                 model = {
                   -- default = "deepseek-coder-v2:latest",
@@ -128,7 +130,7 @@ return {
       },
       {
         "<leader>am",
-        ":CodeCompanionChat codestral<CR>",
+        ":CodeCompanionChat mistral<CR>",
         desc = "Open chat (mistral)",
         -- icon = "🧠",
         mode = { "n", "v" },
@@ -136,52 +138,61 @@ return {
     },
   },
   {
+    "milanglacier/minuet-ai.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("minuet").setup({
+        provider_options = {
+          codestral = {
+            model = "codestral-latest",
+            end_point = "https://codestral.mistral.ai/v1/fim/completions",
+            api_key = "CODESTRAL_API_KEY",
+            stream = true,
+            -- template = {
+            --   prompt = "See [Prompt Section for default value]",
+            --   suffix = "See [Prompt Section for default value]",
+            -- },
+            optional = {
+              stop = nil, -- the identifier to stop the completion generation
+              max_tokens = nil,
+            },
+          },
+        },
+      })
+    end,
+  },
+  {
     "saghen/blink.cmp",
     dependencies = {
       "olimorris/codecompanion.nvim",
+      "milanglacier/minuet-ai.nvim",
     },
-    -- opts = {
-    --   sources = {
-    --     default = { "codecompanion" },
-    --   },
-    -- },
-    opts = function(_, opts)
-      opts.sources.default = opts.sources.default or {}
-      table.insert(opts.sources.default, "codecompanion")
-      -- vim.b.completion = true
-      --
-      -- Snacks.toggle({
-      --   name = "Completion",
-      --   get = function()
-      --     return vim.b.completion
-      --   end,
-      --   set = function(state)
-      --     vim.b.completion = state
-      --   end,
-      -- }):map("<leader>uk")
-      --
-      -- opts.enabled = function()
-      --   return vim.b.completion ~= false
-      -- end
-      return opts
-    end,
-    -- opts = {
-    --   sources = {
-    --     default = { "codecompanion", "tabby" },
-    --     providers = {
-    --       tabby = {
-    --         name = "tabby",
-    --         module = "blink-cmp-tabby",
-    --         kind = "tabby",
-    --         score_offset = 100,
-    --         async = true,
-    --       },
-    --     },
-    --   },
-    -- },
+    opts = {
+      keymap = {
+        ["<A-y>"] = {
+          function(cmp)
+            cmp.show({ providers = { "minuet" } })
+          end,
+        },
+      },
+      sources = {
+        default = { "codecompanion", "minuet" },
+        providers = {
+          minuet = {
+            name = "minuet",
+            module = "minuet.blink",
+            score_offset = 8, -- Gives minuet higher priority among suggestions
+          },
+        },
+      },
+      completion = { trigger = { prefetch_on_insert = false } },
+    },
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
+    enabled = false,
     opts = { auto_insert_mode = false },
     keys = {
       {
@@ -215,6 +226,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
+    enabled = false,
     cmd = "Copilot",
     build = ":Copilot auth",
     opts = {
@@ -223,3 +235,94 @@ return {
     },
   },
 }
+
+-- codestral = function()
+--   return require("codecompanion.adapters").extend("openai_compatible", {
+--     name = "codestral",
+--     env = {
+--       url = "https://codestral.mistral.ai",
+--       api_key = os.getenv("CODESTRAL_API_KEY"),
+--       chat_url = "/v1/chat/completions",
+--     },
+--     handlers = {
+--       form_parameters = function(self, params, messages)
+--         -- codestral doesn't support these in the body
+--         params.stream_options = nil
+--         params.options = nil
+--
+--         return params
+--       end,
+--     },
+--     schema = {
+--       model = {
+--         default = "open-codestral-mamba",
+--       },
+--       -- temperature = {
+--       --   default = 0.2,
+--       --   mapping = "parameters", -- not supported in default parameters.options
+--       -- },
+--     },
+--   })
+-- end,
+
+-- opts = function(_, opts)
+--   opts.sources.default = opts.sources.default or {}
+--   table.insert(opts.sources.default, "codecompanion")
+--   table.insert(opts.sources.default, "minuet")
+--   -- opts.sources.providers = opts.sources.providers or {}
+--   opts.sources.providers = {
+--     minuet = {
+--       name = "minuet",
+--       module = "minuet.blink",
+--       score_offset = 8, -- Gives minuet higher priority among suggestions
+--     },
+--   }
+--   vim.notify(vim.inspect(opts.sources.providers))
+--   -- table.insert(opts.sources.providers, {
+--   --   minuet = {
+--   --     name = "minuet",
+--   --     module = "minuet.blink",
+--   --     score_offset = 8, -- Gives minuet higher priority among suggestions
+--   --   },
+--   -- })
+--   opts.completion = { trigger = { prefetch_on_insert = false } }
+--   table.insert(opts.keymap, {
+--     -- Manually invoke minuet completion.
+--     ["<A-y>"] = require("minuet").make_blink_map(),
+--   })
+--   -- vim.b.completion = true
+--   --
+--   -- Snacks.toggle({
+--   --   name = "Completion",
+--   --   get = function()
+--   --     return vim.b.completion
+--   --   end,
+--   --   set = function(state)
+--   --     vim.b.completion = state
+--   --   end,
+--   -- }):map("<leader>uk")
+--   --
+--   -- opts.enabled = function()
+--   --   return vim.b.completion ~= false
+--   -- end
+--   return opts
+-- end,
+-- -- opts = {
+-- --   sources = {
+-- --     default = { "codecompanion", "tabby" },
+-- --     providers = {
+-- --       tabby = {
+-- --         name = "tabby",
+-- --         module = "blink-cmp-tabby",
+-- --         kind = "tabby",
+-- --         score_offset = 100,
+-- --         async = true,
+-- --       },
+-- --     },
+-- --   },
+-- -- },
+-- {
+--   "blink-cmp-tabby",
+--   dir = "/home//nvimplugins/blink-cmp-tabby/",
+--   lazy = false,
+-- },

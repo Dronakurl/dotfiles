@@ -4,7 +4,7 @@
 
 [Unit]
 Description=Epub download from einfach vorlesen.de
-; After=network.target
+After=network.target
 
 [Service]
 ; Type=simple
@@ -13,5 +13,5 @@ ExecStart=%h/epub/main.py
 ; CPUSchedulingPolicy=idle
 ; IOSchedulingClass=3
 
-; [Install]
-; WantedBy=default.target 
+[Install]
+WantedBy=default.target 
