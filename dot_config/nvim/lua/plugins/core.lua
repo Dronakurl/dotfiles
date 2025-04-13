@@ -1,31 +1,15 @@
 -- local not_neovide = not vim.g.neovide
 
-local function is_running_in_docker()
-  -- Check for the /.dockerenv file
-  local file = io.open("/.dockerenv", "r")
-  if file then
-    file:close()
-    return true
-  end
-
-  -- Check /proc/1/cgroup for Docker related entries
-  for line in io.lines("/proc/1/cgroup") do
-    if line:find("docker") then
-      return true
-    end
-  end
-
-  return false
-end
-
-local colorscheme = ""
-if is_running_in_docker() then
-  colorscheme = "catppuccin-mocha"
-else
-  colorscheme = "tokyonight-moon"
-end
+local colorscheme = "tokyonight-moon"
+-- if require("config.is_running_in_docker")() then
+--   -- if is_running_in_docker() then
+--   colorscheme = "catppuccin-mocha"
+-- else
+--   colorscheme = "tokyonight-moon"
+-- end
 
 return {
+
   {
     "LazyVim/LazyVim",
     opts = {

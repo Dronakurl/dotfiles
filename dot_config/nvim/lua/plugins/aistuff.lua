@@ -55,7 +55,8 @@ return {
               name = "codestral",
               schema = {
                 model = {
-                  default = "open-codestral-mamba",
+                  -- default = "open-codestral-mamba",
+                  default = "mistral-large-latest",
                 },
                 -- temperature = {
                 --   default = 0.2,

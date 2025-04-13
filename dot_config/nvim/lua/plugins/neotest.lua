@@ -5,12 +5,17 @@ end
 return {
   {
     "nvim-neotest/neotest",
+    -- dependencies = {
+    --   "rosstang/neotest-catch2",
+    --   "Shatur/neovim-tasks",
+    -- },
     opts = {
       adapters = {
         ["neotest-python"] = {
           runner = "pytest",
           args = { "-s", "--no-header", "--log-cli-level=DEBUG" },
         },
+        -- "neotest-catch2",
       },
       quickfix = { open = false },
       status = { virtual_text = true },

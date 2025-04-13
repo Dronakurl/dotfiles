@@ -26,6 +26,13 @@ return {
     opts = {
       transparent = false,
       hide_inactive_statusline = true,
+      on_highlights = function(hl, c)
+        -- vim.notify(vim.inspect(hl))
+        hl.BufferLineIndicatorSelected = {
+          bg = "#FFFFFF",
+          fg = "#000000",
+        }
+      end,
     },
   },
   {
@@ -48,10 +55,6 @@ return {
         "NotifyTRACEBorder",
         "NotifyWARNBody",
         "NotifyWARNBorder",
-        "TelescopeBorder",
-        "TelescopePreviewNormal",
-        "TelescopePromptNormal",
-        "TelescopeResultsNormal",
         "WhichKeyFloat",
       },
       exclude_groups = {},
