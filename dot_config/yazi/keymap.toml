@@ -15,7 +15,7 @@ desc = "Delete to trash"
 
 [[manager.append_keymap]]
 on = ["<C-x>"]
-run = "remove --permanently --force"
+run = "remove --permanently"
 desc = "Delete permanently immediately"
 
 [[manager.prepend_keymap]]

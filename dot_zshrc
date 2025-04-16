@@ -1,5 +1,5 @@
 # vim: set filetype=sh :
-
+# shellcheck disable=SC1091
 # Profiling
 #
 # zmodload zsh/zprof
@@ -56,7 +56,7 @@ dockerprune() {
 
 if [ -f ~/.env ]; then
   set -a
-  source $HOME/.env
+  source "$HOME/.env"
   set +a
 fi
 
@@ -83,7 +83,7 @@ alias ta="tmux attach"
 alias isodate="date -u +%Y-%m-%dT%H:%M:%S%Z"
 
 rclon_ssh() {
-  eval $(ssh-agent -s) && ssh-add
+  eval "$(ssh-agent -s)" && ssh-add
 }
 alias 'gitui'='eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa && gitui && ssh-agent -k'
 alias gu='gitui'
@@ -117,12 +117,12 @@ function y() {
 }
 alias j='y'
 alias zrc="chezmoi edit ~/.zshrc"
-alias apt="sudo apt-get update; sudo apt-get upgrade; sudo apt-get autoremove "
+alias ap="sudo apt-get update; sudo apt-get upgrade; sudo apt-get autoremove "
 alias f="cd ~ && cd \$(find * -type d | fzf)"
 alias dropboxmama="rclone mount dropboxmama: ~/mnt --daemon --vfs-cache-mode writes --dropbox-encoding 'Slash,BackSlash,Del,RightSpace,InvalidUtf8,Dot,LeftPeriod' -vv"
-alias tabbyon="docker compose -f \$HOME/Archiv/tabby/docker-compose.yml up -d"
+alias tabbyon="docker compose -f \$HOME/.config/tabby/docker-compose.yml up -d"
 alias tabbyup="tabbyon"
-alias tabbyoff="docker compose -f \$HOME/Archiv/tabby/docker-compose.yml down"
+alias tabbyoff="docker compose -f \$HOME/.config/tabby/docker-compose.yml down"
 alias tabbydn="tabbyoff"
 
 dcf() {
@@ -133,8 +133,6 @@ if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
   alias ls='ls --color=auto'
 fi
-
-export ZK_NOTEBOOK_DIR=$HOME/Dropbox/notes/
 
 # NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 # export NVM_DIR
@@ -153,7 +151,7 @@ if [[ -f "$HOME/.atuin/bin/env" ]]; then
   . "$HOME/.atuin/bin/env"
 fi
 if command -v fzf &>/dev/null && fzf --help | grep -- '--zsh' &>/dev/null; then
-  source <(fzf --zsh)
+  eval "$(fzf --zsh)"
 fi
 if command -v atuin &>/dev/null; then
   eval "$(atuin init zsh --disable-up-arrow)"
@@ -170,6 +168,60 @@ fi
 if command -v chezmoi &>/dev/null; then
   eval "$(chezmoi completion zsh)"
 fi
+
+IFS=',' read -r -a services <<<"$RCLONE_SERVICES"
+
+rc_stop() {
+  # Loop through each service name
+  for service in "${services[@]}"; do
+    echo "stopping rclone@$service.service"
+    systemctl --user stop "rclone@$service.service"
+  done
+}
+
+rc_start() {
+  # Loop through each service name
+  for service in "${services[@]}"; do
+    echo "reloading systemd"
+    systemctl --user daemon-reload
+    echo "enabling rclone@$service.service"
+    systemctl --user enable "rclone@$service.service"
+    echo "starting rclone@$service.service"
+    systemctl --user restart "rclone@$service.service"
+  done
+}
+
+rc_status() {
+  echo "Service            Status"
+  echo "--------------------------------"
+  for service in "${services[@]}"; do
+    mystatus=$(systemctl --user is-active "rclone@$service.service" 2>/dev/null)
+    printf "%-20s %s\n" "$service" "$mystatus"
+  done
+}
+
+IFS=',' read -r -a sservices <<<"$RSYNC_SERVICES"
+
+rs_start() {
+  # Loop through each service name
+  for service in "${sservices[@]}"; do
+    echo "reloading systemd"
+    systemctl --user daemon-reload
+    echo "enabling rsync@$service.service"
+    systemctl --user enable "rsync@$service.service"
+    echo "starting rsync@$service.service"
+    systemctl --user restart "rsync@$service.service"
+  done
+}
+
+rs_status() {
+  echo "Service            Status"
+  echo "--------------------------------"
+  for service in "${sservices[@]}"; do
+    mystatus=$(systemctl --user is-active "rsync@$service.service" 2>/dev/null)
+    printf "%-20s %s\n" "$service" "$mystatus"
+  done
+}
 
 # fpath+=${ZDOTDIR:-~}/.zsh_functions
 

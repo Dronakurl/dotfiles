@@ -1,0 +1,23 @@
+[Unit]
+Description=rclone %i
+Wants=network-online.target
+After=network-online.target
+OnFailure=notify@%i.service
+
+[Service]
+Type=simple
+TimeoutStopSec=60
+SuccessExitStatus=143
+
+ExecStart=%h/.config/systemd/user/rclone.sh %i
+
+StandardOutput=file:%h/tmp/rclone_mount.%i.log
+ExecStop=bash -c 'fusermount -u /mnt/rclone/%i && rmdir /mnt/rclone/%i && rm -fr /mnt/rclone/%i'
+Restart=on-failure
+RestartSec=150
+StartLimitBurst=3
+StartLimitInterval=3min
+
+[Install]
+WantedBy=default.target
+

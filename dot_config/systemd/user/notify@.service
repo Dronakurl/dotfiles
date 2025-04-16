@@ -1,0 +1,6 @@
+[Unit]
+Description=Notify user of failed service %i
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash -c 'notify-send "Service Failure" "A service has failed: %i"'

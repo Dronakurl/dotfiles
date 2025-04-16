@@ -11,7 +11,7 @@ fi
 
 curl -fsSL https://deb.nodesource.com/setup_current.x | sudo bash -
 sudo apt-get install -y --no-install-recommends nodejs python3.10-full zsh llvm libclang-dev libopencv-dev xclip bear nmap ripgrep locales sudo git vim build-essential xclip
-chsh -s /usr/bin/zsh $USER
+chsh -s /usr/bin/zsh "$USER"
 
 sudo apt-get -y --no-install-recommends install 7zip jq zsh ripgrep openssl tmux git curl build-essential gnupg poppler-utils
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
