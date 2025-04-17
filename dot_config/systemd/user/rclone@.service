@@ -9,10 +9,11 @@ Type=simple
 TimeoutStopSec=60
 SuccessExitStatus=143
 
+ExecStartPre=/bin/sleep 60
 ExecStart=%h/.config/systemd/user/rclone.sh %i
 
-StandardOutput=file:%h/tmp/rclone_mount.%i.log
-ExecStop=bash -c 'fusermount -u /mnt/rclone/%i && rmdir /mnt/rclone/%i && rm -fr /mnt/rclone/%i'
+SyslogIdentifier=rclone@%i
+ExecStop=bash -c 'fusermount -u /mnt/rclone/%i && rmdir /mnt/rclone/%i && rm -fr /mnt/rclone/%i && rm -fr %HOME/rclone/%i'
 Restart=on-failure
 RestartSec=150
 StartLimitBurst=3

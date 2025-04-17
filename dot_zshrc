@@ -77,6 +77,7 @@ ghc() {
   gh copilot suggest "$@"
 }
 
+alias vi="nvim"
 alias pacold="sudo pacman -Qtdq | sudo pacman -Rns -; yay -Syyu; paccache -r "
 alias pac="yay -Syyu; paccache -r "
 alias ta="tmux attach"
@@ -169,7 +170,7 @@ if command -v chezmoi &>/dev/null; then
   eval "$(chezmoi completion zsh)"
 fi
 
-IFS=',' read -r -a services <<<"$RCLONE_SERVICES"
+IFS=',' read -r -A services <<<"$RCLONE_SERVICES"
 
 rc_stop() {
   # Loop through each service name
@@ -200,7 +201,11 @@ rc_status() {
   done
 }
 
-IFS=',' read -r -a sservices <<<"$RSYNC_SERVICES"
+rc_log() {
+  journalctl --user -u "rclone@*" $1
+}
+
+IFS=',' read -r -A sservices <<<"$RSYNC_SERVICES"
 
 rs_start() {
   # Loop through each service name
@@ -209,18 +214,41 @@ rs_start() {
     systemctl --user daemon-reload
     echo "enabling rsync@$service.service"
     systemctl --user enable "rsync@$service.service"
+    echo "starting rsync@$service.timer"
+    systemctl --user start "rsync@$service.timer"
+    # echo "starting rsync@$service.service"
+    # systemctl --user restart "rsync@$service.service"
+  done
+}
+
+rs_stop() {
+  for service in "${sservices[@]}"; do
+    echo "stopping rsync@$service.service"
+    systemctl --user stop "rsync@$service.service"
+    echo "stopping rsync@$service.timer"
+    systemctl --user stop "rsync@$service.timer"
+  done
+}
+
+rs_sync() {
+  for service in "${sservices[@]}"; do
     echo "starting rsync@$service.service"
     systemctl --user restart "rsync@$service.service"
   done
 }
 
 rs_status() {
-  echo "Service            Status"
-  echo "--------------------------------"
+  echo "Service            Status               Timer"
+  echo "------------------------------------------------"
   for service in "${sservices[@]}"; do
     mystatus=$(systemctl --user is-active "rsync@$service.service" 2>/dev/null)
-    printf "%-20s %s\n" "$service" "$mystatus"
+    tstatus=$(systemctl --user is-active "rsync@$service.timer" 2>/dev/null)
+    printf "%-19s%-21s%s\n" "$service" "$mystatus" "$tstatus"
   done
+}
+
+rs_log() {
+  journalctl --user -u "rsync@*" $1
 }
 
 # fpath+=${ZDOTDIR:-~}/.zsh_functions

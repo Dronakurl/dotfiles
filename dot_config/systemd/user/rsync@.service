@@ -9,6 +9,7 @@ Type=simple
 TimeoutStopSec=60
 SuccessExitStatus=143
 
+ExecStartPre=/bin/sleep 60
 ExecStart=%h/.config/systemd/user/rsync.sh %i
 
 StandardOutput=file:%h/tmp/rsync.%i.log

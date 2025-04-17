@@ -10,16 +10,16 @@ if API_KEY ~= nil then
   vim.fn.setenv("OPENAI_API_KEY", API_KEY)
 end
 
-local tcommand = "docker inspect --format='{{.State.Running}}' tabby"
-local thandle = io.popen(tcommand)
+-- local tcommand = "docker inspect --format='{{.State.Running}}' tabby"
+-- local thandle = io.popen(tcommand)
 local container_running = false
-if thandle then
-  container_running = thandle:read("*a"):match("%S+") == "true"
-  if container_running then
-    vim.notify("Tabby is running! Great! <leader>at will take you!", vim.log.levels.INFO)
-  end
-  thandle:close()
-end
+-- if thandle then
+--   container_running = thandle:read("*a"):match("%S+") == "true"
+--   if container_running then
+--     vim.notify("Tabby is running! Great! <leader>at will take you!", vim.log.levels.INFO)
+--   end
+--   thandle:close()
+-- end
 
 return {
   {

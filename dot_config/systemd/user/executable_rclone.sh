@@ -26,6 +26,6 @@ rclone mount "$1": "/mnt/rclone/$1" \
   --vfs-cache-mode full \
   --buffer-size 256M \
   --cache-dir "$HOME/Archiv/rclone_cache/$1" \
-  --log-level DEBUG \
+  --log-level INFO \
   --use-mmap
 # --fuse-flag sync_read \
