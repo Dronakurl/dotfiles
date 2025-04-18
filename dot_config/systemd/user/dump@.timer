@@ -1,0 +1,13 @@
+[Unit]
+; Description=Run rsync@%i.service every 30 minutes and after startup
+Description=Run rsync@%i.service egularly and after startup
+
+[Timer]
+; OnCalendar=*:0/30
+; OnCalendar=*-*-* 12:00:00
+OnUnitActiveSec=24h
+OnBootSec=10min
+Unit=dump@%i.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,17 @@
+; Copy this to HOME/.config/systemd/user/ 
+; alongth with epub.timer. Start / enable service with
+; systemctl --user enable epub.timer
+
+[Unit]
+Description=sync my notes
+; After=network.target
+
+[Service]
+; Type=simple
+WorkingDirectory=%h
+ExecStart=%h/Archiv/syncnotes.sh
+; CPUSchedulingPolicy=idle
+; IOSchedulingClass=3
+
+; [Install]
+; WantedBy=default.target 

@@ -7,9 +7,10 @@ if [ -z "$1" ]; then
 fi
 
 if command -v yad &>/dev/null; then
+  sleep 1
   GDK_BACKEND=x11 yad --notification --image=/usr/share/icons/breeze-dark/actions/16/folder-sync-symbolic.svg &
   pid=${!}
-  sleep 3
+  sleep 4
   kill ${pid}
 else
   echo "yad is not installed."
