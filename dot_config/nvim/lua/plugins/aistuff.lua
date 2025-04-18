@@ -21,8 +21,7 @@ local container_running = false
 --   end
 --   thandle:close()
 -- end
-
-return {
+local M = {
   {
     "TabbyML/vim-tabby",
     enabled = container_running,
@@ -168,33 +167,6 @@ return {
     end,
   },
   {
-    "saghen/blink.cmp",
-    dependencies = {
-      "olimorris/codecompanion.nvim",
-      "milanglacier/minuet-ai.nvim",
-    },
-    opts = {
-      keymap = {
-        ["<A-y>"] = {
-          function(cmp)
-            cmp.show({ providers = { "minuet" } })
-          end,
-        },
-      },
-      sources = {
-        default = { "codecompanion", "minuet" },
-        providers = {
-          minuet = {
-            name = "minuet",
-            module = "minuet.blink",
-            score_offset = 8,
-          },
-        },
-      },
-      completion = { trigger = { prefetch_on_insert = false } },
-    },
-  },
-  {
     "CopilotC-Nvim/CopilotChat.nvim",
     enabled = false,
     opts = { auto_insert_mode = false },
@@ -239,3 +211,36 @@ return {
     },
   },
 }
+
+if no_weak_machine == true then
+  table.insert(M, 1, {
+    {
+      "saghen/blink.cmp",
+      dependencies = {
+        "olimorris/codecompanion.nvim",
+        "milanglacier/minuet-ai.nvim",
+      },
+      opts = {
+        keymap = {
+          ["<A-y>"] = {
+            function(cmp)
+              cmp.show({ providers = { "minuet" } })
+            end,
+          },
+        },
+        sources = {
+          default = { "codecompanion", "minuet" },
+          providers = {
+            minuet = {
+              name = "minuet",
+              module = "minuet.blink",
+              score_offset = 8,
+            },
+          },
+        },
+        completion = { trigger = { prefetch_on_insert = false } },
+      },
+    },
+  })
+end
+return M
