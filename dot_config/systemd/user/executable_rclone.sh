@@ -6,6 +6,15 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+if command -v yad &>/dev/null; then
+  GDK_BACKEND=x11 yad --notification --image=/usr/share/icons/breeze-dark/actions/16/folder-sync-symbolic.svg &
+  pid=${!}
+  sleep 3
+  kill ${pid}
+else
+  echo "yad is not installed."
+fi
+
 if [ -d "/mnt/rclone/$1" ] && mountpoint -q "$HOME/rclone/$1"; then
   fusermount -u "$HOME/rclone/$1"
 fi
@@ -19,13 +28,12 @@ mkdir -p "$HOME/Archiv/rclone_cache/$1"
 rclone mount "$1": "/mnt/rclone/$1" \
   --config "$HOME/.config/rclone/rclone.conf" \
   --temp-dir "$HOME/tmp/rclone.$1" \
-  --dir-cache-time 10m \
-  --low-level-retries 3 \
-  --retries 5 \
-  --timeout 15s \
   --vfs-cache-mode full \
-  --buffer-size 256M \
   --cache-dir "$HOME/Archiv/rclone_cache/$1" \
-  --log-level INFO \
-  --use-mmap
+  --log-level INFO
+# --buffer-size 256M \
+# --timeout 15s \
+# --dir-cache-time 10m \
+# --low-level-retries 3 \
+# --retries 5 \
 # --fuse-flag sync_read \

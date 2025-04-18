@@ -207,6 +207,11 @@ rc_log() {
 
 IFS=',' read -r -A sservices <<<"$RSYNC_SERVICES"
 
+rs_do() {
+  echo "$HOME/.config/systemd/user/rsync.sh $1 $2"
+  $HOME/.config/systemd/user/rsync.sh $1 $2
+}
+
 rs_start() {
   # Loop through each service name
   for service in "${sservices[@]}"; do
