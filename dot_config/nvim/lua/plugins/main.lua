@@ -1,8 +1,4 @@
 local no_weak_machine = require("config.weakmachine")
-if no_weak_machine == false then
-  vim.notify("Weak machine mode enabled", vim.log.levels.WARN)
-end
-
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
@@ -84,6 +80,7 @@ return {
   {
     "mistweaverco/kulala.nvim",
     ft = "http",
+    enabled = no_weak_machine,
     keys = {
       { "<leader>k", "<cmd>lua require('kulala').run()<cr>", desc = "Send the request", ft = "http" },
     },
@@ -101,7 +98,7 @@ return {
   },
   {
     "folke/noice.nvim",
-    enabled = true,
+    enabled = no_weak_machine,
     opts = function(_, opts)
       table.insert(opts.routes, {
         filter = {
@@ -180,6 +177,7 @@ return {
   },
   {
     "zk-org/zk-nvim",
+    enabled = no_weak_machine,
     keys = {
       {
         "<leader>zn",

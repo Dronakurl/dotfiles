@@ -1,10 +1,8 @@
 local no_weak_machine = require("config.weakmachine")
-if no_weak_machine == false then
-  vim.notify("Weak machine mode enabled", vim.log.levels.WARN)
-end
 return {
   {
     "nvim-neotest/neotest",
+    nabled = no_weak_machine,
     -- dependencies = {
     --   "rosstang/neotest-catch2",
     --   "Shatur/neovim-tasks",

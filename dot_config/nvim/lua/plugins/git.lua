@@ -1,4 +1,3 @@
--- local no_weak_machine = require("config.weakmachine")
 return {
   {
     "xvzc/chezmoi.nvim",

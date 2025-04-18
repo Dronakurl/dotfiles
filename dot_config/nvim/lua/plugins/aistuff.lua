@@ -1,4 +1,5 @@
 local command = "cat " .. vim.fn.expand("$HOME") .. "/.config/openaikey"
+local no_weak_machine = require("config.weakmachine")
 
 local handle = io.popen(command)
 API_KEY = nil
@@ -36,6 +37,7 @@ return {
   },
   {
     "olimorris/codecompanion.nvim",
+    enabled = no_weak_machine,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -140,6 +142,7 @@ return {
   },
   {
     "milanglacier/minuet-ai.nvim",
+    enabled = no_weak_machine,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
@@ -184,7 +187,7 @@ return {
           minuet = {
             name = "minuet",
             module = "minuet.blink",
-            score_offset = 8, -- Gives minuet higher priority among suggestions
+            score_offset = 8,
           },
         },
       },
@@ -236,94 +239,3 @@ return {
     },
   },
 }
-
--- codestral = function()
---   return require("codecompanion.adapters").extend("openai_compatible", {
---     name = "codestral",
---     env = {
---       url = "https://codestral.mistral.ai",
---       api_key = os.getenv("CODESTRAL_API_KEY"),
---       chat_url = "/v1/chat/completions",
---     },
---     handlers = {
---       form_parameters = function(self, params, messages)
---         -- codestral doesn't support these in the body
---         params.stream_options = nil
---         params.options = nil
---
---         return params
---       end,
---     },
---     schema = {
---       model = {
---         default = "open-codestral-mamba",
---       },
---       -- temperature = {
---       --   default = 0.2,
---       --   mapping = "parameters", -- not supported in default parameters.options
---       -- },
---     },
---   })
--- end,
-
--- opts = function(_, opts)
---   opts.sources.default = opts.sources.default or {}
---   table.insert(opts.sources.default, "codecompanion")
---   table.insert(opts.sources.default, "minuet")
---   -- opts.sources.providers = opts.sources.providers or {}
---   opts.sources.providers = {
---     minuet = {
---       name = "minuet",
---       module = "minuet.blink",
---       score_offset = 8, -- Gives minuet higher priority among suggestions
---     },
---   }
---   vim.notify(vim.inspect(opts.sources.providers))
---   -- table.insert(opts.sources.providers, {
---   --   minuet = {
---   --     name = "minuet",
---   --     module = "minuet.blink",
---   --     score_offset = 8, -- Gives minuet higher priority among suggestions
---   --   },
---   -- })
---   opts.completion = { trigger = { prefetch_on_insert = false } }
---   table.insert(opts.keymap, {
---     -- Manually invoke minuet completion.
---     ["<A-y>"] = require("minuet").make_blink_map(),
---   })
---   -- vim.b.completion = true
---   --
---   -- Snacks.toggle({
---   --   name = "Completion",
---   --   get = function()
---   --     return vim.b.completion
---   --   end,
---   --   set = function(state)
---   --     vim.b.completion = state
---   --   end,
---   -- }):map("<leader>uk")
---   --
---   -- opts.enabled = function()
---   --   return vim.b.completion ~= false
---   -- end
---   return opts
--- end,
--- -- opts = {
--- --   sources = {
--- --     default = { "codecompanion", "tabby" },
--- --     providers = {
--- --       tabby = {
--- --         name = "tabby",
--- --         module = "blink-cmp-tabby",
--- --         kind = "tabby",
--- --         score_offset = 100,
--- --         async = true,
--- --       },
--- --     },
--- --   },
--- -- },
--- {
---   "blink-cmp-tabby",
---   dir = "/home//nvimplugins/blink-cmp-tabby/",
---   lazy = false,
--- },

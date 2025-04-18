@@ -1,12 +1,4 @@
--- local not_neovide = not vim.g.neovide
-
 local colorscheme = "tokyonight-moon"
--- if require("config.is_running_in_docker")() then
---   -- if is_running_in_docker() then
---   colorscheme = "catppuccin-mocha"
--- else
---   colorscheme = "tokyonight-moon"
--- end
 
 return {
 
