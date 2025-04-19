@@ -98,7 +98,7 @@ return {
   },
   {
     "folke/noice.nvim",
-    -- enabled = no_weak_machine,
+    enabled = no_weak_machine,
     opts = function(_, opts)
       table.insert(opts.routes, {
         filter = {
