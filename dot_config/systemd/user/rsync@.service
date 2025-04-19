@@ -2,6 +2,8 @@
 Description=rclone sync %i
 Wants=network-online.target
 After=network-online.target
+Wants=graphical.target
+After=graphical.target
 OnFailure=notify@%i.service
 
 [Service]

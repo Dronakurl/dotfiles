@@ -1,5 +1,4 @@
 #!/usr/bin/bash
-set -e
 
 if [ -z "$1" ]; then
   echo "Usage: $0 <remote>"
@@ -7,7 +6,7 @@ if [ -z "$1" ]; then
 fi
 
 if command -v yad &>/dev/null; then
-  sleep 1
+  sleep 3
   GDK_BACKEND=x11 yad --notification --image=/usr/share/icons/breeze-dark/actions/16/folder-sync-symbolic.svg &
   pid=${!}
   sleep 4
@@ -15,6 +14,8 @@ if command -v yad &>/dev/null; then
 else
   echo "yad is not installed."
 fi
+
+set -e
 
 if [ -d "/mnt/rclone/$1" ] && mountpoint -q "$HOME/rclone/$1"; then
   fusermount -u "$HOME/rclone/$1"

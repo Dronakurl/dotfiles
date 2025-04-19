@@ -4,6 +4,8 @@ Wants=network-online.target
 After=network-online.target
 After=network.target
 Wants=network.target
+Wants=graphical.target
+After=graphical.target
 OnFailure=notify@%i.service
 
 [Service]
