@@ -255,7 +255,8 @@ rs_status() {
 rs_log() {
   journalctl --user -u "rsync@*" $1
 }
-
+export GDK_SCALE=1
+export GDK_DPI_SCALE=0.75
 # fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 # zprof
