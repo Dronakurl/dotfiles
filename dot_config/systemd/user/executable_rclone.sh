@@ -33,6 +33,7 @@ rclone mount "$1": "/mnt/rclone/$1" \
   --vfs-cache-mode full \
   --cache-dir "$HOME/Archiv/rclone_cache/$1" \
   --log-level INFO
+
 # --buffer-size 256M \
 # --timeout 15s \
 # --dir-cache-time 10m \

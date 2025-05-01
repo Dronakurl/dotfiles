@@ -41,6 +41,7 @@ config.warn_about_missing_glyphs = false
 -- config.font = wezterm.font("Neon")
 
 config.font = wezterm.font("JetBrains Mono")
+config.font_size = 12.0
 -- config.line_height = 1.05
 
 -- config.font = wezterm.font("CommitMono")
@@ -176,7 +177,7 @@ config.keys = {
 		}),
 	},
 }
-config.use_fancy_tab_bar = true
+config.use_fancy_tab_bar = false
 config.colors = {
 	tab_bar = {
 		active_tab = {
@@ -186,10 +187,19 @@ config.colors = {
 	},
 }
 
+wezterm.on("gui-startup", function(cmd)
+	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
+end)
+
 wezterm.on("toggle-opacity", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
 	if not overrides.window_background_opacity then
-		overrides.window_background_opacity = 0.5
+		overrides.window_background_opacity = 0.80
+	elseif overrides.window_background_opacity == 0.80 then
+		overrides.window_background_opacity = 0.95
+	elseif overrides.window_background_opacity == 0.95 then
+		overrides.window_background_opacity = 1.0
 	else
 		overrides.window_background_opacity = nil
 	end
