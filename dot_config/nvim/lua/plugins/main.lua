@@ -1,10 +1,12 @@
 local no_weak_machine = require("config.weakmachine")
 return {
-  -- {
-  --   "vyfor/cord.nvim",
-  --   build = ":Cord update",
-  --   -- opts = {}
-  -- },
+  { "mason-org/mason.nvim", version = "1.11.0" },
+  { "mason-org/mason-lspconfig.nvim", version = "1.32.0" },
+  {
+    "vyfor/cord.nvim",
+    build = ":Cord update",
+    -- opts = {}
+  },
   {
     "MeanderingProgrammer/render-markdown.nvim",
     enabled = false,

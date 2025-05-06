@@ -51,5 +51,4 @@ if no_weak_machine == true then
     },
   })
 end
-
 return M
