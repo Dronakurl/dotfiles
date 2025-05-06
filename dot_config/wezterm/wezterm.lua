@@ -11,6 +11,20 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+local act = wezterm.action
+config.mouse_bindings = {
+	{
+		event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+		mods = "NONE",
+		action = act.ScrollByLine(-1),
+	},
+	{
+		event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+		mods = "NONE",
+		action = act.ScrollByLine(1),
+	},
+}
+
 -- local act = wezterm.action
 -- config.mouse_bindings = {
 -- 	-- Bind 'Up' event of CTRL-Click to open hyperlinks
