@@ -5,6 +5,9 @@
 [Unit]
 Description=Epub download from einfach vorlesen.de
 After=network.target
+Wants=network.target
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 ; Type=simple
