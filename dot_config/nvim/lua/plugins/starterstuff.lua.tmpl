@@ -121,18 +121,12 @@ return {
           },
         },
         sections = {
-          {{ if ne .chezmoi.hostname "bigone" }}
-          { pane = 1, { section = "header", gap = 1, padding = 1 } },
+          {{ if eq .chezmoi.hostname "bigone" }}
           -- get_image_pane(),
-          {
-            pane = 2,
-            { section = "keys", gap = 1, padding = 1 },
-            { section = "startup" },
-          },
-          {{ else }}
+            { section = "header", gap = 1, padding = 1 },
+          {{ end }}
           { section = "keys", gap = 1, padding = 1 },
           { section = "startup" },
-          {{ end }}
         },
       },
     },
