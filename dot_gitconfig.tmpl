@@ -1,6 +1,6 @@
 [user]
 	email = {{ .email | quote }}
-	name = Dronakurl
+	name = {{ .name | quote }}
 [alias]
         lol = log --graph --decorate --pretty=oneline --abbrev-commit
         lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
