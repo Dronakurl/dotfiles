@@ -1,7 +1,5 @@
 local no_weak_machine = require("config.weakmachine")
 return {
-  { "mason-org/mason.nvim", version = "1.11.0" },
-  { "mason-org/mason-lspconfig.nvim", version = "1.32.0" },
   {
     "vyfor/cord.nvim",
     build = ":Cord update",
@@ -15,16 +13,6 @@ return {
   -- 	"goerz/jupytext.nvim",
   -- 	version = "0.2.0",
   -- 	opts = {}, -- see Options
-  -- },
-  -- {
-  --   "ziontee113/icon-picker.nvim",
-  --   config = function()
-  --     require("icon-picker").setup({ disable_legacy_commands = true })
-  --     local opts = { noremap = true, silent = true }
-  --     vim.keymap.set("n", "<Leader>fi", "<cmd>IconPickerNormal<cr>", opts)
-  --     -- vim.keymap.set("n", "<Leader><Leader>y", "<cmd>IconPickerYank<cr>", opts) --> Yank the selected icon into register
-  --     -- vim.keymap.set("i", "<C-i>", "<cmd>IconPickerInsert<cr>", opts)
-  --   end,
   -- },
   {
     "snacks.nvim",

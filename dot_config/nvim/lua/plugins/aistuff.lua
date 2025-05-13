@@ -1,15 +1,15 @@
-local command = "cat " .. vim.fn.expand("$HOME") .. "/.config/openaikey"
+-- local command = "cat " .. vim.fn.expand("$HOME") .. "/.config/openaikey"
 local no_weak_machine = require("config.weakmachine")
-
-local handle = io.popen(command)
-API_KEY = nil
-if handle ~= nil then
-  API_KEY = handle:read("*a"):match("%S+")
-  handle:close()
-end
-if API_KEY ~= nil then
-  vim.fn.setenv("OPENAI_API_KEY", API_KEY)
-end
+--
+-- local handle = io.popen(command)
+-- API_KEY = nil
+-- if handle ~= nil then
+--   API_KEY = handle:read("*a"):match("%S+")
+--   handle:close()
+-- end
+-- if API_KEY ~= nil then
+--   vim.fn.setenv("OPENAI_API_KEY", API_KEY)
+-- end
 
 -- local tcommand = "docker inspect --format='{{.State.Running}}' tabby"
 -- local thandle = io.popen(tcommand)
