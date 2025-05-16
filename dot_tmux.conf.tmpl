@@ -5,6 +5,7 @@
 if "test ! -d ~/.tmux/plugins/tpm" \
    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 set -sg escape-time 10
+set -g history-limit 5000
 set -g status-position top
 # set -g allow-passthrough all
 set -g default-terminal "tmux-256color"
