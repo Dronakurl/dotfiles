@@ -15,15 +15,6 @@ return {
     end,
   },
   {
-    "ejrichards/baredot.nvim",
-    init = function()
-      require("baredot").set(false)
-    end,
-    opts = {
-      git_dir = "~/.cfg", -- Change this path
-    },
-  },
-  {
     "lewis6991/gitsigns.nvim",
     -- dependencies = { "sindrets/diffview.nvim" },
     keys = {
