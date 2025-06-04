@@ -10,6 +10,7 @@ local M = {
         javascript = { "prettierd" },
         json = { "prettierd" },
         latex = { "latexindent" },
+        typst = { "typstyle" },
         -- cmake = { "cmake-format" },
         cmake = { "cmakelang" },
       },
