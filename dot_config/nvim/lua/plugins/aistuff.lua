@@ -1,39 +1,6 @@
--- local command = "cat " .. vim.fn.expand("$HOME") .. "/.config/openaikey"
 local no_weak_machine = require("config.weakmachine")
---
--- local handle = io.popen(command)
--- API_KEY = nil
--- if handle ~= nil then
---   API_KEY = handle:read("*a"):match("%S+")
---   handle:close()
--- end
--- if API_KEY ~= nil then
---   vim.fn.setenv("OPENAI_API_KEY", API_KEY)
--- end
 
--- local tcommand = "docker inspect --format='{{.State.Running}}' tabby"
--- local thandle = io.popen(tcommand)
-local container_running = false
--- if thandle then
---   container_running = thandle:read("*a"):match("%S+") == "true"
---   if container_running then
---     vim.notify("Tabby is running! Great! <leader>at will take you!", vim.log.levels.INFO)
---   end
---   thandle:close()
--- end
 local M = {
-  {
-    "TabbyML/vim-tabby",
-    enabled = container_running,
-    lazy = false,
-    dependencies = {
-      "neovim/nvim-lspconfig",
-    },
-    init = function()
-      vim.g.tabby_agent_start_command = { "npx", "tabby-agent", "--stdio" }
-      vim.g.tabby_inline_completion_trigger = "auto"
-    end,
-  },
   {
     "olimorris/codecompanion.nvim",
     enabled = no_weak_machine,
@@ -147,21 +114,45 @@ local M = {
     },
     config = function()
       require("minuet").setup({
-        provider_options = {
-          codestral = {
-            model = "codestral-latest",
-            end_point = "https://codestral.mistral.ai/v1/fim/completions",
-            api_key = "CODESTRAL_API_KEY",
-            stream = true,
-            -- template = {
-            --   prompt = "See [Prompt Section for default value]",
-            --   suffix = "See [Prompt Section for default value]",
-            -- },
-            optional = {
-              stop = nil, -- the identifier to stop the completion generation
-              max_tokens = nil,
+        n_completions = 1,
+        presets = {
+          ollama = {
+            throttle = 400,
+            provider = "openai_fim_compatible",
+            n_completions = 1,
+            provider_options = {
+              openai_fim_compatible = {
+                -- For Windows users, TERM may not be present in environment variables.
+                -- Consider using APPDATA instead.
+                api_key = "TERM",
+                name = "Ollama",
+                -- end_point = "http://localhost:11434/api/generate",
+                end_point = "http://localhost:11434/v1/completions",
+                model = "qwen2.5-coder:7b",
+                -- model = "codestral",
+                -- model = "stable-code:latest",
+                optional = {
+                  max_tokens = 56,
+                  top_p = 0.9,
+                },
+              },
             },
           },
+          -- codestral = {
+          --   provider = "codestral",
+          --   provider_options = {
+          --     codestral = {
+          --       model = "codestral-latest",
+          --       end_point = "https://codestral.mistral.ai/v1/fim/completions",
+          --       api_key = "CODESTRAL_API_KEY",
+          --       stream = true,
+          --       optional = {
+          --         stop = nil, -- the identifier to stop the completion generation
+          --         max_tokens = nil,
+          --       },
+          --     },
+          --   },
+          -- },
         },
       })
     end,
@@ -243,4 +234,5 @@ if no_weak_machine == true then
     },
   })
 end
+
 return M

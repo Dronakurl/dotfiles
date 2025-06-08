@@ -9,6 +9,7 @@ if require("config.is_running_in_docker")() then
 end
 
 vim.opt.wrap = true
+vim.lsp.enable("ty", true)
 
 vim.diagnostic.config({
   virtual_text = {

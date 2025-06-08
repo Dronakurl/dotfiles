@@ -61,6 +61,7 @@ return {
         --     padding = { left = 3 },
         --   },
         -- },
+        -- lualine_y = { activated_venv, { require("minuet.lualine"), display_on_idle = true, display_name = "both" } },
         lualine_y = { activated_venv },
         lualine_z = {
           -- nvimbattery,
