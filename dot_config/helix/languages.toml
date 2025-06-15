@@ -42,6 +42,14 @@ model = "gpt-4o"
 auth_token_env_var_name = "OPENAI_API_KEY"
 max_requests_per_second = 0.3
 
+[language-server.lsp-ai.config.models.codestral]
+type = "open_ai"
+chat_endpoint = "https://codestral.mistral.ai/v1/fim/completions"
+model = "codestral"
+auth_token_env_var_name = "CODESTRAL_API_KEY"
+
+
+
 # [language-server.lsp-ai.config.models.anthropic]
 # type = "anthropic"
 # chat_endpoint = "https://api.anthropic.com/v1/messages"
@@ -65,7 +73,7 @@ content = "You are a code assistant chatbot. The user will ask you for assistanc
 
 # ######################################## Completion with openai
 # [language-server.lsp-ai.config.completion]
-# model = "openaimini"
+# model = "openai"
 
 # [language-server.lsp-ai.config.completion.parameters]
 # max_context = 2048
@@ -122,9 +130,9 @@ content = "You are a code assistant chatbot. The user will ask you for assistanc
 # role = "user"
 # content = "{CODE}"
 
-######################################## Completion with tabby
+######################################## Completion with codestral
 [language-server.lsp-ai.config.completion]
-model = "tabby"
+model = "codestral"
 
 [language-server.lsp-ai.config.completion.parameters]
 max_context = 2048
@@ -180,6 +188,66 @@ content = "def is_even(n):\n    return n % 2 == 0"
 [[language-server.lsp-ai.config.completion.parameters.messages]]
 role = "user"
 content = "{CODE}"
+
+
+# ######################################## Completion with tabby
+# [language-server.lsp-ai.config.completion]
+# model = "tabby"
+
+# [language-server.lsp-ai.config.completion.parameters]
+# max_context = 2048
+# max_tokens = 200
+
+# # [language-server.lsp-ai.config.completion.parameters.options]
+# # num_predict = 32
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "system"
+# content = "Instructions:\n- You are an AI programming assistant.\n- Given a piece of code with the cursor location marked by \"<CURSOR>\", replace \"<CURSOR>\" with the correct code or comment. Only respond with code or comments.\n- Only replace \"<CURSOR>\"; do not include any previously written code.\n- Never include \"<CURSOR>\" in your response\n- If the cursor is within a comment, complete the comment meaningfully.."
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "user"
+# content = "def greet(name):\n    print(f\"Hello, {<CURSOR>}\")"
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "assistant"
+# content = "name"
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "user"
+# content = "function sum(a, b) {\n    return a + <CURSOR>;\n}"
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "assistant"
+# content = "b"
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "user"
+# content = "fn multiply(a: i32, b: i32) -> i32 {\n    a * <CURSOR>\n}"
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "assistant"
+# content = "b"
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "user"
+# content = "# <CURSOR>\ndef add(a, b):\n    return a + b"
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "assistant"
+# content = "Adds two numbers"
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "user"
+# content = "# This function checks if a number is even\n<CURSOR>"
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "assistant"
+# content = "def is_even(n):\n    return n % 2 == 0"
+
+# [[language-server.lsp-ai.config.completion.parameters.messages]]
+# role = "user"
+# content = "{CODE}"
 
 #################################### Action Quick Complete
 [[language-server.lsp-ai.config.actions]]
