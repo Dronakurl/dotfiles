@@ -1,4 +1,4 @@
-[manager]
+[mgr]
 linemode = "size"
 sort_by = "mtime"
 sort_reverse = true
@@ -13,7 +13,7 @@ prepend_previewers = [
   { mime = "application/x-rar", run = "ouch" },
   { mime = "application/x-xz", run = "ouch" },
   { mime = "application/epub+zip", run = "epub-preview" },
-  { name = "*.md", run = "glow" },
+  # { name = "*.md", run = "glow" },
 ]
 
 [opener]
