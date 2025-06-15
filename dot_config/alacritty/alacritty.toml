@@ -1,6 +1,9 @@
 [general]
 #  import = ["~/.config/alacritty/tokyonight/tokyonight_night.toml"]
 
+[terminal]
+osc52 = "CopyPaste"
+
 [env]
 TERM = "xterm-256color"
 
@@ -9,50 +12,50 @@ size = 12
 offset.y = 1
 
 [font.bold]
+family = "FiraCode Nerd Font Mono"
 # family = "Krypton"
 # family = "JetBrainsMono Nerd Font"
 # family = "Neon"
 # family = "Agave Nerd Font Mono"
 # family = "Mononoki Nerd Font Mono "
 # family: "Argon"
-family = "Krypton"
+# family = "Krypton"
 # family: "Mononoki Nerd Font Mono "
-# family = "FiraCode Nerd Font Mono"
 # family: "MonaspaceNeon"
 # family = "CodeNewRoman Nerd Font"
 # family = "Ubuntu Mono Nerd Font "
 style = "Bold"
 
 [font.bold_italic]
+family = "FiraCode Nerd Font Mono"
 # family = "Radon"
 # family = "JetBrainsMono Nerd Font"
 # family = "CodeNewRoman Nerd Font"
 # family = "Neon"
-family = "Krypton"
+# family = "Krypton"
 # family = "Agave Nerd Font Mono"
-# family = "FiraCode Nerd Font Mono"
 # family = "Mononoki Nerd Font Mono "
 # family = "Ubuntu Mono Nerd Font "
 style = "Bold Italic"
 
 [font.italic]
-family = "Radon"
+family = "FiraCode Nerd Font Mono"
+# family = "Radon"
 # family = "JetBrainsMono Nerd Font"
 # family = "CodeNewRoman Nerd Font"
 # family = "Neon"
 # family = "Agave Nerd Font Mono"
 # family = "Mononoki Nerd Font Mono "
-# family = "FiraCode Nerd Font Mono"
 # family = "Ubuntu Mono Nerd Font "
 style = "Italic"
 
 [font.normal]
-family = "Neon"
+family = "FiraCode Nerd Font Mono"
+# family = "Neon"
 # family = "JetBrainsMono Nerd Font"
 # family = "CodeNewRoman Nerd Font"
 # family = "Agave Nerd Font Mono"
 # family = "Mononoki Nerd Font Mono "
-#family = "FiraCode Nerd Font Mono"
 # family= "Neon"
 # family = "Ubuntu Mono Nerd Font "
 
