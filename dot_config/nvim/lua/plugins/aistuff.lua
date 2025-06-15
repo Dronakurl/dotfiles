@@ -2,6 +2,14 @@ local no_weak_machine = require("config.weakmachine")
 
 local M = {
   {
+    "coder/claudecode.nvim",
+    config = true,
+    keys = {
+      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+    },
+  },
+  {
     "olimorris/codecompanion.nvim",
     enabled = no_weak_machine,
     dependencies = {
