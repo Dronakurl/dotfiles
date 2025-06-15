@@ -1,0 +1,8 @@
+[Unit]
+Description=Run vimbacklight script
+
+[Service]
+ExecStart=%h/.config/systemd/user/vimbacklight.sh
+
+[Install]
+WantedBy=default.target

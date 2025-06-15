@@ -1,0 +1,9 @@
+[Unit]
+Description=Run vimbacklight script 1 minute after login
+
+[Timer]
+OnActiveSec=1min
+Unit=backlight.service
+
+[Install]
+WantedBy=default.target
