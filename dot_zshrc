@@ -103,7 +103,6 @@ alias gsl="git status"
 alias nvimdiff='nvim -d'
 alias uy="uv run"
 alias ur="uv run"
-alias jos='joshuto --output-file /tmp/joshutodir; LASTDIR=`cat /tmp/joshutodir`; cd "$LASTDIR"'
 function y() {
   # yazi file manager, but exit to the terminal in the last visited directory within yazi
   if [ -f "$HOME/.env" ]; then
