@@ -2,8 +2,65 @@ local no_weak_machine = require("config.weakmachine")
 
 local M = {
   {
+    "yetone/avante.nvim",
+    enabled = false,
+    event = "VeryLazy",
+    build = "make",
+    opts = {
+      input = {
+        provider = "snacks",
+        provider_opts = {
+          title = "Avante Input",
+          icon = " ",
+          placeholder = "Enter your API key...",
+        },
+      },
+      provider = "mistral",
+      providers = {
+        ollama = {
+          endpoint = "http://localhost:11434",
+          model = "devstral:latest",
+        },
+        claude = {
+          endpoint = "https://api.anthropic.com",
+          model = "claude-3-5-sonnet-20241022",
+          disable_tools = true,
+          extra_request_body = {
+            temperature = 0.75,
+            max_tokens = 4096,
+          },
+        },
+        mistral = {
+          __inherited_from = "openai",
+          api_key_name = "MISTRAL_API_KEY",
+          endpoint = "https://api.mistral.ai/v1/",
+          model = "mistral-large-latest",
+          extra_request_body = {
+            max_tokens = 4096, -- to avoid using max_completion_tokens
+          },
+        },
+      },
+    },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      -- "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
+  },
+  {
     "coder/claudecode.nvim",
     config = true,
+    -- enabled = is_command_available("claude"),
+    enabled = false,
     keys = {
       { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
       { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
@@ -11,7 +68,8 @@ local M = {
   },
   {
     "olimorris/codecompanion.nvim",
-    enabled = no_weak_machine,
+    -- enabled = no_weak_machine,
+    enabled = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
@@ -78,26 +136,26 @@ local M = {
     end,
     keys = {
       {
-        "<leader>ar",
+        "<leader>aq",
         ":CodeCompanion ",
         desc = "Quick change (openai)",
         -- icon = "🔀",
         mode = { "n", "v" },
       },
-      {
-        "<leader>at",
-        ":CodeCompanionChat tabby<CR>",
-        desc = "Open chat (tabby)",
-        -- icon = "🐱",
-        mode = { "n", "v" },
-      },
-      {
-        "<leader>ad",
-        ":CodeCompanionChat deepseek<CR>",
-        desc = "Open chat (deepseek-coder-v2)",
-        -- icon = "🔍",
-        mode = { "n", "v" },
-      },
+      -- {
+      --   "<leader>at",
+      --   ":CodeCompanionChat tabby<CR>",
+      --   desc = "Open chat (tabby)",
+      --   -- icon = "🐱",
+      --   mode = { "n", "v" },
+      -- },
+      -- {
+      --   "<leader>ad",
+      --   ":CodeCompanionChat deepseek<CR>",
+      --   desc = "Open chat (deepseek-coder-v2)",
+      --   -- icon = "🔍",
+      --   mode = { "n", "v" },
+      -- },
       {
         "<leader>ao",
         ":CodeCompanionChat openai<CR>",
@@ -216,8 +274,9 @@ if no_weak_machine == true then
     {
       "saghen/blink.cmp",
       dependencies = {
-        "olimorris/codecompanion.nvim",
+        -- "olimorris/codecompanion.nvim",
         "milanglacier/minuet-ai.nvim",
+        "Kaiser-Yang/blink-cmp-avante",
       },
       opts = {
         keymap = {
@@ -228,8 +287,17 @@ if no_weak_machine == true then
           },
         },
         sources = {
-          default = { "codecompanion", "minuet" },
+          -- default = { "codecompanion", "minuet", "avante" },
+          -- default = { "minuet", "avante" },
+          default = { "minuet", "codecompanion" },
           providers = {
+            avante = {
+              module = "blink-cmp-avante",
+              name = "Avante",
+              opts = {
+                -- options for blink-cmp-avante
+              },
+            },
             minuet = {
               name = "minuet",
               module = "minuet.blink",
