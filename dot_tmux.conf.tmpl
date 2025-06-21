@@ -11,7 +11,8 @@ set -g allow-passthrough on
 set -ga update-environment TERM
 set -ga update-environment TERM_PROGRAM
 set -g default-terminal "$TERM"
-set -ag  terminal-features ",$TERM:Tc"
+# set -ag  terminal-features ",$TERM:Tc"
+set -ag  terminal-features ",$TERM:RGB"
 # set -g terminal-features ',xterm-kitty:RGB'
 set -g mouse on
 set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'  # undercurl support
