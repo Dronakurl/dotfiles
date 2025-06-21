@@ -3,11 +3,27 @@ return {
   {
     "vyfor/cord.nvim",
     build = ":Cord update",
+    enabled = no_weak_machine,
     -- opts = {}
   },
+  -- {
+  --   "linux-cultist/venv-selector.nvim",
+  --   dependencies = {
+  --     "neovim/nvim-lspconfig",
+  --   },
+  --   lazy = false,
+  --   branch = "regexp",
+  --   keys = {
+  --     { ",v", "<cmd>VenvSelect<cr>" },
+  --   },
+  --   opts = {
+  --     picker = "native",
+  --     -- Your settings go here
+  --   },
+  -- },
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    enabled = false,
+    enabled = true,
   },
   -- {
   -- 	"goerz/jupytext.nvim",
@@ -83,8 +99,8 @@ return {
       additional_curl_options = { "--location", "-k" },
     },
   },
-  -- Telescope is needed because of venvselect
-  { "nvim-telescope/telescope.nvim" },
+  -- -- Telescope is needed because of venvselect
+  -- { "nvim-telescope/telescope.nvim" },
   {
     "echasnovski/mini.pairs",
     opts = {
