@@ -274,9 +274,9 @@ if no_weak_machine == true then
     {
       "saghen/blink.cmp",
       dependencies = {
-        -- "olimorris/codecompanion.nvim",
+        "olimorris/codecompanion.nvim",
         "milanglacier/minuet-ai.nvim",
-        "Kaiser-Yang/blink-cmp-avante",
+        -- "Kaiser-Yang/blink-cmp-avante",
       },
       opts = {
         keymap = {
