@@ -4,6 +4,7 @@
  
 if "test ! -d ~/.tmux/plugins/tpm" \
    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
+set -g base-index 1
 set -sg escape-time 10
 set -g history-limit 5000
 set -g status-position top
@@ -31,6 +32,7 @@ bind-key M-a send-prefix
 bind  c  new-window      -c "#{pane_current_path}"
 bind  %  split-window -h -c "#{pane_current_path}"
 bind '"' split-window -v -c "#{pane_current_path}"
+bind-key C new-window -t 0 -n "nvim" 'nvim'
 
 # set -g @plugin 'tmux-plugins/tmux-battery'
 # set -g @plugin 'tmux-plugins/tmux-cpu'
@@ -63,4 +65,10 @@ set -g status-right ""
 set -g status-right '#[fg=cyan,bold] #U@#H #[default]#[fg=blue]#(tmux display-message -p "#{pane_current_path}" | sed "s#$HOME#~#g") #[fg=red]%Y-%m-%d  #[fg=green,bold]%H:%M #[default]'
 run '~/.tmux/plugins/tpm/tpm'
 
+# # Trigger the script whenever windows are renamed or created
+# set-hook -g after-new-window "run-shell ~/.config/tmux/highlight-editor.sh.sh"
+# set-hook -g after-rename-window "run-shell ~/.config/tmux/highlight-editor.sh"
+#
+ # Optional: run once on tmux start
+# run-shell ~/.config/tmux/highlight-editor.sh
 
