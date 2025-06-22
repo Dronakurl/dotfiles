@@ -24,6 +24,9 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     enabled = true,
+    opts = {
+      code = { border = "thick" },
+    },
   },
   -- {
   -- 	"goerz/jupytext.nvim",
@@ -71,7 +74,7 @@ return {
         filter = function()
           return true
         end,
-        size = { width = 50 },
+        size = { width = 80 },
       })
 
       opts.left = opts.left or {}
