@@ -26,6 +26,7 @@ return {
     enabled = true,
     opts = {
       code = { border = "thick" },
+      html = { comment = { conceal = false } },
     },
   },
   -- {
