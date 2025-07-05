@@ -278,6 +278,19 @@ if no_weak_machine == true then
         "milanglacier/minuet-ai.nvim",
         -- "Kaiser-Yang/blink-cmp-avante",
       },
+      keys = {
+        {
+          "<leader>uu",
+          function()
+            if vim.b.completion == nil then
+              vim.b.completion = true
+            end
+            vim.b.completion = not vim.b.completion
+            vim.notify("Blink completion " .. (vim.b.completion and "enabled" or "disabled"), vim.log.levels.INFO)
+          end,
+          desc = "Toggle blink completion",
+        },
+      },
       opts = {
         keymap = {
           ["<A-y>"] = {
@@ -291,13 +304,13 @@ if no_weak_machine == true then
           -- default = { "minuet", "avante" },
           default = { "minuet", "codecompanion" },
           providers = {
-            avante = {
-              module = "blink-cmp-avante",
-              name = "Avante",
-              opts = {
-                -- options for blink-cmp-avante
-              },
-            },
+            -- avante = {
+            --   module = "blink-cmp-avante",
+            --   name = "Avante",
+            --   opts = {
+            --     -- options for blink-cmp-avante
+            --   },
+            -- },
             minuet = {
               name = "minuet",
               module = "minuet.blink",
