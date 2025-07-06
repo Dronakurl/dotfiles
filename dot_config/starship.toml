@@ -5,6 +5,9 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
+$container\
+$sudo\
+$typst\
 $cmd_duration\
 $line_break\
 $python\
@@ -67,3 +70,8 @@ style = "bright-black"
 [python]
 format = "[$virtualenv]($style) "
 style = "bold fg:213"
+
+[sudo]
+style = 'bold green'
+symbol = '👩‍💻 '
+disabled = false
