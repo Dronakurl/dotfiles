@@ -12,7 +12,8 @@ size = 12
 offset.y = 1
 
 [font.bold]
-family = "FiraCode Nerd Font Mono"
+# family = "FiraCode Nerd Font Mono"
+family = "Sauce Code Pro Nerd Font"
 # family = "Krypton"
 # family = "JetBrainsMono Nerd Font"
 # family = "Neon"
@@ -27,7 +28,8 @@ family = "FiraCode Nerd Font Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "FiraCode Nerd Font Mono"
+# family = "FiraCode Nerd Font Mono"
+family = "Sauce Code Pro Nerd Font"
 # family = "Radon"
 # family = "JetBrainsMono Nerd Font"
 # family = "CodeNewRoman Nerd Font"
@@ -39,7 +41,8 @@ family = "FiraCode Nerd Font Mono"
 style = "Bold Italic"
 
 [font.italic]
-family = "FiraCode Nerd Font Mono"
+# family = "FiraCode Nerd Font Mono"
+family = "Sauce Code Pro Nerd Font"
 # family = "Radon"
 # family = "JetBrainsMono Nerd Font"
 # family = "CodeNewRoman Nerd Font"
@@ -50,7 +53,8 @@ family = "FiraCode Nerd Font Mono"
 style = "Italic"
 
 [font.normal]
-family = "FiraCode Nerd Font Mono"
+# family = "FiraCode Nerd Font Mono"
+family = "Sauce Code Pro Nerd Font"
 # family = "Neon"
 # family = "JetBrainsMono Nerd Font"
 # family = "CodeNewRoman Nerd Font"

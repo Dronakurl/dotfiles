@@ -6,15 +6,15 @@ declare -a fonts=(
   # Agave
   # CascadiaCode
   # CodeNewRoman
+  # SourceCodePro
   #  DejaVuSansMono
   # FiraCode
   # FiraMono
-  Iosevka
+  #  Iosevka
   # Mononoki
   # NerdFontsSymbolsOnly
-  RobotoMono
+  # RobotoMono
   # UbuntuMono
-
   # Ubuntu
   # AnonymousPro
   # Arimo
@@ -36,7 +36,7 @@ declare -a fonts=(
   # Inconsolate
   # InconsolataGo
   # InconsolataLGC
-  JetBrainsMono
+  # JetBrainsMono
   # Lekton
   # LiberationMono
   # Lilex
