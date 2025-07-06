@@ -1,5 +1,7 @@
 [general]
-#  import = ["~/.config/alacritty/tokyonight/tokyonight_night.toml"]
+{{ if eq .chezmoi.hostname "bigone" }}
+import = ["~/.config/alacritty/tokyonight/tokyonight_night.toml"]
+{{ end }}
 
 [terminal]
 osc52 = "CopyPaste"
