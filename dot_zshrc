@@ -121,11 +121,13 @@ alias zrc="chezmoi edit ~/.zshrc"
 # alias ap="sudo apt-get update; sudo apt-get upgrade; sudo apt-get autoremove "
 ap() {
   if command -v pkcon >/dev/null; then
+    pkcon refresh
     pkcon update
+  else
+    sudo apt-get update
+    sudo apt-get upgrade
+    sudo apt-get autoremove
   fi
-  sudo apt-get update
-  sudo apt-get upgrade
-  sudo apt-get autoremove
 }
 alias f="cd ~ && cd \$(find * -type d | fzf)"
 alias dropboxmama="rclone mount dropboxmama: ~/mnt --daemon --vfs-cache-mode writes --dropbox-encoding 'Slash,BackSlash,Del,RightSpace,InvalidUtf8,Dot,LeftPeriod' -vv"
