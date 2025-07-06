@@ -89,8 +89,8 @@ local M = {
               name = "codestral",
               schema = {
                 model = {
-                  -- default = "open-codestral-mamba",
                   default = "mistral-large-latest",
+                  -- default = "magistral-medium-2506",
                 },
                 -- temperature = {
                 --   default = 0.2,
