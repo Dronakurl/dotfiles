@@ -98,40 +98,46 @@ vim.keymap.set("n", "<leader>L", ":Lazy<ENTER>", { desc = "Lazy" })
 vim.keymap.set("n", "<leader>B", ":norm obreakpoint()<ESC>", { desc = "insert breakpoint" }) --, nowait = true })
 vim.keymap.set("n", "q:", "<Nop>", { desc = "No command history" })
 
-local ruffme = function()
+local dome = function(command, commanddisplay)
   -- local choice = vim.fn.confirm("Are you sure you want to run 'ruff -q .'?", "&Yes\n&No", 2)
-  local choice = 1
-  if choice == 1 then
-    -- vim.notify("Running ruff -q " .. vim.inspect(vim.fn.getcwd()), "debug", { icon = "", title = "Ruff" })
-    vim.cmd(":cexpr system('ruff check -q $(pwd)')")
-    local qflist = vim.fn.getqflist()
-    if #qflist == 0 then
-      vim.notify(
-        "🚀 Ruff check shows everything is fine. 😊",
-        "info",
-        ---@diagnostic disable-next-line
-        { icon = "", title = "Ruff", hl = { border = "DiagnosticOk", title = "DiagnosticOk" } }
-      )
-    else
-      require("trouble").open("quickfix")
-    end
+  vim.cmd(command)
+  local qflist = vim.fn.getqflist()
+  if #qflist == 0 then
+    vim.notify(
+      "🚀 " .. commanddisplay .. " shows everything is fine. 😊",
+      "info",
+      ---@diagnostic disable-next-line
+      { icon = "", title = "Ruff", hl = { border = "DiagnosticOk", title = "DiagnosticOk" } }
+    )
+  else
+    require("trouble").open("quickfix")
+  end
+end
 
-    -- Run ruff format --check and capture the output
-    local formatCheckOutput = vim.fn.systemlist("ruff format --check $(pwd)")
-    local exitStatus = vim.v.shell_error
+local clippyme = function()
+  dome(
+    ":cexpr system(' cargo clippy --all-features --message-format=short -- -D warnings -W clippy::pedantic -W clippy::nursery -W rust-2018-idioms ')",
+    "Clippy"
+  )
+end
 
-    if exitStatus == 1 then
-      local message = ""
-      if #formatCheckOutput > 0 then
-        message = table.concat(formatCheckOutput, "\n")
-      end
-      vim.notify(
-        "🚨 Ruff format --check found formatting issues." .. "\n\n" .. message,
-        "warn",
-        ---@diagnostic disable-next-line
-        { icon = "", title = "Ruff", hl = { title = "Error" }, timeout = 15000 }
-      )
+local ruffme = function()
+  dome(":cexpr system('ruff check -q $(pwd)')", "Ruff check")
+  -- Run ruff format --check and capture the output
+  local formatCheckOutput = vim.fn.systemlist("ruff format --check $(pwd)")
+  local exitStatus = vim.v.shell_error
+
+  if exitStatus == 1 then
+    local message = ""
+    if #formatCheckOutput > 0 then
+      message = table.concat(formatCheckOutput, "\n")
     end
+    vim.notify(
+      "🚨 Ruff format --check found formatting issues." .. "\n\n" .. message,
+      "warn",
+      ---@diagnostic disable-next-line
+      { icon = "", title = "Ruff", hl = { title = "Error" }, timeout = 15000 }
+    )
   end
 end
 
@@ -143,7 +149,8 @@ local mypyme = function()
   end
 end
 
-vim.keymap.set("n", "<leader>xr", ruffme, { desc = "Apply ruff and trouble" })
-vim.keymap.set("n", "<leader>xm", mypyme, { desc = "Apply mypy and trouble" })
+vim.keymap.set("n", "<leader>xr", ruffme, { desc = "Apply ruff and quickfix" })
+vim.keymap.set("n", "<leader>xc", clippyme, { desc = "Apply clippy and quickfix" })
+vim.keymap.set("n", "<leader>xm", mypyme, { desc = "Apply mypy and quickfix" })
 
 vim.api.nvim_set_keymap("n", "<leader>uS", ":setlocal spell spelllang=de<CR>", { noremap = false, silent = true })
