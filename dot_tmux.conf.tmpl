@@ -26,9 +26,9 @@ bind -T copy-mode-vi v send -X begin-selection
 bind-key -T copy-mode-vi y send -X copy-selection-and-cancel
 bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel
 bind-key h set -g status 
-set -g prefix M-a
-unbind-key C-b
-bind-key M-a send-prefix
+# set -g prefix M-a
+# unbind-key C-b
+# bind-key M-a send-prefix
 bind  c  new-window      -c "#{pane_current_path}"
 bind  %  split-window -h -c "#{pane_current_path}"
 bind '"' split-window -v -c "#{pane_current_path}"
