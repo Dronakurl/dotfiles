@@ -1,4 +1,4 @@
-local colorscheme = "tokyonight-moon"
+local colorscheme = "tokyonight-storm"
 
 return {
 
@@ -9,7 +9,7 @@ return {
       -- colorscheme = "catppuccin-mocha",
       -- colorscheme = "habamax",
       -- colorscheme = "kanagawa-dragon",
-      -- colorscheme = "tokyonight",
+      -- colorscheme = "tokyonight-storm",
       -- colorscheme = "carbonfox",
       -- colorscheme = "duskfox",
       -- colorscheme = "kanagawa",
