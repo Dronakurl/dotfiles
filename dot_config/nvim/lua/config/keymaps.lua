@@ -13,7 +13,7 @@ vim.keymap.set("n", "gm", "`", { desc = "Goto mark" })
 -- vim.keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode" })
 -- vim.keymap.set("t", "jj", "<ESC>", { desc = "Exit terminal mode" })
 
-vim.keymap.set("n", "<C-h>", ":f<cr>", { desc = "Show current file" })
+vim.keymap.set("n", "<C-G>", ":f<cr>", { desc = "Show current file" })
 vim.keymap.set("n", "ä", "]", { remap = true })
 vim.keymap.set("n", "ö", "[", { remap = true })
 vim.keymap.set("n", "ü", "}", { remap = true })
