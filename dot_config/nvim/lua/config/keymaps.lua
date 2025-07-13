@@ -35,7 +35,8 @@ vim.keymap.set(
   { desc = "Put empty line below" }
 )
 
-local wurst = function()
+---@return integer|nil
+local get_typos_client_id = function()
   -- Get clients that match the name 'typos_lsp'
   local clients = vim.lsp.get_clients({ name = "typos_lsp" })
 
@@ -46,36 +47,61 @@ local wurst = function()
   end
 
   -- Get the client ID of the first client
+  ---@type integer
   local client_id = clients[1].id
+  return client_id
+end
 
-  -- Get the current buffer number
-  local bufnr = vim.api.nvim_get_current_buf()
+---@return table<number, integer>
+local get_buffers_with_typos = function()
+  local client_id = get_typos_client_id()
+
+  -- If no clients are running, notify the user
+  if client_id == nil then
+    vim.notify("typos not running!", vim.log.levels.INFO)
+    return {}
+  end
 
   -- Get buffers associated with the client
+  ---@type table<number, integer>
   local bufs = vim.lsp.get_buffers_by_client_id(client_id)
+  return bufs
+end
+
+---@return boolean
+local is_typos_running = function()
+  -- Get the current buffer number
+  local bufnr = vim.api.nvim_get_current_buf()
+  local bufs = get_buffers_with_typos()
 
   -- Check if current buffer is in the list
-  if vim.tbl_contains(bufs, bufnr) then
-    -- Detach the client from the buffer
-    vim.lsp.buf_detach_client(bufnr, client_id)
-  else
-    -- Attach the client to the buffer
-    vim.lsp.buf_attach_client(bufnr, client_id)
+  return vim.tbl_contains(bufs, bufnr)
+end
+
+---@param enabled boolean
+---@return nil
+local set_typos = function(enabled)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local client_id = get_typos_client_id()
+  if client_id ~= nil then
+    if enabled then
+      vim.lsp.buf_attach_client(bufnr, client_id)
+    else
+      vim.lsp.buf_detach_client(bufnr, client_id)
+    end
   end
 end
 
-vim.keymap.set("n", "<leader>ut", wurst, { desc = "toggle typos" })
-
--- Snacks.toggle({
---   id = "completion",
---   name = "Blink completion",
---   get = function()
---     return vim.b.completion
---   end,
---   set = function(enabled)
---     vim.b.completion = enabled
---   end,
--- }):map("<leader>uu")
+Snacks.toggle({
+  id = "completion",
+  name = "Blink completion",
+  get = function()
+    return is_typos_running()
+  end,
+  set = function(enabled)
+    set_typos(enabled)
+  end,
+}):map("<leader>ut")
 
 -- vim.keymap.set("n", "<c-h>", ":echo expand('%:p')<cr>", { desc = "Full file path" })
 vim.keymap.set("n", "<c-7>", ":lua Snacks.terminal()<cr>", { desc = "Terminal (root dir)" })
