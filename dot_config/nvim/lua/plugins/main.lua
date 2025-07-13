@@ -106,12 +106,6 @@ return {
   -- -- Telescope is needed because of venvselect
   -- { "nvim-telescope/telescope.nvim" },
   {
-    "echasnovski/mini.pairs",
-    opts = {
-      skip_ts = {},
-    },
-  },
-  {
     "folke/noice.nvim",
     enabled = no_weak_machine,
     opts = function(_, opts)
