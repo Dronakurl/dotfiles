@@ -38,6 +38,21 @@ return {
   {
     "xiyaowong/transparent.nvim",
     lazy = false,
+    init = function()
+      local snacks = require("snacks")
+      snacks
+        .toggle({
+          id = "transparency",
+          name = "Transparency",
+          get = function()
+            return vim.g.transparent_enabled
+          end,
+          set = function(enabled)
+            vim.g.transparent_enabled = enabled
+          end,
+        })
+        :map("<leader>uo")
+    end,
     opts = {
       extra_groups = {
         "FloatBorder",
@@ -58,13 +73,6 @@ return {
         "WhichKeyFloat",
       },
       exclude_groups = {},
-    },
-    keys = {
-      {
-        "<Leader>uo",
-        "<Cmd>TransparentToggle<Cr>",
-        desc = "Toggle Transparency",
-      },
     },
   },
 }
