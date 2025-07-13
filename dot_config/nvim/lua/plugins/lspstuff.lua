@@ -9,6 +9,11 @@ local M = {
             procMacro = {
               ignored = {
                 ["async-trait"] = vim.NIL,
+                ["leptos_macro"] = {
+                  -- optional: --
+                  -- "component",
+                  ["server"] = vim.NIL,
+                },
               },
             },
           },
@@ -23,7 +28,7 @@ local M = {
         python = { "ruff_format", "ruff_organize_imports" },
         html = { "prettierd" },
         css = { "prettierd" },
-        rust = { "rustfmt" },
+        rust = { "rustfmt", "leptosfmt" },
         javascript = { "prettierd" },
         json = { "prettierd" },
         latex = { "latexindent" },

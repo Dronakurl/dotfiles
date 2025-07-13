@@ -177,9 +177,21 @@ local M = {
     enabled = no_weak_machine,
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "folke/snacks.nvim",
     },
     config = function()
-      require("minuet").setup({
+      local minuet = require("minuet")
+      Snacks.toggle({
+        id = "minuet",
+        name = "AI completion",
+        get = function()
+          return minuet.config["blink"].enable_auto_complete
+        end,
+        set = function(enabled)
+          minuet.config["blink"].enable_auto_complete = enabled
+        end,
+      }):map("<leader>uk")
+      minuet.setup({
         n_completions = 1,
         presets = {
           ollama = {
@@ -278,19 +290,25 @@ if no_weak_machine == true then
         "milanglacier/minuet-ai.nvim",
         -- "Kaiser-Yang/blink-cmp-avante",
       },
-      keys = {
-        {
-          "<leader>uu",
-          function()
-            if vim.b.completion == nil then
-              vim.b.completion = true
-            end
-            vim.b.completion = not vim.b.completion
-            vim.notify("Blink completion " .. (vim.b.completion and "enabled" or "disabled"), vim.log.levels.INFO)
-          end,
-          desc = "Toggle blink completion",
-        },
-      },
+      init = function()
+        local snacks = require("snacks")
+        local blink = require("blink.cmp")
+        snacks
+          .toggle({
+            id = "completion",
+            name = "Blink completion",
+            get = function()
+              if vim.b.completion == nil then
+                vim.b.completion = true
+              end
+              return vim.b.completion
+            end,
+            set = function(enabled)
+              vim.b.completion = enabled
+            end,
+          })
+          :map("<leader>uu")
+      end,
       opts = {
         keymap = {
           ["<A-y>"] = {

@@ -13,6 +13,7 @@ vim.keymap.set("n", "gm", "`", { desc = "Goto mark" })
 -- vim.keymap.set("i", "jj", "<ESC>", { desc = "Exit insert mode" })
 -- vim.keymap.set("t", "jj", "<ESC>", { desc = "Exit terminal mode" })
 
+vim.keymap.set("n", "<C-h>", ":f<cr>", { desc = "Show current file" })
 vim.keymap.set("n", "ä", "]", { remap = true })
 vim.keymap.set("n", "ö", "[", { remap = true })
 vim.keymap.set("n", "ü", "}", { remap = true })
@@ -64,6 +65,17 @@ local wurst = function()
 end
 
 vim.keymap.set("n", "<leader>ut", wurst, { desc = "toggle typos" })
+
+-- Snacks.toggle({
+--   id = "completion",
+--   name = "Blink completion",
+--   get = function()
+--     return vim.b.completion
+--   end,
+--   set = function(enabled)
+--     vim.b.completion = enabled
+--   end,
+-- }):map("<leader>uu")
 
 -- vim.keymap.set("n", "<c-h>", ":echo expand('%:p')<cr>", { desc = "Full file path" })
 vim.keymap.set("n", "<c-7>", ":lua Snacks.terminal()<cr>", { desc = "Terminal (root dir)" })
