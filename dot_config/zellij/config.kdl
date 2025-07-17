@@ -144,11 +144,13 @@ keybinds clear-defaults=true {
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
         bind "Alt f" { ToggleFloatingPanes; }
+        bind "Alt d" { ToggleFocusFullscreen; SwitchToMode "normal"; }
         bind "Ctrl g" { SwitchToMode "locked"; }
         bind "Alt i" { MoveTab "left"; }
         bind "Alt n" { NewPane; }
         bind "Alt o" { MoveTab "right"; }
-        bind "Ctrl q" { Quit; }
+        bind "Ctrl q" { Detach; }
+        bind "Ctrl Q" { Quit; }
     }
     shared_except "locked" "move" {
         bind "Ctrl m" { SwitchToMode "move"; }
