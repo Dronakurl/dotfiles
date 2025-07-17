@@ -117,8 +117,11 @@ wezterm.on("toggle-tabbar", function(window, _)
 	window:set_config_overrides(overrides)
 end)
 
-config.leader = { key = "b", mods = "CTRL", timeout_milliseconds = 1001 }
-local act = wezterm.action
+config.leader = { key = "ü", mods = "CTRL", timeout_milliseconds = 1001 }
+
+config.enable_csi_u_key_encoding = true
+-- -- unbind CTRL+M
+-- config.disable_default_key_bindings = true
 
 config.keys = {
 	{ key = "b", mods = "LEADER", action = act.SendKey({ key = "b", mods = "CTRL" }) },
