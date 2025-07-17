@@ -93,8 +93,8 @@ local set_typos = function(enabled)
 end
 
 Snacks.toggle({
-  id = "completion",
-  name = "Blink completion",
+  id = "typos",
+  name = "Typos",
   get = function()
     return is_typos_running()
   end,
