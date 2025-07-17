@@ -39,6 +39,27 @@ local M = {
         end,
       },
     },
+    inline = {
+      adapter = "mistral",
+      keymaps = {
+        accept_change = {
+          modes = {
+            n = "gda",
+          },
+          index = 1,
+          callback = "keymaps.accept_change",
+          description = "Accept change",
+        },
+        reject_change = {
+          modes = {
+            n = "gdr",
+          },
+          index = 2,
+          callback = "keymaps.reject_change",
+          description = "Reject change",
+        },
+      },
+    },
     keys = {
       {
         "<leader>aq",
