@@ -2,69 +2,14 @@ local no_weak_machine = require("config.weakmachine")
 
 local M = {
   {
-    "yetone/avante.nvim",
-    enabled = false,
-    event = "VeryLazy",
-    build = "make",
-    opts = {
-      input = {
-        provider = "snacks",
-        provider_opts = {
-          title = "Avante Input",
-          icon = " ",
-          placeholder = "Enter your API key...",
-        },
-      },
-      provider = "mistral",
-      providers = {
-        ollama = {
-          endpoint = "http://localhost:11434",
-          model = "devstral:latest",
-        },
-        claude = {
-          endpoint = "https://api.anthropic.com",
-          model = "claude-3-5-sonnet-20241022",
-          disable_tools = true,
-          extra_request_body = {
-            temperature = 0.75,
-            max_tokens = 4096,
-          },
-        },
-        mistral = {
-          __inherited_from = "openai",
-          api_key_name = "MISTRAL_API_KEY",
-          endpoint = "https://api.mistral.ai/v1/",
-          model = "mistral-large-latest",
-          extra_request_body = {
-            max_tokens = 4096, -- to avoid using max_completion_tokens
-          },
-        },
-      },
-    },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      -- "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-      {
-        "MeanderingProgrammer/render-markdown.nvim",
-        opts = {
-          file_types = { "markdown", "Avante" },
-        },
-        ft = { "markdown", "Avante" },
-      },
-    },
-  },
-  {
-    "coder/claudecode.nvim",
-    config = true,
-    -- enabled = is_command_available("claude"),
-    enabled = false,
-    keys = {
-      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-      { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
-    },
+    "echasnovski/mini.diff",
+    config = function()
+      local diff = require("mini.diff")
+      diff.setup({
+        -- Disabled by default
+        source = diff.gen_source.none(),
+      })
+    end,
   },
   {
     "olimorris/codecompanion.nvim",
@@ -73,67 +18,27 @@ local M = {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
+      "ravitemer/codecompanion-history.nvim",
     },
-    config = function()
-      require("codecompanion").setup({
-        strategies = {
-          chat = { adapter = "mistral" },
-          inline = { adapter = "mistral" },
-        },
-        opts = {
-          stream = true,
-        },
-        adapters = {
-          mistral = function()
-            return require("codecompanion.adapters").extend("mistral", {
-              name = "codestral",
-              schema = {
-                model = {
-                  default = "mistral-large-latest",
-                  -- default = "magistral-medium-2506",
-                },
-                -- temperature = {
-                --   default = 0.2,
-                --   mapping = "parameters", -- not supported in default parameters.options
-                -- },
+    opts = {
+      strategies = {
+        chat = { adapter = "mistral" },
+        inline = { adapter = "mistral" },
+      },
+      adapters = {
+        mistral = function()
+          return require("codecompanion.adapters").extend("mistral", {
+            name = "codestral",
+            schema = {
+              model = {
+                default = "mistral-large-latest",
+                -- default = "magistral-medium-2506",
               },
-            })
-          end,
-          deepseek = function()
-            return require("codecompanion.adapters").extend("ollama", {
-              name = "deepseek",
-              schema = {
-                model = {
-                  -- default = "deepseek-coder-v2:latest",
-                  default = "deepseek-r1:8b",
-                },
-                num_ctx = {
-                  default = 16384,
-                },
-                num_predict = {
-                  default = -1,
-                },
-              },
-            })
-          end,
-          tabby = function()
-            return require("codecompanion.adapters").extend("openai_compatible", {
-              env = {
-                url = "http://localhost:8080", -- optional: default value is ollama url http://127.0.0.1:11434
-                api_key = "auth_881a958cbb454e1aa87a3fa17e8e9649", -- optional: if your endpoint is authenticated
-              },
-              chat_url = "/v1/chat/completions", -- optional: default value, override if different
-              schema = {
-                model = {
-                  default = "Qwen2-1.5B-Instruct",
-                  choices = { "Qwen2-1.5B-Instruct" },
-                },
-              },
-            })
-          end,
-        },
-      })
-    end,
+            },
+          })
+        end,
+      },
+    },
     keys = {
       {
         "<leader>aq",
@@ -142,20 +47,6 @@ local M = {
         -- icon = "🔀",
         mode = { "n", "v" },
       },
-      -- {
-      --   "<leader>at",
-      --   ":CodeCompanionChat tabby<CR>",
-      --   desc = "Open chat (tabby)",
-      --   -- icon = "🐱",
-      --   mode = { "n", "v" },
-      -- },
-      -- {
-      --   "<leader>ad",
-      --   ":CodeCompanionChat deepseek<CR>",
-      --   desc = "Open chat (deepseek-coder-v2)",
-      --   -- icon = "🔍",
-      --   mode = { "n", "v" },
-      -- },
       {
         "<leader>ao",
         ":CodeCompanionChat openai<CR>",
@@ -216,68 +107,9 @@ local M = {
               },
             },
           },
-          -- codestral = {
-          --   provider = "codestral",
-          --   provider_options = {
-          --     codestral = {
-          --       model = "codestral-latest",
-          --       end_point = "https://codestral.mistral.ai/v1/fim/completions",
-          --       api_key = "CODESTRAL_API_KEY",
-          --       stream = true,
-          --       optional = {
-          --         stop = nil, -- the identifier to stop the completion generation
-          --         max_tokens = nil,
-          --       },
-          --     },
-          --   },
-          -- },
         },
       })
     end,
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    enabled = false,
-    opts = { auto_insert_mode = false },
-    keys = {
-      {
-        "<leader>ag",
-        function()
-          return require("CopilotChat").toggle()
-        end,
-        desc = "Toggle (CopilotChat)",
-        -- icon = " ",
-        mode = { "n", "v" },
-      },
-      -- NOTE: This is defined here, because otherwise it would be obscured by
-      -- the default for CopilotChat, so it is again defined below
-      {
-        "<leader>aa",
-        ":CodeCompanionActions<CR>",
-        desc = "Open Actions",
-        -- icon = "🐱",
-        mode = { "n", "v" },
-      },
-      {
-        "<leader>ac",
-        function()
-          return require("CopilotChat").toggle()
-        end,
-        desc = "Toggle (CopilotChat)",
-        -- icon = " ",
-        mode = { "n", "v" },
-      },
-    },
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    enabled = false,
-    cmd = "Copilot",
-    build = ":Copilot auth",
-    opts = {
-      suggestion = { enabled = false },
-      panel = { enabled = true },
-    },
   },
 }
 
@@ -292,7 +124,6 @@ if no_weak_machine == true then
       },
       init = function()
         local snacks = require("snacks")
-        local blink = require("blink.cmp")
         snacks
           .toggle({
             id = "completion",
