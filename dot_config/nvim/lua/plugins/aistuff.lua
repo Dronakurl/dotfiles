@@ -23,7 +23,27 @@ local M = {
     opts = {
       strategies = {
         chat = { adapter = "mistral" },
-        inline = { adapter = "mistral" },
+        inline = {
+          adapter = "mistral",
+          keymaps = {
+            accept_change = {
+              modes = {
+                n = "gA",
+              },
+              index = 1,
+              callback = "keymaps.accept_change",
+              description = "Accept change",
+            },
+            reject_change = {
+              modes = {
+                n = "gR",
+              },
+              index = 2,
+              callback = "keymaps.reject_change",
+              description = "Reject change",
+            },
+          },
+        },
       },
       adapters = {
         mistral = function()
@@ -31,33 +51,13 @@ local M = {
             name = "codestral",
             schema = {
               model = {
-                default = "mistral-large-latest",
+                -- default = "mistral-large-latest",
+                default = "codestral-latest",
                 -- default = "magistral-medium-2506",
               },
             },
           })
         end,
-      },
-    },
-    inline = {
-      adapter = "mistral",
-      keymaps = {
-        accept_change = {
-          modes = {
-            n = "gda",
-          },
-          index = 1,
-          callback = "keymaps.accept_change",
-          description = "Accept change",
-        },
-        reject_change = {
-          modes = {
-            n = "gdr",
-          },
-          index = 2,
-          callback = "keymaps.reject_change",
-          description = "Reject change",
-        },
       },
     },
     keys = {
