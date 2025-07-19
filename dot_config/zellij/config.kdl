@@ -134,8 +134,8 @@ keybinds clear-defaults=true {
         bind "Super k" { MoveFocusOrTab "right"; }
         bind "Alt down" { MoveFocus "down"; }
         bind "Alt up" { MoveFocus "up"; }
-        bind "Alt H" { MoveFocus "left"; }
-        bind "Alt L" { MoveFocus "right"; }
+        bind "Alt H" { MoveFocusOrTab "left"; }
+        bind "Alt L" { MoveFocusOrTab "right"; }
         bind "Alt J" { MoveFocus "down"; }
         bind "Alt K" { MoveFocus "up"; }
         bind "Alt +" { Resize "Increase"; }
