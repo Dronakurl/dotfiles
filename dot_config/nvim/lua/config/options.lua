@@ -10,6 +10,7 @@ end
 
 vim.opt.wrap = true
 vim.lsp.enable("ty", true)
+vim.g.root_spec = { ".git", "lsp" }
 
 vim.diagnostic.config({
   virtual_text = {
