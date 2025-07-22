@@ -74,6 +74,14 @@ end
 
 return {
   {
+    "akinsho/bufferline.nvim",
+    opts = {
+      options = {
+        always_show_bufferline = true,
+      },
+    },
+  },
+  {
     "justinhj/battery.nvim",
     enabled = false,
     config = function()
