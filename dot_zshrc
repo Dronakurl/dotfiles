@@ -19,7 +19,7 @@ fpath+=~/.zfunc
 
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/share/bob/nvim-bin:$PATH
-export PATH=$HOME/.my/bin:${PATH}
+export PATH=$HOME/.claude/local:${PATH}
 export PATH=/usr/local/texlive/2024/bin/x86_64-linux:$PATH
 # export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export PYTHONPYCACHEPREFIX=/tmp/pycache
