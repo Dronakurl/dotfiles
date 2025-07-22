@@ -1,0 +1,54 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space f f": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-s": ["vim::PushAddSurrounds", {}]
+    }
+  },
+  {
+    "context": "Panel",
+    "bindings": {
+      "space": null,
+      "space f b": "tab_switcher::Toggle",
+      "space f o": "projects::OpenRecent",
+      "space m": "pane::CloseActiveItem",
+      "space l": "file_finder::SelectPrevious",
+      "space ,": "tab_switcher::Toggle"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-h": "pane::ActivatePreviousItem",
+      "alt-l": "pane::ActivateNextItem",
+      "space l": "pane::ActivateLastItem",
+      "ctrl-space": "editor::SelectLargerSyntaxNode",
+      "ctrl-backspace": "editor::SelectSmallerSyntaxNode"
+    }
+  },
+  {
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "bindings": {
+      "space": null,
+      "space f f": "file_finder::Toggle",
+      "space f b": "tab_switcher::Toggle",
+      "space f o": "projects::OpenRecent",
+      "space m": "pane::CloseActiveItem",
+      "space ,": "tab_switcher::Toggle"
+    }
+  }
+]
