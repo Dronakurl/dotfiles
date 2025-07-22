@@ -50,9 +50,18 @@ local M = {
           return require("codecompanion.adapters").extend("mistral", {
             name = "codestral",
             schema = {
+              choices = {
+                "mistral-large-latest",
+                "magistral-medium-latest",
+                "codestral-latest",
+                "devstral-small-latest",
+                "devstral-medium-latest",
+              },
               model = {
                 -- default = "mistral-large-latest",
-                default = "codestral-latest",
+                -- default = "codestral-latest",
+                -- default = "devstral-small-latest",
+                default = "devstral-medium-latest",
                 -- default = "magistral-medium-2506",
               },
             },
