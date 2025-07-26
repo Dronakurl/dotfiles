@@ -20,6 +20,7 @@ fpath+=~/.zfunc
 export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
 export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/share/bob/nvim-bin:$PATH
 export PATH=$HOME/.claude/local:${PATH}
+export PATH=/home/konrad/.opencode/bin:$PATH
 export PATH=/usr/local/texlive/2024/bin/x86_64-linux:$PATH
 # export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export PYTHONPYCACHEPREFIX=/tmp/pycache
@@ -27,7 +28,7 @@ export TEXMFHOME=$HOME/.local/share/texmf
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 export ZSH="$HOME/.oh-my-zsh"
-# ZSH_THEME="agnoster"
+export ZSH_THEME="agnoster"
 export COMPLETION_WAITING_DOTS="true"
 
 export NVM_LAZY_LOAD=true
@@ -77,6 +78,7 @@ ghc() {
   gh copilot suggest "$@"
 }
 
+alias claude="/home/konrad/.claude/local/claude"
 alias ncdu="gdu"
 alias vi="nvim"
 alias pacold="sudo pacman -Qtdq | sudo pacman -Rns -; yay -Syyu; paccache -r "
@@ -170,9 +172,9 @@ fi
 if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
 fi
-if command -v starship &>/dev/null; then
-  eval "$(starship init zsh)"
-fi
+# if command -v starship &>/dev/null; then
+#   eval "$(starship init zsh)"
+# fi
 if command -v uv &>/dev/null; then
   eval "$(uv generate-shell-completion zsh)"
 fi
@@ -266,9 +268,5 @@ rs_status() {
 rs_log() {
   journalctl --user -u "rsync@*" $1
 }
-
-# export GDK_SCALE=1
-# export GDK_DPI_SCALE=0.75
-# fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 # zprof
