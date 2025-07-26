@@ -7,48 +7,76 @@
 // from the command palette.
 [
   {
-    "context": "Workspace",
-    "bindings": {
-      "space space": "file_finder::Toggle",
-      "space f f": "file_finder::Toggle"
-    }
-  },
-  {
-    "context": "vim_mode == visual",
+    "context": "vim_mode == visual || vim_mode == helix_visual",
     "bindings": {
       "shift-s": ["vim::PushAddSurrounds", {}]
     }
   },
   {
-    "context": "Panel",
+    "context": "AgentPanel || GitPanel || ProjectPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView || DebugPanel",
     "bindings": {
-      "space": null,
-      "space f b": "tab_switcher::Toggle",
-      "space f o": "projects::OpenRecent",
-      "space m": "pane::CloseActiveItem",
-      "space l": "file_finder::SelectPrevious",
-      "space ,": "tab_switcher::Toggle"
+      // window related commands (ctrl-w X)
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight"
     }
   },
   {
     "context": "Editor",
     "bindings": {
       "alt-h": "pane::ActivatePreviousItem",
-      "alt-l": "pane::ActivateNextItem",
-      "space l": "pane::ActivateLastItem",
-      "ctrl-space": "editor::SelectLargerSyntaxNode",
-      "ctrl-backspace": "editor::SelectSmallerSyntaxNode"
+      "alt-l": "pane::ActivateNextItem"
     }
   },
   {
-    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu",
+    "context": "Editor && !edit_prediction",
     "bindings": {
+      "alt-y": "editor::ShowEditPrediction"
+    }
+  },
+  {
+    "context": "(Editor && (vim_mode == normal || vim_mode == visual || vim_mode == helix_normal || vim_mode == helix_visual) && !VimWaiting && !menu) || (EmptyPane || SharedScreen)",
+    "bindings": {
+      "g r": "editor::FindAllReferences",
       "space": null,
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+      "] h": "editor::GoToHunk",
+      "[ h": "editor::GoToPreviousHunk",
+      "ctrl-space": "editor::SelectLargerSyntaxNode",
+      "ctrl-backspace": "editor::SelectSmallerSyntaxNode",
+      "shift shift": "file_finder::Toggle",
+      "space ,": "tab_switcher::Toggle",
+      "space m": "pane::CloseActiveItem",
+      "space /": "pane::DeploySearch"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "space e": "workspace::ToggleLeftDock"
+      // "space e": "pr
+    }
+  },
+  {
+    "context": "(Editor && (vim_mode == normal || vim_mode == visual) && !VimWaiting && !menu) || (EmptyPane || SharedScreen)",
+    "bindings": {
+      "g e": "editor::ToggleInlineDiagnostics",
+      "ctrl-w o": "workspace::CloseAllDocks",
+      "space space": "file_finder::Toggle",
+      "space l": ["workspace::SendKeystrokes", "ctrl-tab enter"],
+      "space s s": "outline::Toggle",
+      "space e": "project_panel::ToggleFocus",
+      "space s g": "pane::DeploySearch",
+      "space g g": "editor::ToggleSelectedDiffHunks",
+      "space g r": "git::Restore", // "d p"
+      "space g shift-r": "git::Restore", // "d p"
       "space f f": "file_finder::Toggle",
       "space f b": "tab_switcher::Toggle",
       "space f o": "projects::OpenRecent",
+      "space a m": "workspace::ToggleRightDock",
       "space m": "pane::CloseActiveItem",
-      "space ,": "tab_switcher::Toggle"
+      "space c a": "editor::ToggleCodeActions" // zed specific
     }
   }
 ]
