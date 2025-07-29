@@ -124,6 +124,8 @@ config.enable_csi_u_key_encoding = true
 -- config.disable_default_key_bindings = true
 
 config.keys = {
+	-- { key = "r", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	-- { key = "r", mods = "CTRL|SHIFT", action = act.SendKey({ key = "r", mods = "CTRL|SHIFT" }) },
 	{ key = "b", mods = "LEADER", action = act.SendKey({ key = "b", mods = "CTRL" }) },
 	{ key = "a", mods = "LEADER", action = act.SendKey({ key = "a", mods = "ALT" }) },
 	{ key = "t", mods = "LEADER", action = act.EmitEvent("toggle-tabbar") },
@@ -204,10 +206,10 @@ config.colors = {
 	},
 }
 
-wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
-	window:gui_window():maximize()
-end)
+-- wezterm.on("gui-startup", function(cmd)
+-- 	local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+-- 	window:gui_window():maximize()
+-- end)
 
 wezterm.on("toggle-opacity", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
