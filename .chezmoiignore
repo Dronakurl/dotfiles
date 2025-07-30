@@ -1,4 +1,6 @@
 {{- if ne .chezmoi.hostname "bigone" }}
 .config/systemd/**/*
 .env
+Archiv
 {{- end }}
+README.md
