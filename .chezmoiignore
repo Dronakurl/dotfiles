@@ -1,4 +1,4 @@
 {{- if ne .chezmoi.hostname "bigone" }}
-.config/systemd/*
+.config/systemd/**/*
 .env
 {{- end }}
