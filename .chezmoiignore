@@ -1,7 +1,4 @@
 {{- if ne .chezmoi.hostname "bigone" }}
-.config/systemd/user/timers.target.wants/eos-update-notifier.timer
-.config/systemd/user/timers.target.wants/epub.timer
-.config/systemd/user/epub.timer
-.config/systemd/user/epub.service
+.config/systemd/*
 .env
 {{- end }}
