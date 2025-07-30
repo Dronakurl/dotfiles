@@ -44,21 +44,21 @@ run = "peek 5"
 desc = "Peek down 5 units in the preview"
 
 [[mgr.prepend_keymap]]
-on = ["M"]
-run = "plugin bookmarks --args=save"
+on = ["b", "a"]
+run = "plugin bookmarks save"
 desc = "Save current position as a bookmark"
 
 [[mgr.prepend_keymap]]
-on = ["'"]
-run = "plugin bookmarks --args=jump"
+on = ["b", "g"]
+run = "plugin bookmarks jump"
 desc = "Jump to a bookmark"
 
 [[mgr.prepend_keymap]]
 on = ["b", "d"]
-run = "plugin bookmarks --args=delete"
+run = "plugin bookmarks delete"
 desc = "Delete a bookmark"
 
 [[mgr.prepend_keymap]]
 on = ["b", "D"]
-run = "plugin bookmarks --args=delete_all"
+run = "plugin bookmarks delete_all"
 desc = "Delete all bookmarks"

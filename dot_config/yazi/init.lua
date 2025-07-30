@@ -1,12 +1,15 @@
 require("git"):setup()
 
+-- ~/.config/yazi/init.lua
 require("bookmarks"):setup({
-	last_directory = { enable = true, persist = true },
+	last_directory = { enable = true, persist = true, mode = "dir" },
 	persist = "all",
 	desc_format = "full",
 	file_pick_mode = "hover",
+	custom_desc_input = false,
+	show_keys = false,
 	notify = {
-		enable = false,
+		enable = true,
 		timeout = 1,
 		message = {
 			new = "New bookmark '<key>' -> '<folder>'",
