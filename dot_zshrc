@@ -17,11 +17,59 @@ fpath+=~/.zfunc
 # 	compinit -C;
 # fi;
 
-export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
-export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.local/share/bob/nvim-bin:$PATH
-export PATH=$HOME/.claude/local:${PATH}
-export PATH=/home/konrad/.opencode/bin:$PATH
-export PATH=/usr/local/texlive/2024/bin/x86_64-linux:$PATH
+# Enhanced PATH management function
+path_prepend() {
+  local dir="$1"
+  # Only add if directory exists and is not already in PATH
+  if [[ -d "$dir" && ":$PATH:" != *":$dir:"* ]]; then
+    PATH="$dir:$PATH"
+  fi
+}
+
+path_append() {
+  local dir="$1"
+  # Only add if directory exists and is not already in PATH
+  if [[ -d "$dir" && ":$PATH:" != *":$dir:"* ]]; then
+    PATH="$PATH:$dir"
+  fi
+}
+
+# Remove duplicates from PATH
+dedupe_path() {
+  local new_path=""
+  local IFS=':'
+  for dir in $PATH; do
+    if [[ -n "$dir" && ":$new_path:" != *":$dir:"* ]]; then
+      if [[ -z "$new_path" ]]; then
+        new_path="$dir"
+      else
+        new_path="$new_path:$dir"
+      fi
+    fi
+  done
+  PATH="$new_path"
+}
+
+# Build PATH systematically
+# High priority paths (prepend)
+path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/.cargo/bin"
+path_prepend "$HOME/.local/share/bob/nvim-bin"
+path_prepend "$HOME/.claude/local"
+path_prepend "$HOME/.opencode/bin"
+
+# Lower priority paths (append)
+path_append "/usr/local/cuda/bin"
+
+# Clean up any duplicates (just in case)
+dedupe_path
+
+# Export the final PATH
+export PATH
+
+# Clean up functions (optional - removes them from environment)
+unset -f path_prepend path_append dedupe_path
+
 # export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export PYTHONPYCACHEPREFIX=/tmp/pycache
 export TEXMFHOME=$HOME/.local/share/texmf
@@ -108,6 +156,7 @@ alias gsl="git status"
 alias nvimdiff='nvim -d'
 alias uy="uv run"
 alias ur="uv run"
+
 function y() {
   # yazi file manager, but exit to the terminal in the last visited directory within yazi
   if [ -f "$HOME/.env" ]; then
@@ -123,6 +172,7 @@ function y() {
 }
 alias j='y'
 alias zrc="chezmoi edit ~/.zshrc"
+
 # alias ap="sudo apt-get update; sudo apt-get upgrade; sudo apt-get autoremove "
 ap() {
   if command -v pkcon >/dev/null; then
@@ -140,10 +190,6 @@ alias tabbyon="docker compose -f \$HOME/.config/tabby/docker-compose.yml up -d"
 alias tabbyup="tabbyon"
 alias tabbyoff="docker compose -f \$HOME/.config/tabby/docker-compose.yml down"
 alias tabbydn="tabbyoff"
-
-dcf() {
-  docker compose -f ./docker/docker-compose.yml "$@"
-}
 
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
