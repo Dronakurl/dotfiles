@@ -126,7 +126,7 @@ ghc() {
   gh copilot suggest "$@"
 }
 
-alias claude="/home/konrad/.claude/local/claude"
+alias claude="\$HOME/.claude/local/claude"
 alias ncdu="gdu"
 alias vi="nvim"
 alias pacold="sudo pacman -Qtdq | sudo pacman -Rns -; yay -Syyu; paccache -r "
