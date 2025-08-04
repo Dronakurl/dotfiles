@@ -128,6 +128,8 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" {
+        // sends Ctrl-b to the terminal
+        bind "Alt a" { Write 2; } 
         bind "Alt left" { MoveFocusOrTab "left"; }
         bind "Alt right" { MoveFocusOrTab "right"; }
         bind "Super j" { MoveFocusOrTab "left"; }
@@ -157,6 +159,13 @@ keybinds clear-defaults=true {
     }
     shared_except "locked" "session" {
         bind "F8" { SwitchToMode "session"; }
+        bind "F12" { 
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "normal"
+          }
     }
     shared_except "locked" "scroll" "search" "tmux" {
         bind "Ctrl b" { SwitchToMode "tmux"; }
