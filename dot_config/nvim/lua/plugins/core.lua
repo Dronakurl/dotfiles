@@ -1,4 +1,4 @@
-local colorscheme = "tokyonight-storm"
+local colorscheme = "tokyonight-night"
 
 return {
 

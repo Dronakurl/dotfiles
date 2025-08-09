@@ -16,12 +16,16 @@ config.mouse_bindings = {
 	{
 		event = { Down = { streak = 1, button = { WheelUp = 1 } } },
 		mods = "NONE",
-		action = act.ScrollByLine(-1),
+		-- action = act.ScrollByLine(-0.1),
+		action = act.ScrollByPage(-0.2),
+		alt_screen = false,
 	},
 	{
 		event = { Down = { streak = 1, button = { WheelDown = 1 } } },
 		mods = "NONE",
-		action = act.ScrollByLine(1),
+		-- action = act.ScrollByLine(0.1),
+		action = act.ScrollByPage(0.2),
+		alt_screen = false,
 	},
 }
 
@@ -41,8 +45,10 @@ config.mouse_bindings = {
 -- 	},
 -- }
 
+-- config.alternate_buffer_wheel_scroll_speed = 1
+
 -- config.color_scheme = "Catppuccin Mocha"
-config.color_scheme = "Tokyo Night Storm"
+config.color_scheme = "Tokyo Night"
 -- config.color_scheme = "terafox"
 config.enable_tab_bar = false
 config.window_decorations = "NONE"
@@ -99,10 +105,10 @@ config.window_frame = {
 	border_right_width = "0.3cell",
 	border_bottom_height = "0.14cell",
 	border_top_height = "0.13cell",
-	border_left_color = "rgba(100, 149, 237, 0.5)",
-	border_right_color = "rgba(100, 149, 237, 0.5)",
-	border_bottom_color = "rgba(100, 149, 237, 0.5)",
-	border_top_color = "rgba(100, 149, 237, 0.5)",
+	border_left_color = "rgba(50, 49, 137, 1)",
+	border_right_color = "rgba(50, 49, 137, 1)",
+	border_bottom_color = "rgba(50, 49, 137, 1)",
+	border_top_color = "rgba(50, 49, 137, 1)",
 }
 
 wezterm.on("toggle-tabbar", function(window, _)
@@ -117,7 +123,7 @@ wezterm.on("toggle-tabbar", function(window, _)
 	window:set_config_overrides(overrides)
 end)
 
-config.leader = { key = "ü", mods = "CTRL", timeout_milliseconds = 1001 }
+config.leader = { key = "b", mods = "ALT", timeout_milliseconds = 1001 }
 
 config.enable_csi_u_key_encoding = true
 -- -- unbind CTRL+M

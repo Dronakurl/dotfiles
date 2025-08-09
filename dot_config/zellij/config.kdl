@@ -285,7 +285,7 @@ load_plugins {
 // Default: default
 // 
 // theme "kanagawa"
-theme "tokyo-night-storm"
+theme "tokyo-night-dark"
 
  
 // Choose the base input mode of zellij.
