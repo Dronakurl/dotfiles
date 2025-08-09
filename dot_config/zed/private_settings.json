@@ -10,6 +10,11 @@
   "features": {
     "edit_prediction_provider": "copilot"
   },
+  "git": {
+    "inline_blame": {
+      "delay_ms": 5000
+    }
+  },
   "project_panel": {
     "hide_gitignore": false
   },
@@ -38,8 +43,8 @@
   "agent": {
     "default_profile": "write",
     "default_model": {
-      "provider": "anthropic",
-      "model": "claude-sonnet-4-latest"
+      "provider": "mistral",
+      "model": "codestral-latest"
       // "model": "devstral-medium-latest"
     }
   },
@@ -73,6 +78,6 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Ayu Dark"
+    "dark": "Tokyo Night"
   }
 }
