@@ -4,3 +4,11 @@
 use = "tokyo-night"
 # For Yazi 0.4 and above
 dark = "tokyo-night"
+
+[icon]
+prepend_dirs = [
+  { name = "ddt", text = "", fg = "#ff9e64" },
+  { name = "epub", text = "", fg = "#9ece6a" },     # bright green
+  { name = ".archive", text = "", fg = "#9d7cd8" }, # bright yellow
+  { name = "Archiv", text = "", fg = "#9d7cd8" },   # bright yellow
+]
