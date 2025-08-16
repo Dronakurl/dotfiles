@@ -128,7 +128,51 @@ ghc() {
 
 alias claude="\$HOME/.claude/local/claude"
 alias ncdu="gdu"
-alias vi="nvim"
+vi() {
+  # Check if bob is installed
+  if ! command -v bob &>/dev/null; then
+    echo "bob could not be found, installing..."
+    cargo install bob-nvim
+  else
+    echo "bob is already installed."
+  fi
+
+  # Check if the last update was more than 1 week ago
+  timestamp_file=~/.local/state/lastnvimupdate
+  if [ ! -f "$timestamp_file" ]; then
+    echo "Timestamp file not found, creating one with a date long ago..."
+    date -d "3 weeks ago" +%s >"$timestamp_file"
+  fi
+  if [ -f "$timestamp_file" ]; then
+    last_update=$(cat "$timestamp_file")
+    one_week_ago=$(date -d "1 week ago" +%s)
+    if [ "$last_update" -gt "$one_week_ago" ]; then
+      echo "Last update was less than 1 week ago, skipping..."
+    else
+      if ! cargo install bob-nvim; then
+        echo "Failed to install bob-nvim"
+        return 1
+      fi
+      if ! echo "y" | bob use nightly; then
+        echo "cannot update nvim with bob"
+        return 1
+      fi
+      if ! "$HOME/.local/share/bob/nvim-bin/nvim" --headless "+Lazy! sync" +qa; then
+        echo "cannot update plugins with nvim"
+        return 1
+      fi
+      # if ! "$HOME/.local/share/bob/nvim-bin/nvim" --headless "+MasonUpdate" +qa; then
+      #   echo "cannot update Mason plugins with nvim"
+      #   return 1
+      # fi
+
+      # Update the timestamp file
+      date +%s >"$timestamp_file"
+    fi
+  fi
+  echo "running nvim"
+  "$HOME/.local/share/bob/nvim-bin/nvim"
+}
 alias pacold="sudo pacman -Qtdq | sudo pacman -Rns -; yay -Syyu; paccache -r "
 alias pac="yay -Syyu; paccache -r "
 alias ta="tmux attach"
@@ -221,9 +265,9 @@ fi
 if [ -f "$HOME/.cargo/env" ]; then
   . "$HOME/.cargo/env"
 fi
-# if command -v starship &>/dev/null; then
-#   eval "$(starship init zsh)"
-# fi
+if command -v starship &>/dev/null; then
+  eval "$(starship init zsh)"
+fi
 if command -v uv &>/dev/null; then
   eval "$(uv generate-shell-completion zsh)"
 fi
