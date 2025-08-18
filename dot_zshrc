@@ -171,7 +171,7 @@ vi() {
     fi
   fi
   echo "running nvim"
-  "$HOME/.local/share/bob/nvim-bin/nvim"
+  "$HOME/.local/share/bob/nvim-bin/nvim" "$@"
 }
 alias pacold="sudo pacman -Qtdq | sudo pacman -Rns -; yay -Syyu; paccache -r "
 alias pac="yay -Syyu; paccache -r "
