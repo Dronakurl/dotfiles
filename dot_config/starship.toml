@@ -5,19 +5,43 @@ $directory\
 $git_branch\
 $git_state\
 $git_status\
+$git_metrics\
 $container\
 $sudo\
 $typst\
+$rust\
 $cmd_duration\
+$status\
+$jobs\
 $line_break\
 $python\
 $character"""
+
+[status]
+# style = 'bg:blue'
+symbol = '🔴 '
+success_symbol = '🟢 SUCCESS'
+format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
+map_symbol = true
+disabled = true
 
 [directory]
 style = "blue"
 truncate_to_repo = false
 before_repo_root_style = "bold grey"
-repo_root_style = "underline blue"
+# fish_style_pwd_dir_length = 0
+home_symbol = "🏠"
+# repo_root_style = "underline blue"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+"ddt" = "🌟"
+"regioncounter" = "🩷"
+"briefe" = ""
+"Briefe" = ""
 
 [character]
 success_symbol = "[❯](purple)"
@@ -29,25 +53,11 @@ disabled = false
 format = "[$symbol$branch]($style) "
 symbol = " "
 style = "bold purple"
-# truncation_length = 7 # default = 2^63 - 1
 truncation_symbol = "…"
-# [git_branch]
-# format = "[$branch]($style)"
-# style = "yellow"
 
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style) )'
 style = "red bold"
-# format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218) ($ahead_behind$stashed)]($style)"
-# style = "cyan"
-# conflicted = "onflic"
-# untracked = "?"
-# modified = "M"
-# staged = "S"
-# renamed = "​"
-# deleted = "​"
-# stashed = "≡"
-
 stashed = '\$'
 ahead = "⇡"
 behind = "⇣"
@@ -63,6 +73,18 @@ untracked = "?"
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
 style = "bright-black"
 
+[git_metrics]
+disabled = false
+# Pale green
+added_style = "green dimmed"
+# Pale red
+deleted_style = "red dimmed"
+
+[container]
+format = "[$symbol \\[$name\\]]($style) "
+symbol = "📦"
+style = "bold blue"
+
 [cmd_duration]
 format = "[$duration]($style) "
 style = "bright-black"
@@ -70,6 +92,11 @@ style = "bright-black"
 [python]
 format = "[$virtualenv]($style) "
 style = "bold fg:213"
+
+[rust]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [sudo]
 style = 'bold green'
