@@ -73,11 +73,12 @@ tabpad = "·"  # Tabs will look like "→···" (depending on tab width)
 
 [keys.normal.space]
 "m" = ":buffer-close"
-"." = "file_picker_in_current_buffer_directory"
+" " = "file_picker_in_current_buffer_directory"
 "," = "buffer_picker"
 "l" = "goto_last_accessed_file"
 "q" = ":write-quit-all"
 "z" = ":open ~/notes/notes.md"
+"." = ":sh zellij run -n Yazi -c -f -x 10%% -y 10%% --width 80%% --height 80%% -- bash ~/.config/helix/yazi-picker.sh open %{buffer_name}"
 
 [keys.normal]
 C-r = "redo"
