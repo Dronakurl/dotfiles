@@ -394,7 +394,9 @@ pane_frames false
 // otherwise this will error if such a session exists.
 // Default: <RANDOM>
 // 
+{{ if eq .chezmoi.hostname "bigone" }}
 session_name "Du schaffst das!"
+{{ end }}
  
 // When `session_name` is provided, attaches to that session
 // if it is already running or creates it otherwise.
