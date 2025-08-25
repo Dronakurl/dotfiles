@@ -396,6 +396,8 @@ pane_frames false
 // 
 {{ if eq .chezmoi.hostname "bigone" }}
 session_name "Du schaffst das!"
+{{ else }}
+session_name "go"
 {{ end }}
  
 // When `session_name` is provided, attaches to that session
