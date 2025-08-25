@@ -4,6 +4,7 @@
 #
 # zmodload zsh/zprof
 
+export KEYTIMEOUT=5
 export ZSH_DISABLE_COMPFIX=true
 export LC_ALL=en_US.UTF-8
 export LANG="C.UTF-8"
