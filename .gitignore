@@ -1,2 +1,7 @@
 dot_config/systemd/user/mnt-@.automount
 dot_config/systemd/user/mnt-@.mount
+dot_config/yazi/flavors/tokyo-night.yazi/dot_git
+dot_config/yazi/flavors/tokyo-night.yazi/LICENSE
+dot_config/yazi/flavors/tokyo-night.yazi/LICENSE-tmtheme
+dot_config/yazi/flavors/tokyo-night.yazi/README.md
+dot_config/yazi/flavors/tokyo-night.yazi/preview.png
