@@ -1,11 +1,13 @@
 local no_weak_machine = require("config.weakmachine")
 return {
+  {{ if or (eq .chezmoi.hostname "bigone") (eq .chezmoi.hostname "herbert") }}
   {
     "vyfor/cord.nvim",
     build = ":Cord update",
     enabled = no_weak_machine,
     -- opts = {}
   },
+  {{ end }}
   -- {
   --   "linux-cultist/venv-selector.nvim",
   --   dependencies = {
