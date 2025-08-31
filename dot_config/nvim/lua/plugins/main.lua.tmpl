@@ -95,17 +95,17 @@ return {
       opts.animate.enabled = false
     end,
   },
-  {
-    "mistweaverco/kulala.nvim",
-    ft = "http",
-    enabled = no_weak_machine,
-    keys = {
-      { "<leader>k", "<cmd>lua require('kulala').run()<cr>", desc = "Send the request", ft = "http" },
-    },
-    opts = {
-      additional_curl_options = { "--location", "-k" },
-    },
-  },
+  -- {
+  --   "mistweaverco/kulala.nvim",
+  --   ft = "http",
+  --   enabled = no_weak_machine,
+  --   keys = {
+  --     { "<leader>k", "<cmd>lua require('kulala').run()<cr>", desc = "Send the request", ft = "http" },
+  --   },
+  --   opts = {
+  --     additional_curl_options = { "--location", "-k" },
+  --   },
+  -- },
   -- -- Telescope is needed because of venvselect
   -- { "nvim-telescope/telescope.nvim" },
   {

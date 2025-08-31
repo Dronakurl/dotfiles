@@ -1,12 +1,33 @@
 -- -- Options are automatically loaded before lazy.nvim startup
 -- -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
-
 -- vim.api.nvim_set_hl(0, "BufferLineBufferSelected", { bg = "#a8a725", fg = "#000000", bold = true })
---
+
 if require("config.is_running_in_docker")() then
   vim.api.nvim_set_hl(0, "BufferLineFill", { bg = "#7777AA" })
   vim.notify("Running in Docker")
 end
+
+-- vim.g.clipboard = "osc52"
+vim.o.clipboard = "unnamedplus"
+
+local function paste()
+  return {
+    vim.fn.split(vim.fn.getreg(""), "\n"),
+    vim.fn.getregtype(""),
+  }
+end
+
+vim.g.clipboard = {
+  name = "OSC 52",
+  copy = {
+    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+  },
+  paste = {
+    ["+"] = paste,
+    ["*"] = paste,
+  },
+}
 
 vim.opt.wrap = true
 vim.lsp.enable("ty", true)
