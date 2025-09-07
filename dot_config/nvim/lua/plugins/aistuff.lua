@@ -139,6 +139,7 @@ local M = {
           },
         },
       })
+      minuet.config["blink"].enable_auto_complete = false
     end,
   },
 }

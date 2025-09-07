@@ -4,12 +4,15 @@
 #
 # zmodload zsh/zprof
 
-export KEYTIMEOUT=5
+export KEYTIMEOUT=20
 export ZSH_DISABLE_COMPFIX=true
 export LC_ALL=en_US.UTF-8
 export LANG="C.UTF-8"
 fpath+=~/.zfunc
 
+{{ if eq .chezmoi.hostname "bigone" }}
+export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
+{{ end }}
 # Old performance stuff, I played around with
 # autoload -Uz compinit && compinit
 # if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
@@ -82,7 +85,7 @@ export COMPLETION_WAITING_DOTS="true"
 
 export NVM_LAZY_LOAD=true
 export NVM_COMPLETION=true
-plugins=(git vi-mode dotenv zsh-autosuggestions docker docker-compose nvm)
+plugins=(git vi-mode dotenv zsh-autosuggestions docker-compose)
 zstyle ':omz:plugins:nvm' lazy yes
 
 source "$ZSH/oh-my-zsh.sh"
@@ -197,7 +200,7 @@ fi
 if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
-alias dp="docker ps --format 'table {{.Image}}\t{{.Names}}\t{{.Status}}\t{{.Command}}'"
+alias dp="~/.local/bin/dockerps.sh"
 alias gss="git status -s"
 alias gsl="git status"
 alias nvimdiff='nvim -d'

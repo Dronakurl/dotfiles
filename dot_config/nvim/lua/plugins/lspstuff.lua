@@ -1,26 +1,25 @@
 local M = {
-
-  {
-    "mrcjkb/rustaceanvim",
-    opts = {
-      server = {
-        default_settings = {
-          ["rust-analyzer"] = {
-            procMacro = {
-              ignored = {
-                ["async-trait"] = vim.NIL,
-                ["leptos_macro"] = {
-                  -- optional: --
-                  -- "component",
-                  ["server"] = vim.NIL,
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  },
+  -- {
+  --   "mrcjkb/rustaceanvim",
+  --   opts = {
+  --     server = {
+  --       default_settings = {
+  --         ["rust-analyzer"] = {
+  --           procMacro = {
+  --             ignored = {
+  --               ["async-trait"] = vim.NIL,
+  --               ["leptos_macro"] = {
+  --                 -- optional: --
+  --                 -- "component",
+  --                 ["server"] = vim.NIL,
+  --               },
+  --             },
+  --           },
+  --         },
+  --       },
+  --     },
+  --   },
+  -- },
   {
     "stevearc/conform.nvim",
     opts = {
