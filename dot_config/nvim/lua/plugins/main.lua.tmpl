@@ -141,7 +141,7 @@ return {
           find = ".-Registered '.-' with .- LSP",
         },
       })
-      opts.lsp.progress = { enabled = false }
+      opts.lsp.progress = { enabled = true }
       opts.presets.bottom_search = false
     end,
   },
@@ -186,43 +186,6 @@ return {
         silent = true,
       },
     },
-  },
-  {
-    "zk-org/zk-nvim",
-    enabled = no_weak_machine,
-    keys = {
-      {
-        "<leader>zn",
-        "<Cmd>ZkNew <CR>",
-        noremap = false,
-        silent = true,
-        desc = "New note",
-      },
-      {
-        "<leader>zo",
-        "<Cmd>ZkNotes { sort = { 'modified' }}<CR>",
-        noremap = false,
-        silent = true,
-        desc = "Open notes",
-      },
-      {
-        "<leader>zt",
-        "<Cmd>ZkTags<CR>",
-        noremap = false,
-        silent = true,
-        desc = "Open notes associated with the selected tags.",
-      },
-      {
-        "<leader>zf",
-        "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') }}<CR>",
-        noremap = false,
-        silent = true,
-        desc = "Search for the notes matching a given query.",
-      },
-    },
-    config = function()
-      require("zk").setup({})
-    end,
   },
   {
     "gbprod/yanky.nvim",

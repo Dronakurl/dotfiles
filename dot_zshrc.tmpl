@@ -280,6 +280,10 @@ fi
 if command -v chezmoi &>/dev/null; then
   eval "$(chezmoi completion zsh)"
 fi
+if command -v just &>/dev/null; then
+  # autoload -Uz compinit && compinit
+  eval "$(just --completions zsh)"
+fi
 
 IFS=',' read -r -A services <<<"$RCLONE_SERVICES"
 
