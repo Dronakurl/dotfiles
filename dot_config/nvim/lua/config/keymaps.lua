@@ -40,9 +40,8 @@ local get_typos_client_id = function()
   -- Get clients that match the name 'typos_lsp'
   local clients = vim.lsp.get_clients({ name = "typos_lsp" })
 
-  -- If no clients are running, notify the user
   if #clients == 0 then
-    vim.notify("typos not running!", vim.log.levels.INFO)
+    -- vim.notify("typos not running!", vim.log.levels.INFO)
     return
   end
 
@@ -58,7 +57,7 @@ local get_buffers_with_typos = function()
 
   -- If no clients are running, notify the user
   if client_id == nil then
-    vim.notify("typos not running!", vim.log.levels.INFO)
+    -- vim.notify("typos not running!", vim.log.levels.INFO)
     return {}
   end
 
@@ -103,6 +102,51 @@ Snacks.toggle({
   end,
 }):map("<leader>ut")
 
+-- local function paste()
+--   return {
+--     vim.fn.split(vim.fn.getreg(""), "\n"),
+--     vim.fn.getregtype(""),
+--   }
+-- end
+--
+-- local function setosc52(enabled)
+--   if enabled then
+--     vim.g.clipboard = "osc52"
+--     return
+--     -- vim.g.clipboard = {
+--     --   name = "OSC 52",
+--     --   copy = {
+--     --     ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+--     --     ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+--     --   },
+--     --   paste = {
+--     --     ["+"] = paste,
+--     --     ["*"] = paste,
+--     --   },
+--     -- }
+--     -- return
+--   else
+--     vim.g.clipboard = nil
+--     return
+--   end
+-- end
+--
+-- local function is_osc52_set()
+--   -- if vim.g.clipboard is not nil
+--   return vim.g.clipboard ~= nil
+-- end
+--
+-- Snacks.toggle({
+--   id = "osc52",
+--   name = "OSC52",
+--   get = function()
+--     return is_osc52_set()
+--   end,
+--   set = function(enabled)
+--     setosc52(enabled)
+--   end,
+-- }):map("<leader>uy")
+--
 -- vim.keymap.set("n", "<c-h>", ":echo expand('%:p')<cr>", { desc = "Full file path" })
 vim.keymap.set("n", "<c-7>", ":lua Snacks.terminal()<cr>", { desc = "Terminal (root dir)" })
 vim.keymap.set("t", "<c-7>", "<cmd>close<cr>", { desc = "Hide Terminal" })
