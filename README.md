@@ -40,6 +40,7 @@ autoPush = false
 [data]
 email = ""
 smtpserver = ""
+name = "Nobody"
 EOF
 
 sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply Dronakurl
