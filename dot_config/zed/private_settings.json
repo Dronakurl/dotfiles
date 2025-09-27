@@ -7,6 +7,15 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "edit_predictions": {
+    "mode": "subtle",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null,
+      "enterprise_uri": null
+    },
+    "enabled_in_text_threads": false
+  },
   "features": {
     "edit_prediction_provider": "copilot"
   },
@@ -43,8 +52,8 @@
   "agent": {
     "default_profile": "write",
     "default_model": {
-      "provider": "mistral",
-      "model": "codestral-latest"
+      "provider": "zed.dev",
+      "model": "claude-3-7-sonnet"
       // "model": "devstral-medium-latest"
     }
   },

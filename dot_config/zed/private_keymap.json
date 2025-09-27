@@ -34,6 +34,18 @@
     }
   },
   {
+    "context": "Editor && edit_prediction",
+    "bindings": {
+      "alt-a": "editor::AcceptEditPrediction"
+    }
+  },
+  {
+    "context": "Editor && edit_prediction_conflict",
+    "bindings": {
+      "alt-a": "editor::AcceptEditPrediction"
+    }
+  },
+  {
     "context": "(Editor && (vim_mode == normal || vim_mode == visual || vim_mode == helix_normal || vim_mode == helix_visual) && !VimWaiting && !menu) || (EmptyPane || SharedScreen)",
     "bindings": {
       "g r": "editor::FindAllReferences",

@@ -132,6 +132,7 @@ config.enable_csi_u_key_encoding = true
 config.keys = {
 	-- { key = "r", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 	-- { key = "r", mods = "CTRL|SHIFT", action = act.SendKey({ key = "r", mods = "CTRL|SHIFT" }) },
+	{ key = "Enter", mods = "SHIFT", action = wezterm.action({ SendString = "\x1b\r" }) },
 	{ key = "b", mods = "LEADER", action = act.SendKey({ key = "b", mods = "CTRL" }) },
 	{ key = "a", mods = "LEADER", action = act.SendKey({ key = "a", mods = "ALT" }) },
 	{ key = "t", mods = "LEADER", action = act.EmitEvent("toggle-tabbar") },
