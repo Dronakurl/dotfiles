@@ -36,7 +36,7 @@ declare -a fonts=(
   # Inconsolate
   # InconsolataGo
   # InconsolataLGC
-  # JetBrainsMono
+  JetBrainsMono
   # Lekton
   # LiberationMono
   # Lilex
