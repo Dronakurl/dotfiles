@@ -3,7 +3,7 @@ keybinds clear-defaults=true {
     // unbind "Ctrl n"
     unbind "Ctrl h"
     locked {
-        bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Ctrl Space" { SwitchToMode "normal"; }
     }
     pane {
         bind "left" { MovePane "left"; }
@@ -130,7 +130,9 @@ keybinds clear-defaults=true {
     }
     shared_except "locked" {
         // sends Ctrl-b to the terminal
-        bind "Alt a" { Write 2; } 
+        bind "Alt a" { Write 2; }
+        // sends Ctrl-g to the terminal
+        bind "Ctrl g" { Write 7; }
         bind "Alt left" { MoveFocusOrTab "left"; }
         bind "Alt right" { MoveFocusOrTab "right"; }
         bind "Super j" { MoveFocusOrTab "left"; }
@@ -148,7 +150,7 @@ keybinds clear-defaults=true {
         bind "Alt ]" { NextSwapLayout; }
         bind "Alt f" { ToggleFloatingPanes; }
         bind "Alt d" { ToggleFocusFullscreen; SwitchToMode "normal"; }
-        bind "Ctrl g" { SwitchToMode "locked"; }
+        bind "Ctrl Space" { SwitchToMode "locked"; }
         bind "Alt i" { MoveTab "left"; }
         bind "Alt n" { NewPane; }
         bind "Alt o" { MoveTab "right"; }
