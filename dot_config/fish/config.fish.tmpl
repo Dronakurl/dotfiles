@@ -1,0 +1,158 @@
+# vim: set filetype=fish :
+
+# Environment variables
+set -gx LC_ALL en_US.UTF-8
+set -gx LANG C.UTF-8
+set -gx PYTHONPYCACHEPREFIX /tmp/pycache
+set -gx TEXMFHOME $HOME/.local/share/texmf
+set -gx EDITOR nvim
+set -gx VISUAL nvim
+
+if test -f "$HOME/.env"
+    set -a
+    source "$HOME/.env"
+    set +a
+end
+
+{{ if eq .chezmoi.hostname "bigone" }}
+set -gx PKG_CONFIG_PATH /usr/lib/x86_64-linux-gnu/pkgconfig
+{{ end }}
+
+# Enhanced PATH management
+function path_prepend
+    set -l dir $argv[1]
+    if test -d "$dir"; and not contains "$dir" $PATH
+        set -gx PATH "$dir" $PATH
+    end
+end
+
+function path_append
+    set -l dir $argv[1]
+    if test -d "$dir"; and not contains "$dir" $PATH
+        set -gx PATH $PATH "$dir"
+    end
+end
+
+# Build PATH systematically
+path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/.cargo/bin"
+path_prepend "$HOME/.local/share/bob/nvim-bin"
+path_prepend "$HOME/.claude/local"
+path_prepend "$HOME/.opencode/bin"
+path_append /usr/local/cuda/bin
+
+# Clean up PATH management functions
+functions -e path_prepend
+functions -e path_append
+
+# Load environment variables from ~/.env
+if test -f ~/.env
+    export (cat ~/.env | grep -v '^#' | xargs)
+end
+
+# Simple command aliases using standalone scripts
+alias vi="$HOME/.local/bin/vi.sh"
+alias dockerpruneall="$HOME/.local/bin/dockerpruneall.sh"
+alias dockerprune="$HOME/.local/bin/dockerprune.sh"
+alias hxv="$HOME/.local/bin/hxv.sh"
+alias ap="$HOME/.local/bin/ap.sh"
+alias ghc="gh copilot suggest"
+alias rclon_ssh='eval (ssh-agent -c); and ssh-add'
+
+# Yazi wrapper function (needs to be a function to change directory)
+function y
+    if test -f "$HOME/.env"
+        source "$HOME/.env"
+    end
+    set -l tmp (mktemp -t "yazi-cwd.XXXXXX")
+    set -x TERM xterm-kitty
+    yazi $argv --cwd-file="$tmp" 2>/dev/null
+    if set -l cwd (cat -- "$tmp"); and test -n "$cwd"; and test "$cwd" != "$PWD"
+        cd -- "$cwd"
+    end
+    rm -f -- "$tmp"
+end
+
+# Other aliases
+alias ncdu="gdu"
+alias z="zellij"
+alias pacold="$HOME/.local/bin/pacold.sh"
+alias pac="$HOME/.local/bin/pac.sh"
+alias ta="tmux attach"
+alias isodate="date -u +%Y-%m-%dT%H:%M:%S%Z"
+alias gitui='eval (ssh-agent -c) && ssh-add ~/.ssh/id_rsa && gitui && ssh-agent -k'
+alias gu='gitui'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cl='lazygit --use-config-file "$HOME/.config/lazygit/tweak.yml" --work-tree ~ --git-dir ~/.cfg'
+alias cz='lazygit --work-tree $HOME/.local/share/chezmoi/'
+alias lz='lazygit'
+alias c="clear"
+alias dp="~/.local/bin/dockerps.sh"
+alias gss="git status -s"
+alias gsl="git status"
+alias nvimdiff='nvim -d'
+alias uy="uv run"
+alias ur="uv run"
+alias j='y'
+alias zrc="chezmoi edit ~/.zshrc"
+alias f="cd ~ && cd (find * -type d | fzf)"
+alias dropboxmama="rclone mount dropboxmama: ~/mnt --daemon --vfs-cache-mode writes --dropbox-encoding 'Slash,BackSlash,Del,RightSpace,InvalidUtf8,Dot,LeftPeriod' -vv"
+alias tabbyon="docker compose -f \$HOME/.config/tabby/docker-compose.yml up -d"
+alias tabbyup="tabbyon"
+alias tabbyoff="docker compose -f \$HOME/.config/tabby/docker-compose.yml down"
+alias tabbydn="tabbyoff"
+
+# ls colors
+if test -x /usr/bin/dircolors
+    if test -r ~/.dircolors
+        eval (dircolors -c ~/.dircolors)
+    else
+        eval (dircolors -c)
+    end
+end
+
+# Linuxbrew
+if test -f /opt/linuxbrew/bin/brew
+    eval (/opt/linuxbrew/bin/brew shellenv)
+end
+if test -f /home/linuxbrew/.linuxbrew/bin/brew
+    eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+end
+
+# Shell integrations
+# Note: atuin's env file is for bash/zsh, fish uses atuin init directly
+
+if command -v fzf >/dev/null 2>&1
+    fzf --fish | source
+end
+
+if command -v atuin >/dev/null 2>&1
+    atuin init fish --disable-up-arrow | source
+end
+
+# Add cargo bin to PATH if it exists
+if test -d "$HOME/.cargo/bin"
+    fish_add_path "$HOME/.cargo/bin"
+end
+
+if command -v starship >/dev/null 2>&1
+    starship init fish | source
+end
+
+if command -v uv >/dev/null 2>&1
+    uv generate-shell-completion fish | source
+end
+
+if command -v chezmoi >/dev/null 2>&1
+    chezmoi completion fish | source
+end
+
+if command -v just >/dev/null 2>&1
+    just --completions fish | source
+end
+
+# Vi mode
+fish_vi_key_bindings
+# Ctrl+K to kill line (like in zsh)
+bind -M insert \ck kill-line
+bind -M default \ck kill-line

@@ -96,16 +96,11 @@ export VISUAL='nvim'
 
 bindkey \^K kill-line
 
-dockerpruneall() {
-  docker container prune -f
-  docker image prune -f
-  docker system prune -a -f
-}
-dockerprune() {
-  docker container prune -f
-  docker image prune -f
-  docker volume prune -f
-}
+# Use standalone scripts for common commands
+alias dockerpruneall="$HOME/.local/bin/dockerpruneall.sh"
+alias dockerprune="$HOME/.local/bin/dockerprune.sh"
+alias hxv="$HOME/.local/bin/hxv.sh"
+alias vi="$HOME/.local/bin/vi.sh"
 
 if [ -f ~/.env ]; then
   set -a
@@ -113,194 +108,56 @@ if [ -f ~/.env ]; then
   set +a
 fi
 
-hxv() {
-  if [[ -z "$VIRTUAL_ENV" ]]; then
-    if [[ -d ".venv" ]]; then
-      source .venv/bin/activate
-    else
-      echo "No virtual environment found."
-    fi
-  else
-    echo "Already in a virtual environment."
-  fi
-  hx "$@"
-}
-
-ghc() {
-  gh copilot suggest "$@"
-}
-
 # alias claude="\$HOME/.claude/local/claude"
 alias ncdu="gdu"
-
-# Helper functions for vi command
-_vi_should_skip_bob() {
-  # Returns 0 (success) if bob should be skipped
-  if ! command -v cargo &>/dev/null; then
-    return 0
-  fi
-  if command -v nvim 2>/dev/null | grep -q "brew"; then
-    return 0
-  fi
-  return 1
-}
-
-_vi_needs_update() {
-  local timestamp_file=~/.local/state/lastnvimupdate
-
-  if [ ! -f "$timestamp_file" ]; then
-    echo "Timestamp file not found, creating one with a date long ago..."
-    mkdir -p ~/.local/state
-    date -d "3 weeks ago" +%s >"$timestamp_file"
-    return 0
-  fi
-
-  local last_update=$(cat "$timestamp_file")
-  local one_week_ago=$(date -d "1 week ago" +%s)
-
-  if [ "$last_update" -gt "$one_week_ago" ]; then
-    echo "Last update was less than 1 week ago, skipping..."
-    return 1
-  fi
-  return 0
-}
-
-_vi_ensure_bob() {
-  if ! command -v bob &>/dev/null; then
-    echo "bob could not be found, installing..."
-    cargo install bob-nvim
-  else
-    echo "bob is already installed."
-  fi
-}
-
-_vi_update_bob() {
-  if ! cargo install bob-nvim; then
-    echo "Failed to install bob-nvim"
-    return 1
-  fi
-  if ! echo "y" | bob use nightly; then
-    echo "cannot update nvim with bob"
-    return 1
-  fi
-  return 0
-}
-
-_vi_update_plugins() {
-  local nvim_path="$1"
-  if ! "$nvim_path" --headless "+Lazy! sync" +qa; then
-    echo "cannot update plugins with nvim"
-    return 1
-  fi
-  # if ! "$nvim_path" --headless "+MasonUpdate" +qa; then
-  #   echo "cannot update Mason plugins with nvim"
-  #   return 1
-  # fi
-  return 0
-}
-
-_vi_update_timestamp() {
-  local timestamp_file=~/.local/state/lastnvimupdate
-  date +%s >"$timestamp_file"
-}
-
-vi() {
-  local use_bob=true
-  local nvim_path="$HOME/.local/share/bob/nvim-bin/nvim"
-
-  # Determine which nvim to use
-  if _vi_should_skip_bob; then
-    use_bob=false
-    nvim_path="nvim"
-    echo "Using system nvim: $(command -v nvim)"
-  else
-    echo "Using bob's nvim: $nvim_path"
-  fi
-
-  # Ensure bob is installed if we're using it
-  if $use_bob; then
-    _vi_ensure_bob
-  fi
-
-  # Check if update is needed
-  if _vi_needs_update; then
-    # Update bob if we're using it
-    if $use_bob; then
-      _vi_update_bob || return 1
-    fi
-
-    # Update plugins
-    _vi_update_plugins "$nvim_path" || return 1
-
-    # Update timestamp
-    _vi_update_timestamp
-  fi
-
-  # Run nvim
-  "$nvim_path" "$@"
-}
 alias z="zellij"
-alias pacold="sudo pacman -Qtdq | sudo pacman -Rns -; yay -Syyu; paccache -r "
-alias pac="yay -Syyu; paccache -r "
+alias pac="$HOME/.local/bin/pac.sh"
 alias ta="tmux attach"
 alias isodate="date -u +%Y-%m-%dT%H:%M:%S%Z"
 
 rclon_ssh() {
   eval "$(ssh-agent -s)" && ssh-add
 }
-alias 'gitui'='eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa && gitui && ssh-agent -k'
-alias gu='gitui'
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-alias cl='lazygit --use-config-file "$HOME/.config/lazygit/tweak.yml" --work-tree ~ --git-dir ~/.cfg'
-alias cz='lazygit --work-tree $HOME/.local/share/chezmoi/'
-alias lz='lazygit'
-alias c="clear"
-if [ -f "/opt/linuxbrew/bin/brew" ]; then
-  eval "$(/opt/linuxbrew/bin/brew shellenv)"
-fi
-if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-fi
-alias dp="~/.local/bin/dockerps.sh"
-alias gss="git status -s"
-alias gsl="git status"
-alias nvimdiff='nvim -d'
-alias uy="uv run"
-alias ur="uv run"
-
-function y() {
-  # yazi file manager, but exit to the terminal in the last visited directory within yazi
-  if [ -f "$HOME/.env" ]; then
-    source "$HOME/.env"
-  fi
-  local tmp
-  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-  TERM=xterm-kitty yazi "$@" --cwd-file="$tmp" 2>/dev/null
-  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    builtin cd -- "$cwd" || return 1
-  fi
+# alias 'gitui'='eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa && gitui && ssh-agent -k'
+# alias gu='gitui'
+# alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+# alias cl='lazygit --use-config-file "$HOME/.config/lazygit/tweak.yml" --work-tree ~ --git-dir ~/.cfg'
+# alias cz='lazygit --work-tree $HOME/.local/share/chezmoi/'
+# alias lz='lazygit'
+# alias c="clear"
+# if [ -f "/opt/linuxbrew/bin/brew" ]; then
+#   eval "$(/opt/linuxbrew/bin/brew shellenv)"
+# fi
+# if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+#   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# fi
+# alias dp="~/.local/bin/dockerps.sh"
+# alias gss="git status -s"
+# alias gsl="git status"
+# alias nvimdiff='nvim -d'
+# alias uy="uv run"
+# alias ur="uv run"
+#
+# function y() {
+#   # yazi file manager, but exit to the terminal in the last visited directory within yazi
+#   if [ -f "$HOME/.env" ]; then
+#     source "$HOME/.env"
+#   fi
+#   local tmp
+#   tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+#   TERM=xterm-kitty yazi "$@" --cwd-file="$tmp" 2>/dev/null
+#   if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+#     builtin cd -- "$cwd" || return 1
+#   fi
   rm -f -- "$tmp"
 }
 alias j='y'
 alias zrc="chezmoi edit ~/.zshrc"
 
 # alias ap="sudo apt-get update; sudo apt-get upgrade; sudo apt-get autoremove "
-ap() {
-  if command -v pkcon >/dev/null; then
-    pkcon refresh
-    pkcon update
-  else
-    sudo apt-get update
-    sudo apt-get upgrade
-    sudo apt-get autoremove
-  fi
-}
+alias ap="$HOME/.local/bin/ap.sh"
 alias f="cd ~ && cd \$(find * -type d | fzf)"
 alias dropboxmama="rclone mount dropboxmama: ~/mnt --daemon --vfs-cache-mode writes --dropbox-encoding 'Slash,BackSlash,Del,RightSpace,InvalidUtf8,Dot,LeftPeriod' -vv"
-alias tabbyon="docker compose -f \$HOME/.config/tabby/docker-compose.yml up -d"
-alias tabbyup="tabbyon"
-alias tabbyoff="docker compose -f \$HOME/.config/tabby/docker-compose.yml down"
-alias tabbydn="tabbyoff"
 
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
