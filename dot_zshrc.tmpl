@@ -108,8 +108,33 @@ if [ -f ~/.env ]; then
   set +a
 fi
 
+# Yazi file manager - change to last visited directory
+j() {
+  if [ -f "$HOME/.env" ]; then
+    source "$HOME/.env"
+  fi
+  local tmp
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  TERM=xterm-kitty yazi "$@" --cwd-file="$tmp" 2>/dev/null
+  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd" || return 1
+  fi
+  rm -f -- "$tmp"
+}
+
 # alias claude="\$HOME/.claude/local/claude"
-alias ncdu="gdu"
+# ncdu function to handle both gdu and gdu-go
+ncdu() {
+  if command -v gdu >/dev/null 2>&1; then
+    gdu "$@"
+  elif command -v gdu-go >/dev/null 2>&1; then
+    gdu-go "$@"
+  else
+    echo "Error: Neither 'gdu' nor 'gdu-go' is installed."
+    return 1
+  fi
+}
+
 alias z="zellij"
 alias pac="$HOME/.local/bin/pac.sh"
 alias ta="tmux attach"
@@ -118,40 +143,19 @@ alias isodate="date -u +%Y-%m-%dT%H:%M:%S%Z"
 rclon_ssh() {
   eval "$(ssh-agent -s)" && ssh-add
 }
-# alias 'gitui'='eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa && gitui && ssh-agent -k'
-# alias gu='gitui'
-# alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-# alias cl='lazygit --use-config-file "$HOME/.config/lazygit/tweak.yml" --work-tree ~ --git-dir ~/.cfg'
-# alias cz='lazygit --work-tree $HOME/.local/share/chezmoi/'
-# alias lz='lazygit'
-# alias c="clear"
-# if [ -f "/opt/linuxbrew/bin/brew" ]; then
-#   eval "$(/opt/linuxbrew/bin/brew shellenv)"
-# fi
-# if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
-#   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-# fi
-# alias dp="~/.local/bin/dockerps.sh"
-# alias gss="git status -s"
-# alias gsl="git status"
-# alias nvimdiff='nvim -d'
-# alias uy="uv run"
-# alias ur="uv run"
-#
-# function y() {
-#   # yazi file manager, but exit to the terminal in the last visited directory within yazi
-#   if [ -f "$HOME/.env" ]; then
-#     source "$HOME/.env"
-#   fi
-#   local tmp
-#   tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-#   TERM=xterm-kitty yazi "$@" --cwd-file="$tmp" 2>/dev/null
-#   if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-#     builtin cd -- "$cwd" || return 1
-#   fi
-  rm -f -- "$tmp"
-}
-alias j='y'
+alias 'gitui'='eval $(ssh-agent) && ssh-add ~/.ssh/id_rsa && gitui && ssh-agent -k'
+alias gu='gitui'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias cl='lazygit --use-config-file "$HOME/.config/lazygit/tweak.yml" --work-tree ~ --git-dir ~/.cfg'
+alias cz='lazygit --work-tree $HOME/.local/share/chezmoi/'
+alias lz='lazygit'
+alias c="clear"
+alias dp="~/.local/bin/dockerps.sh"
+alias gss="git status -s"
+alias gsl="git status"
+alias nvimdiff='nvim -d'
+alias uy="uv run"
+alias ur="uv run"
 alias zrc="chezmoi edit ~/.zshrc"
 
 # alias ap="sudo apt-get update; sudo apt-get upgrade; sudo apt-get autoremove "

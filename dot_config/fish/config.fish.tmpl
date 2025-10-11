@@ -59,8 +59,8 @@ alias ap="$HOME/.local/bin/ap.sh"
 alias ghc="gh copilot suggest"
 alias rclon_ssh='eval (ssh-agent -c); and ssh-add'
 
-# Yazi wrapper function (needs to be a function to change directory)
-function y
+# Yazi file manager - change to last visited directory
+function j
     if test -f "$HOME/.env"
         source "$HOME/.env"
     end
@@ -72,9 +72,9 @@ function y
     end
     rm -f -- "$tmp"
 end
-alias j='y'
 
 # Other aliases
+# ncdu function to handle both gdu and gdu-go
 function ncdu
     if type -q gdu
         gdu $argv
@@ -82,8 +82,10 @@ function ncdu
         gdu-go $argv
     else
         echo "Error: Neither 'gdu' nor 'gdu-go' is installed."
+        return 1
     end
 end
+
 alias z="zellij"
 alias pacold="$HOME/.local/bin/pacold.sh"
 alias pac="$HOME/.local/bin/pac.sh"
