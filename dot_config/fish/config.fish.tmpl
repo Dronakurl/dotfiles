@@ -72,9 +72,18 @@ function y
     end
     rm -f -- "$tmp"
 end
+alias j='y'
 
 # Other aliases
-alias ncdu="gdu"
+function ncdu
+    if type -q gdu
+        gdu $argv
+    else if type -q gdu-go
+        gdu-go $argv
+    else
+        echo "Error: Neither 'gdu' nor 'gdu-go' is installed."
+    end
+end
 alias z="zellij"
 alias pacold="$HOME/.local/bin/pacold.sh"
 alias pac="$HOME/.local/bin/pac.sh"
@@ -93,7 +102,6 @@ alias gsl="git status"
 alias nvimdiff='nvim -d'
 alias uy="uv run"
 alias ur="uv run"
-alias j='y'
 alias zrc="chezmoi edit ~/.zshrc"
 alias f="cd ~ && cd (find * -type d | fzf)"
 alias dropboxmama="rclone mount dropboxmama: ~/mnt --daemon --vfs-cache-mode writes --dropbox-encoding 'Slash,BackSlash,Del,RightSpace,InvalidUtf8,Dot,LeftPeriod' -vv"
