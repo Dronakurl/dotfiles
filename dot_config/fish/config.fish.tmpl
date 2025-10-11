@@ -1,5 +1,8 @@
 # vim: set filetype=fish :
 
+# Disable greeting
+set -g fish_greeting
+
 # Environment variables
 set -gx LC_ALL en_US.UTF-8
 set -gx LANG C.UTF-8
@@ -7,12 +10,6 @@ set -gx PYTHONPYCACHEPREFIX /tmp/pycache
 set -gx TEXMFHOME $HOME/.local/share/texmf
 set -gx EDITOR nvim
 set -gx VISUAL nvim
-
-if test -f "$HOME/.env"
-    set -a
-    source "$HOME/.env"
-    set +a
-end
 
 {{ if eq .chezmoi.hostname "bigone" }}
 set -gx PKG_CONFIG_PATH /usr/lib/x86_64-linux-gnu/pkgconfig
@@ -62,7 +59,7 @@ alias rclon_ssh='eval (ssh-agent -c); and ssh-add'
 # Yazi file manager - change to last visited directory
 function j
     if test -f "$HOME/.env"
-        source "$HOME/.env"
+        export (cat "$HOME/.env" | grep -v '^#' | xargs)
     end
     set -l tmp (mktemp -t "yazi-cwd.XXXXXX")
     set -x TERM xterm-kitty
