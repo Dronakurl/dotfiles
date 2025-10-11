@@ -62,7 +62,7 @@ function j
         export (cat "$HOME/.env" | grep -v '^#' | xargs)
     end
     set -l tmp (mktemp -t "yazi-cwd.XXXXXX")
-    set -x TERM xterm-kitty
+    # set -x TERM xterm-kitty
     yazi $argv --cwd-file="$tmp" 2>/dev/null
     if set -l cwd (cat -- "$tmp"); and test -n "$cwd"; and test "$cwd" != "$PWD"
         cd -- "$cwd"
@@ -102,6 +102,7 @@ alias nvimdiff='nvim -d'
 alias uy="uv run"
 alias ur="uv run"
 alias zrc="chezmoi edit ~/.zshrc"
+alias zrc="chezmoi edit ~/.config/fish/config.fish"
 alias f="cd ~ && cd (find * -type d | fzf)"
 alias dropboxmama="rclone mount dropboxmama: ~/mnt --daemon --vfs-cache-mode writes --dropbox-encoding 'Slash,BackSlash,Del,RightSpace,InvalidUtf8,Dot,LeftPeriod' -vv"
 alias tabbyon="docker compose -f \$HOME/.config/tabby/docker-compose.yml up -d"

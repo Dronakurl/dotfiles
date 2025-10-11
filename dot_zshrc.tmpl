@@ -115,7 +115,7 @@ j() {
   fi
   local tmp
   tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-  TERM=xterm-kitty yazi "$@" --cwd-file="$tmp" 2>/dev/null
+  # TERM=xterm-kitty yazi "$@" --cwd-file="$tmp" 2>/dev/null
   if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
     builtin cd -- "$cwd" || return 1
   fi
