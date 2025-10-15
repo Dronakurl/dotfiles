@@ -206,6 +206,9 @@ if command -v just &>/dev/null; then
   # autoload -Uz compinit && compinit
   eval "$(just --completions zsh)"
 fi
+if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
 
 IFS=',' read -r -A services <<<"$RCLONE_SERVICES"
 
