@@ -4,8 +4,8 @@
 set -g fish_greeting
 
 # Environment variables
-set -gx LC_ALL en_US.UTF-8
-set -gx LANG C.UTF-8
+# set -gx LC_ALL en_US.UTF-8
+# set -gx LANG C.UTF-8
 set -gx PYTHONPYCACHEPREFIX /tmp/pycache
 set -gx TEXMFHOME $HOME/.local/share/texmf
 set -gx EDITOR nvim
@@ -84,7 +84,6 @@ function ncdu
 end
 
 alias z="zellij"
-alias pacold="$HOME/.local/bin/pacold.sh"
 alias pac="$HOME/.local/bin/pac.sh"
 alias ta="tmux attach"
 alias isodate="date -u +%Y-%m-%dT%H:%M:%S%Z"
@@ -99,7 +98,6 @@ alias dp="~/.local/bin/dockerps.sh"
 alias gss="git status -s"
 alias gsl="git status"
 alias nvimdiff='nvim -d'
-alias uy="uv run"
 alias ur="uv run"
 alias zrc="chezmoi edit ~/.zshrc"
 alias zrc="chezmoi edit ~/.config/fish/config.fish"
@@ -159,8 +157,10 @@ if command -v just >/dev/null 2>&1
     just --completions fish | source
 end
 
-# Vi mode
 fish_vi_key_bindings
-# Ctrl+K to kill line (like in zsh)
+
 bind -M insert \ck kill-line
 bind -M default \ck kill-line
+
+bind -M insert \cw forward-word
+bind -M insert \cf accept-autosuggestion
