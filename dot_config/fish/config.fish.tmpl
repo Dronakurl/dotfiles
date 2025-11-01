@@ -35,6 +35,7 @@ path_prepend "$HOME/.local/bin"
 path_prepend "$HOME/.cargo/bin"
 path_prepend "$HOME/.local/share/bob/nvim-bin"
 path_prepend "$HOME/.claude/local"
+path_prepend "$HOME/.local/npm-global/bin"
 path_prepend "$HOME/.opencode/bin"
 path_append /usr/local/cuda/bin
 
@@ -42,10 +43,25 @@ path_append /usr/local/cuda/bin
 functions -e path_prepend
 functions -e path_append
 
-# Load environment variables from ~/.env
-if test -f ~/.env
-    export (cat ~/.env | grep -v '^#' | xargs)
+# Function to load environment variables from a file
+function load_env
+    set -l env_file $argv[1]
+    if test -z "$env_file"
+        set env_file ~/.env
+    end
+
+    if test -f "$env_file"
+        for line in (cat "$env_file" | grep -v '^#' | grep -v '^$')
+            set -l parts (string split -m 1 '=' -- $line)
+            if test (count $parts) -eq 2
+                set -gx $parts[1] $parts[2]
+            end
+        end
+    end
 end
+
+# Load environment variables from ~/.env
+load_env
 
 # Simple command aliases using standalone scripts
 alias vi="$HOME/.local/bin/vi.sh"
@@ -58,9 +74,7 @@ alias rclon_ssh='eval (ssh-agent -c); and ssh-add'
 
 # Yazi file manager - change to last visited directory
 function j
-    if test -f "$HOME/.env"
-        export (cat "$HOME/.env" | grep -v '^#' | xargs)
-    end
+    load_env
     set -l tmp (mktemp -t "yazi-cwd.XXXXXX")
     # set -x TERM xterm-kitty
     yazi $argv --cwd-file="$tmp" 2>/dev/null
