@@ -22,7 +22,8 @@ local M = {
     },
     opts = {
       strategies = {
-        chat = { adapter = "mistral" },
+        chat = { adapter = "claude_code" },
+        cmd = { adapter = "claude_code" },
         inline = {
           adapter = "mistral",
           keymaps = {
@@ -90,6 +91,13 @@ local M = {
         "<leader>ao",
         ":CodeCompanionChat openai<CR>",
         desc = "Open chat (openai)",
+        -- icon = "🧠",
+        mode = { "n", "v" },
+      },
+      {
+        "<leader>ai",
+        ":CodeCompanionChat claude_code<CR>",
+        desc = "Open chat (claude_code)",
         -- icon = "🧠",
         mode = { "n", "v" },
       },
