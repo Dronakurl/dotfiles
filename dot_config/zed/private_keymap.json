@@ -17,7 +17,8 @@
     "bindings": {
       // window related commands (ctrl-w X)
       "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight"
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-j": "workspace::ActivatePaneDown"
     }
   },
   {
@@ -59,8 +60,13 @@
       "shift shift": "file_finder::Toggle",
       "space ,": "tab_switcher::Toggle",
       "space m": "pane::CloseActiveItem",
-      "space /": "pane::DeploySearch"
+      "space /": "pane::DeploySearch",
+      "ctrl-7": "terminal_panel::ToggleFocus"
     }
+  },
+  {
+    "context": "TerminalPanel",
+    "bindings": { "ctrl-7": "terminal_panel::ToggleFocus" }
   },
   {
     "context": "ProjectPanel && not_editing",
