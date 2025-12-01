@@ -90,6 +90,14 @@ zstyle ':omz:plugins:nvm' lazy yes
 
 source "$ZSH/oh-my-zsh.sh"
 
+# Vi-mode cursor shape: line for insert, block for normal
+VI_MODE_SET_CURSOR=true
+VI_MODE_CURSOR_NORMAL=1
+VI_MODE_CURSOR_INSERT=5
+
+# CTRL+f to accept autosuggestion (like fish)
+bindkey '^f' autosuggest-accept
+
 # Preferred editor for local and remote sessions
 export EDITOR='nvim'
 export VISUAL='nvim'
