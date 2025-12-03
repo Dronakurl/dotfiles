@@ -221,4 +221,11 @@ if no_weak_machine == true then
   })
 end
 
-return M
+local f = io.open("$HOME/.no_ai", "r")
+if f ~= nil then
+  io.close(f)
+  vim.notify("no ai")
+  return {}
+else
+  return M
+end

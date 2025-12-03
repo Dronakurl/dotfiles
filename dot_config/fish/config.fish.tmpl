@@ -76,6 +76,7 @@ alias rclon_ssh='eval (ssh-agent -c); and ssh-add'
 function j
     load_env
     set -l tmp (mktemp -t "yazi-cwd.XXXXXX")
+    # I don't remember why this was needed
     # set -x TERM xterm-kitty
     yazi $argv --cwd-file="$tmp" 2>/dev/null
     if set -l cwd (cat -- "$tmp"); and test -n "$cwd"; and test "$cwd" != "$PWD"
