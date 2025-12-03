@@ -6,7 +6,12 @@ _vi_should_skip_bob() {
     if ! command -v cargo >/dev/null 2>&1; then
         return 0
     fi
+    # Skip, if running on homebrew
     if command -v nvim 2>/dev/null | grep -q "brew"; then
+        return 0
+    fi
+    # Skip if running on Arch Linux
+    if grep -qi 'arch' /etc/os-release 2>/dev/null; then
         return 0
     fi
     return 1
