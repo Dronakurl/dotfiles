@@ -338,9 +338,10 @@ function set_tab_to_command_line() {
   change_tab_title $truncated_cmdline
 }
 
-if [[ -n $ZELLIJ ]]; then
-  add-zsh-hook precmd set_tab_to_working_dir
-  add-zsh-hook preexec set_tab_to_command_line
-fi
+# Disabled - using zautotabname plugin instead
+# if [[ -n $ZELLIJ ]]; then
+#   add-zsh-hook precmd set_tab_to_working_dir
+#   add-zsh-hook preexec set_tab_to_command_line
+# fi
 
 # zprof

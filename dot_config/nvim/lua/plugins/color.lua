@@ -35,46 +35,46 @@ return {
       end,
     },
   },
-  {
-    "xiyaowong/transparent.nvim",
-    lazy = false,
-    init = function()
-      local snacks = require("snacks")
-      snacks
-        .toggle({
-          id = "transparency",
-          name = "Transparency",
-          get = function()
-            return vim.g.transparent_enabled
-          end,
-          set = function(enabled)
-            vim.g.transparent_enabled = enabled
-          end,
-        })
-        :map("<leader>uo")
-    end,
-    opts = {
-      extra_groups = {
-        "FloatBorder",
-        "LSPInfoBorder",
-        "NeoTreeNormal",
-        "NeoTreeNormalNC",
-        "NormalFloat",
-        "NotifyDEBUGBody",
-        "NotifyDEBUGBorder",
-        "NotifyERRORBody",
-        "NotifyERRORBorder",
-        "NotifyINFOBody",
-        "NotifyINFOBorder",
-        "NotifyTRACEBody",
-        "NotifyTRACEBorder",
-        "NotifyWARNBody",
-        "NotifyWARNBorder",
-        "WhichKeyFloat",
-      },
-      exclude_groups = {},
-    },
-  },
+  -- {
+  --   "xiyaowong/transparent.nvim",
+  --   lazy = false,
+  --   init = function()
+  --     local snacks = require("snacks")
+  --     snacks
+  --       .toggle({
+  --         id = "transparency",
+  --         name = "Transparency",
+  --         get = function()
+  --           return vim.g.transparent_enabled
+  --         end,
+  --         set = function(enabled)
+  --           vim.g.transparent_enabled = enabled
+  --         end,
+  --       })
+  --       :map("<leader>uo")
+  --   end,
+  --   opts = {
+  --     extra_groups = {
+  --       "FloatBorder",
+  --       "LSPInfoBorder",
+  --       "NeoTreeNormal",
+  --       "NeoTreeNormalNC",
+  --       "NormalFloat",
+  --       "NotifyDEBUGBody",
+  --       "NotifyDEBUGBorder",
+  --       "NotifyERRORBody",
+  --       "NotifyERRORBorder",
+  --       "NotifyINFOBody",
+  --       "NotifyINFOBorder",
+  --       "NotifyTRACEBody",
+  --       "NotifyTRACEBorder",
+  --       "NotifyWARNBody",
+  --       "NotifyWARNBorder",
+  --       "WhichKeyFloat",
+  --     },
+  --     exclude_groups = {},
+  --   },
+  -- },
 }
 -- { "rebelot/kanagawa.nvim", enabled = true, priority = 1, lazy = false },
 -- Or with configuration
