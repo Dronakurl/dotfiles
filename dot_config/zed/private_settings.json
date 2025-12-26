@@ -54,30 +54,14 @@
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-7-sonnet"
-      // "model": "devstral-medium-latest"
     }
   },
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "buffer_font_weight": 200,
   "soft_wrap": "editor_width",
-  // "buffer_font_family": "FiraCode Nerd Font Mono",
-  // "buffer_font_family": "Monaspace Neon",
-  // "buffer_font_family": "Iosevka Nerd Font Mono",
-  // "buffer_font_family": "Monaspace Neon",
-  // # family = "FiraCode Nerd Font Mono"
-  // # family = "Sauce Code Pro Nerd Font"
-  // # family = "Mono"
-  // # family = "Krypton"
-  // # family = "Neon"
-  // # family = "Agave Nerd Font Mono"
-  // # family = "Mononoki Nerd Font Mono "
-  // # family: "Argon"
-  // # family = "Krypton"
-  // # family: "Mononoki Nerd Font Mono "
-  // # family: "MonaspaceNeon"
-  // # family = "CodeNewRoman Nerd Font"
-  // # family = "Ubuntu Mono Nerd Font "
-  "buffer_line_height": { "custom": 1.39 },
+  "buffer_line_height": {
+    "custom": 1.39
+  },
   "vim_mode": true,
   "helix_mode": false,
   "autosave": "on_focus_change",
