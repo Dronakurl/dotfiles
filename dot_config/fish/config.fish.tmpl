@@ -32,6 +32,7 @@ end
 
 # Build PATH systematically
 path_prepend "$HOME/.local/bin"
+path_prepend "$HOME/.local/bin/ngc-cli/"
 path_prepend "$HOME/.cargo/bin"
 path_prepend "$HOME/.local/share/bob/nvim-bin"
 path_prepend "$HOME/.claude/local"
@@ -175,8 +176,10 @@ end
 fish_vi_key_bindings
 
 # Start in insert mode
-function fish_default_mode_prompt; end
-function fish_mode_prompt; end
+function fish_default_mode_prompt
+end
+function fish_mode_prompt
+end
 set -g fish_vi_force_cursor 1
 set -g fish_cursor_default block
 set -g fish_cursor_insert line
