@@ -22,8 +22,8 @@ local M = {
     },
     opts = {
       strategies = {
-        chat = { adapter = "claude_code" },
-        cmd = { adapter = "claude_code" },
+        chat = { adapter = "mistral" },
+        cmd = { adapter = "mistral" },
         inline = {
           adapter = "mistral",
           keymaps = {
@@ -47,15 +47,15 @@ local M = {
         },
       },
       adapters = {
-        acp = {
-          claude_code = function()
-            return require("codecompanion.adapters").extend("claude_code", {
-              env = {
-                CLAUDE_CODE_OAUTH_TOKEN = os.getenv("CLAUDE_CODE_OAUTH_TOKEN"),
-              },
-            })
-          end,
-        },
+        -- acp = {
+        --   claude_code = function()
+        --     return require("codecompanion.adapters").extend("claude_code", {
+        --       env = {
+        --         CLAUDE_CODE_OAUTH_TOKEN = os.getenv("CLAUDE_CODE_OAUTH_TOKEN"),
+        --       },
+        --     })
+        --   end,
+        -- },
         mistral = function()
           return require("codecompanion.adapters").extend("mistral", {
             name = "codestral",
@@ -94,13 +94,13 @@ local M = {
         -- icon = "🧠",
         mode = { "n", "v" },
       },
-      {
-        "<leader>ai",
-        ":CodeCompanionChat claude_code<CR>",
-        desc = "Open chat (claude_code)",
-        -- icon = "🧠",
-        mode = { "n", "v" },
-      },
+      -- {
+      --   "<leader>ai",
+      --   ":CodeCompanionChat claude_code<CR>",
+      --   desc = "Open chat (claude_code)",
+      --   -- icon = "🧠",
+      --   mode = { "n", "v" },
+      -- },
       {
         "<leader>am",
         ":CodeCompanionChat mistral<CR>",
