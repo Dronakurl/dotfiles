@@ -213,7 +213,7 @@ records = true
 
 [daemon]
 ## Enables using the daemon to sync. Requires the daemon to be running in the background. Start it with `atuin daemon`
-# enabled = false
+enabled = false
 
 ## How often the daemon should sync in seconds
 # sync_frequency = 300
@@ -230,3 +230,7 @@ records = true
 
 ## The port that should be used for TCP on non unix systems
 # tcp_port = 8889
+
+[fish_sync]
+enabled = true
+history_path = "~/.local/share/fish/fish_history"
