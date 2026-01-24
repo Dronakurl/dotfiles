@@ -232,5 +232,29 @@ enabled = false
 # tcp_port = 8889
 
 [fish_sync]
+## Enable syncing remote Atuin history (from other machines) to Fish shell history file
+## This allows Fish's autosuggestions (ghost text) to work with commands from all your machines
+## Note: Local commands are already written to Fish history by Fish itself
+## This setting only controls syncing of remote commands downloaded during Atuin sync
 enabled = true
+
+## Sync ALL local Atuin entries to Fish history when running `atuin sync` command
+## This includes both local commands and remote downloaded entries
+## Useful for ensuring Fish has complete history, but can be slow for large histories
+sync_all_on_cli = true
+
+## Sync ALL local Atuin entries to Fish history when daemon runs scheduled sync
+## This includes both local commands and remote downloaded entries
+## Useful for ensuring Fish has complete history, but can be slow for large histories
+sync_all_on_daemon = false
+
+## Run atuin sync on Fish shell startup
+## This ensures Fish history is always up-to-date when opening a new shell
+sync_on_startup = true
+
+## Maximum number of entries to keep in Fish history (prevent file bloat)
+## Set to 0 for no limit
+max_entries = 10000
+
+## Path to the Fish history file
 history_path = "~/.local/share/fish/fish_history"
