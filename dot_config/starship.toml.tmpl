@@ -11,6 +11,7 @@ $typst\
 $rust\
 $cmd_duration\
 $status\
+$custom.bgjobs\
 $jobs\
 $line_break\
 $python\
@@ -106,3 +107,13 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 style = 'bold green'
 symbol = '👩‍💻 '
 disabled = true
+
+[jobs]
+symbol = '✦ '
+style = 'bold yellow'
+disabled = true
+
+[env_var.STARSHIP_JOBS]
+symbol = '⚙ '
+style = 'bold yellow'
+format = '[$symbol$env_value]($style) '

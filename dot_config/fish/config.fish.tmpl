@@ -158,7 +158,37 @@ if test -d "$HOME/.cargo/bin"
 end
 
 if command -v starship >/dev/null 2>&1
+    # Function to set job names
+    function __starship_update_jobs
+        set -l job_names
+        for line in (jobs 2>/dev/null)
+            set -l cmd (string replace -r '^\S+\s+\S+\s+\S+\s+\S+\s+' '' $line | string replace -r '\s*&\s*$' '' | string shorten -m 20)
+            if test -n "$cmd"
+                set -a job_names $cmd
+            end
+        end
+        if test (count $job_names) -gt 0
+            set -gx STARSHIP_JOBS (string join ' ' $job_names[1..5])
+        else
+            set -e STARSHIP_JOBS 2>/dev/null
+        end
+    end
+
+    # Save original fish_prompt before starship overwrites it (only once)
+    if not functions -q __starship_original_fish_prompt
+        functions -c fish_prompt __starship_original_fish_prompt
+    end
+
     starship init fish | source
+
+    # Now wrap fish_prompt to call our updater first (only once)
+    if not functions -q __starship_fish_prompt_copy
+        functions -c fish_prompt __starship_fish_prompt_copy
+        function fish_prompt
+            __starship_update_jobs
+            __starship_fish_prompt_copy
+        end
+    end
 end
 
 if command -v uv >/dev/null 2>&1
