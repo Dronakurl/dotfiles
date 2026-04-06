@@ -4,8 +4,9 @@ name = "markdown"
 
 [[language]]
 name = "python"
+scope = "source.python"
 auto-format = true
-language-servers = ["basedpyright", "ruff"]
+language-servers = ["basedpyright", "ruff", "ty"]
 formatter = { command = "bash", args = [
   "-c",
   "ruff check --select I --fix - | ruff format - ",
@@ -19,6 +20,10 @@ typeCheckingMode = "basic"
 
 [language-server.ruff]
 command = "ruff-lsp"
+
+[language-server.ty]
+command = "ty"
+args = ["server"]
 
 [language-server.ruff.config.settings]
 args = ["--ignore", "E501"]
