@@ -14,7 +14,7 @@ completion-timeout = 100
 end-of-line-diagnostics = "warning"
 
 [editor.lsp]
-display-inlay-hints = false
+display-inlay-hints = true
 goto-reference-include-declaration = false
 
 [editor.auto-save]
@@ -22,7 +22,7 @@ focus-lost = true
 after-delay.enable = true
 
 [editor.inline-diagnostics]
-cursor-line = "warning" # show warnings and errors on the cursorline inline
+cursor-line = "hint" # show warnings and errors on the cursorline inline
 
 [editor.soft-wrap]
 enable = true
@@ -78,7 +78,6 @@ tabpad = "·"  # Tabs will look like "→···" (depending on tab width)
 "l" = "goto_last_accessed_file"
 "q" = ":write-quit-all"
 "z" = ":open ~/notes/notes.md"
-# "." = ":sh zellij run -n Yazi -c -f -x 10%% -y 10%% --width 80%% --height 80%% -- bash ~/.config/helix/yazi-picker.sh open %{buffer_name}"
 "." = [
   ':sh rm -f /tmp/unique-file',
   ':sh rm -f /tmp/unique-cwd-file',
@@ -92,13 +91,15 @@ tabpad = "·"  # Tabs will look like "→···" (depending on tab width)
 [keys.normal]
 C-r = "redo"
 C-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
-"^" = "switch_to_uppercase"
+"7" = "switch_to_uppercase"
+"A-7" = "switch_to_lowercase"
 "G" = "goto_last_line"
 "A-h" = "goto_previous_buffer"
 "A-l" = "goto_next_buffer"
 "0" = "extend_to_line_start"
 "$" = "extend_to_line_end"
-"V" = "extend_to_line_bounds"
+# "V" = "extend_to_line_bounds"
+V = ["select_mode", "extend_to_line_bounds"]
 "_" = "extend_to_first_nonwhitespace"
 # move lines up and down
 A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
@@ -109,6 +110,7 @@ A-k = [
   "paste_before",
 ]
 D = ["ensure_selections_forward", "extend_to_line_end", "delete_selection"]
+# D = ["extend_to_line_end", "yank_main_selection_to_clipboard", "delete_selection"]
 # "d" = { "d" = ["extend_line_below", "delete_selection"] }
 # A-x = "extend_to_line_bounds"
 # X = ["extend_line_up", "extend_to_line_bounds"]
@@ -116,6 +118,26 @@ X = ["extend_line_above"]
 esc = ["collapse_selection", "keep_primary_selection"]
 C-space = ["expand_selection"]
 A-m = "flip_selections"
+C-h = "select_prev_sibling"
+C-j = "shrink_selection"
+C-k = "expand_selection"
+C-l = "select_next_sibling"
+"{" = ["goto_prev_paragraph", "collapse_selection"]
+"}" = ["goto_next_paragraph", "collapse_selection"]
+"%" = "match_brackets"
+# C = ["extend_to_line_end", "yank_main_selection_to_clipboard", "delete_selection", "insert_mode"]
+
+# Search for word under cursor
+"*" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
+"#" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_prev"]
+
+# # New paste commands
+# p = ["paste_clipboard_after", "collapse_selection"]
+# P = ["paste_clipboard_before", "collapse_selection"]
+
+# # Would be nice to add ya and yi, but the surround commands can't be chained
+# Y = ["extend_to_line_end", "yank_main_selection_to_clipboard", "collapse_selection"]
+# y = "yank_main_selection_to_clipboard"
 
 [keys.normal.g]
 o = "add_newline_below"
@@ -125,5 +147,5 @@ q = ":reflow"
 [keys.select]
 X = ["extend_line_above"]
 
-[keys.insert.j]
-"j" = "normal_mode"
+# [keys.insert.j]
+# "j" = "normal_modejoplin

@@ -1,4 +1,5 @@
 # vim: set filetype=fish :
+chezmoi:template:missing-key=invalid
 
 # Disable greeting
 set -g fish_greeting
@@ -8,8 +9,8 @@ set -g fish_greeting
 # set -gx LANG C.UTF-8
 set -gx PYTHONPYCACHEPREFIX /tmp/pycache
 set -gx TEXMFHOME $HOME/.local/share/texmf
-set -gx EDITOR nvim
-set -gx VISUAL nvim
+set -gx EDITOR {{ .editor | default "vim" }}
+set -gx VISUAL {{ .editor | default "vim" }}
 
 {{ if eq .chezmoi.hostname "bigone" }}
 set -gx PKG_CONFIG_PATH /usr/lib/x86_64-linux-gnu/pkgconfig
