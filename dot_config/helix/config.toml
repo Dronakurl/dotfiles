@@ -124,12 +124,24 @@ C-k = "expand_selection"
 C-l = "select_next_sibling"
 "{" = ["goto_prev_paragraph", "collapse_selection"]
 "}" = ["goto_next_paragraph", "collapse_selection"]
-"%" = "match_brackets"
+# "%" = "match_brackets"
 # C = ["extend_to_line_end", "yank_main_selection_to_clipboard", "delete_selection", "insert_mode"]
 
 # Search for word under cursor
-"*" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_next"]
-"#" = ["move_char_right", "move_prev_word_start", "move_next_word_end", "search_selection", "search_prev"]
+"*" = [
+  "move_char_right",
+  "move_prev_word_start",
+  "move_next_word_end",
+  "search_selection",
+  "search_next",
+]
+"#" = [
+  "move_char_right",
+  "move_prev_word_start",
+  "move_next_word_end",
+  "search_selection",
+  "search_prev",
+]
 
 # # New paste commands
 # p = ["paste_clipboard_after", "collapse_selection"]
@@ -137,6 +149,7 @@ C-l = "select_next_sibling"
 
 # # Would be nice to add ya and yi, but the surround commands can't be chained
 # Y = ["extend_to_line_end", "yank_main_selection_to_clipboard", "collapse_selection"]
+Y = ["yank_main_selection_to_clipboard"]
 # y = "yank_main_selection_to_clipboard"
 
 [keys.normal.g]
