@@ -35,4 +35,4 @@
 [diif]
 	tool = nvimdiff
 [core]
-	editor = nvim
+	editor = {{ .editor | quote | default "vim" }}

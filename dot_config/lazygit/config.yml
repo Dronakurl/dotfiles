@@ -1,5 +1,5 @@
-os:
-  editPreset: "nvim"
+# os:
+#   editPreset: "helix"
 promptToReturnFromSubprocess: false
 gui:
   expandFocusedSidePanel: true
