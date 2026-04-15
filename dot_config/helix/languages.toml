@@ -1,6 +1,14 @@
-###################################################### Language definitions
+[[language]]
+name = "typst"
+# language-servers = ["tinymist", "harper-ls"]
+language-servers = ["tinymist"]
+
 [[language]]
 name = "markdown"
+language-servers = ["harper-ls"]
+
+[language-server.harper-ls]
+command = "harper-ls"
 
 [[language]]
 name = "python"
@@ -17,9 +25,6 @@ typeCheckingMode = "basic"
 
 [language-server.basedpyright.analysis]
 typeCheckingMode = "basic"
-
-[language-server.ruff]
-command = "ruff-lsp"
 
 [language-server.ty]
 command = "ty"
