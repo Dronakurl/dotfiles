@@ -67,6 +67,9 @@ load_env
 
 # Simple command aliases using standalone scripts
 alias vi="$HOME/.local/bin/vi.sh"
+if test "$EDITOR" = "helix"
+    alias hx="helix"
+end
 alias dockerpruneall="$HOME/.local/bin/dockerpruneall.sh"
 alias dockerprune="$HOME/.local/bin/dockerprune.sh"
 alias hxv="$HOME/.local/bin/hxv.sh"

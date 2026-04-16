@@ -1,3 +1,6 @@
+[language-server.hunspell-lsp]
+command = "/home/konrad/.cargo/bin/hunspell-lsp"
+
 [[language]]
 name = "typst"
 # language-servers = ["tinymist", "harper-ls"]
@@ -5,7 +8,7 @@ language-servers = ["tinymist"]
 
 [[language]]
 name = "markdown"
-language-servers = ["harper-ls"]
+language-servers = ["hunspell-lsp"]
 
 [language-server.harper-ls]
 command = "harper-ls"
