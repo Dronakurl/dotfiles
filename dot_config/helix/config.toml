@@ -1,5 +1,5 @@
+# theme = "tokyonight_moon"
 # theme = "catppuccin_mocha"
-theme = "tokyonight_moon"
 # theme = "github_dark_dimmed"
 # theme = "bogster"
 # theme = "monokai"
@@ -79,7 +79,13 @@ tabpad = "·"  # Tabs will look like "→···" (depending on tab width)
 "," = "buffer_picker"
 "l" = "goto_last_accessed_file"
 "q" = ":write-quit-all"
-"z" = ":open ~/notes/notes.md"
+# "z" = ":open ~/notes/notes.md"
+"z" = [
+  ":write",
+  ":insert-output chezmoi apply ~/.config/helix",
+  ":config-reload",
+  ":open ~/.local/share/chezmoi/dot_config/helix/config.toml",
+]
 "." = [
   ':sh rm -f /tmp/unique-file',
   ':sh rm -f /tmp/unique-cwd-file',
@@ -93,8 +99,8 @@ tabpad = "·"  # Tabs will look like "→···" (depending on tab width)
 [keys.normal]
 C-r = "redo"
 C-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
-"7" = "switch_to_uppercase"
-"A-7" = "switch_to_lowercase"
+"+" = "switch_to_uppercase"
+"A-+" = "switch_to_lowercase"
 "G" = "goto_last_line"
 "A-h" = "goto_previous_buffer"
 "A-l" = "goto_next_buffer"
@@ -138,7 +144,7 @@ C-l = "select_next_sibling"
 #   "search_prev",
 # ]
 
-R = "rotate_selection_contents_forward"
+A-R = "rotate_selection_contents_forward"
 
 # Y = ["yank_main_selection_to_clipboard"]
 
