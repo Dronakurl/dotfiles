@@ -1,5 +1,7 @@
 # theme = "catppuccin_mocha"
-# theme = "tokyonight_moon"
+theme = "tokyonight_moon"
+# theme = "github_dark_dimmed"
+# theme = "bogster"
 # theme = "monokai"
 
 [editor]
@@ -121,22 +123,24 @@ C-l = "select_next_sibling"
 "}" = ["goto_next_paragraph", "collapse_selection"]
 
 # Search for word under cursor
-"*" = [
-  "move_char_right",
-  "move_prev_word_start",
-  "move_next_word_end",
-  "search_selection",
-  "search_next",
-]
-"#" = [
-  "move_char_right",
-  "move_prev_word_start",
-  "move_next_word_end",
-  "search_selection",
-  "search_prev",
-]
+# "*" = [
+#   "move_char_right",
+#   "move_prev_word_start",
+#   "move_next_word_end",
+#   "search_selection",
+#   "search_next",
+# ]
+# "#" = [
+#   "move_char_right",
+#   "move_prev_word_start",
+#   "move_next_word_end",
+#   "search_selection",
+#   "search_prev",
+# ]
 
-Y = ["yank_main_selection_to_clipboard"]
+R = "rotate_selection_contents_forward"
+
+# Y = ["yank_main_selection_to_clipboard"]
 
 [keys.normal.g]
 o = "add_newline_below"
