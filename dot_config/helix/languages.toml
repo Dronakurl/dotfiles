@@ -82,10 +82,10 @@ name = "typescript"
 auto-format = true
 language-servers = ["typescript-language-server"]
 
-[[language]]
-name = "rust"
-auto-format = true
-language-servers = ["rust-analyzer"]
+# [[language]]
+# name = "rust"
+# auto-format = true
+# language-servers = ["rust-analyzer"]
 
 [[language]]
 name = "javascript"
