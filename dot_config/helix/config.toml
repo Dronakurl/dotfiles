@@ -1,10 +1,12 @@
-theme = "tokyonight_moon"
+# theme = "tokyonight_moon"
+theme = "kanagawa"
 # theme = "catppuccin_mocha"
 # theme = "github_dark_dimmed"
 # theme = "bogster"
 # theme = "monokai"
 
 [editor]
+# insecure = true
 line-number = "relative"
 bufferline = "always"
 gutters = ["diagnostics", "line-numbers", "diff"]
@@ -12,8 +14,8 @@ auto-format = true
 true-color = true
 color-modes = true
 idle-timeout = 150
-completion-timeout = 100
-end-of-line-diagnostics = "warning"
+# crompletion-timeout = 100
+# end-of-line-diagnostics = "error"
 
 [editor.lsp]
 display-inlay-hints = false
@@ -23,8 +25,9 @@ goto-reference-include-declaration = false
 focus-lost = true
 after-delay.enable = true
 
-[editor.inline-diagnostics]
-cursor-line = "hint"
+# [editor.inline-diagnostics]
+# cursor-line = "disable"
+# other-lines = "error"
 
 [editor.soft-wrap]
 enable = true
@@ -54,9 +57,9 @@ right = [
   "read-only-indicator",
 ]
 separator = "│"
-mode.normal = "ADID"
-mode.insert = "SUPE"
-mode.select = "TAMA"
+mode.normal = "N"
+mode.insert = "I"
+mode.select = "S"
 
 [editor.whitespace.render]
 space = "none"

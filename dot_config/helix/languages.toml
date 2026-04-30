@@ -39,11 +39,11 @@ args = ["server"]
 [language-server.ruff.config.settings]
 args = ["--ignore", "E501"]
 
-[[language]]
-name = "toml"
-auto-format = true
-language-servers = ["taplo"]
-formatter = { command = "taplo", args = ["fmt", "-"] }
+# [[language]]
+# name = "toml"
+# auto-format = true
+# language-servers = ["taplo"]
+# formatter = { command = "taplo", args = ["fmt", "-"] }
 
 [[language]]
 name = "yaml"
