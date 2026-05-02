@@ -5,6 +5,11 @@
 command = "/home/konrad/.cargo/bin/harper-ls"
 args = ["--stdio"]
 
+[language-server.harper-ls.config.harper-ls]
+# Delay diagnostics by 1 second (1000ms) after typing stops
+# This prevents diagnostics from appearing while you're actively typing
+diagnosticDelayMs = 1000
+
 [[language]]
 name = "typst"
 # language-servers = ["tinymist", "harper-ls"]

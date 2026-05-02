@@ -1,8 +1,9 @@
 # theme = "tokyonight_moon"
-theme = "kanagawa"
+# theme = "kanagawa"
 # theme = "catppuccin_mocha"
 # theme = "github_dark_dimmed"
 # theme = "bogster"
+theme = "tokyonight"
 # theme = "monokai"
 
 [editor]

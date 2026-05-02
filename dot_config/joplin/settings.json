@@ -1,0 +1,9 @@
+{
+  "$schema": "https://joplinapp.org/schema/settings.json",
+  "altInstanceId": "",
+  "sync.target": 6,
+  "sync.6.path": "https://webdav.mc.gmx.net/joplin/",
+  "locale": "en_US",
+  "markdown.plugin.softbreaks": false,
+  "markdown.plugin.typographer": false
+}
