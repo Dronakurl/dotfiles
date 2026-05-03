@@ -99,6 +99,7 @@ tabpad = "·"  # Tabs will look like "→···" (depending on tab width)
   ':cd %sh{cat /tmp/unique-cwd-file}',
   ':redraw',
 ]
+"t" = "@gOgoXms`ms`ms`"
 
 [keys.normal]
 C-r = "redo"
