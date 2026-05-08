@@ -12,8 +12,8 @@ diagnosticDelayMs = 1000
 
 [[language]]
 name = "typst"
-# language-servers = ["tinymist", "harper-ls"]
-language-servers = ["tinymist"]
+language-servers = ["tinymist", "harper-ls"]
+# language-servers = ["tinymist"]
 
 [[language]]
 name = "markdown"
