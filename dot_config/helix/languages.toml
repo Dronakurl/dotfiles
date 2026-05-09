@@ -12,6 +12,7 @@ diagnosticDelayMs = 1000
 
 [[language]]
 name = "typst"
+auto-format = true
 language-servers = ["tinymist", "harper-ls"]
 # language-servers = ["tinymist"]
 
