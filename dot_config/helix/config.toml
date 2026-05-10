@@ -112,7 +112,7 @@ C-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
 "0" = "extend_to_line_start"
 "$" = "extend_to_line_end"
 V = ["select_mode", "extend_to_line_bounds"]
-"_" = "extend_to_first_nonwhitespace"
+# "_" = "extend_to_first_nonwhitespace"
 # move lines up and down
 A-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
 A-k = [
