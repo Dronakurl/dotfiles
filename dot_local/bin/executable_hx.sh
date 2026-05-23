@@ -15,7 +15,7 @@ _hx_needs_update() {
     one_week_ago=$(date -d "1 week ago" +%s)
 
     if [ "$last_update" -gt "$one_week_ago" ]; then
-        echo "Last update was less than 1 week ago, skipping..."
+        # echo "Last update was less than 1 week ago, skipping..."
         return 1
     fi
     return 0
@@ -65,6 +65,8 @@ _hx_update_timestamp() {
 }
 
 # Main logic
+
+export HELIX_RUNTIME=$HOME/gallery/helix/runtime
 
 # Check if update is needed
 if _hx_needs_update; then
