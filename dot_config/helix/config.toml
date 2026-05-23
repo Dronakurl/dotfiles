@@ -83,6 +83,7 @@ tabpad = "·"  # Tabs will look like "→···" (depending on tab width)
 "," = "buffer_picker"
 "l" = "goto_last_accessed_file"
 "q" = ":write-quit-all"
+"E" = "file_explorer_in_current_buffer_directory"
 # "z" = ":open ~/notes/notes.md"
 "z" = [
   ":write",
