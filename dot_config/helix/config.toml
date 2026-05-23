@@ -17,6 +17,8 @@ color-modes = true
 idle-timeout = 150
 # crompletion-timeout = 100
 # end-of-line-diagnostics = "error"
+# This is needed for OSC52 and cutting and pasting in zellij
+clipboard-provider = "termcode"
 
 [editor.lsp]
 display-inlay-hints = false
