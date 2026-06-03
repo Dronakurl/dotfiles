@@ -10,9 +10,10 @@ export ZSH_DISABLE_COMPFIX=true
 # export LANG="C.UTF-8"
 fpath+=~/.zfunc
 
-{{ if eq .chezmoi.hostname "bigone" }}
-export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
-{{ end }}
+# {{ if eq .chezmoi.hostname "bigone" }}
+# export PKG_CONFIG_PATH=/usr/lib/x86_64-linux-gnu/pkgconfig
+# {{ end }}
+
 # Old performance stuff, I played around with
 # autoload -Uz compinit && compinit
 # if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then

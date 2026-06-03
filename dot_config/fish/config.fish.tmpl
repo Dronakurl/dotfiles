@@ -12,9 +12,9 @@ set -gx TEXMFHOME $HOME/.local/share/texmf
 set -gx EDITOR {{ .editor | default "vim" }}
 set -gx VISUAL {{ .editor | default "vim" }}
 
-{{ if eq .chezmoi.hostname "bigone" }}
-set -gx PKG_CONFIG_PATH /usr/lib/x86_64-linux-gnu/pkgconfig
-{{ end }}
+# {{ if eq .chezmoi.hostname "bigone" }}
+# set -gx PKG_CONFIG_PATH /usr/lib/x86_64-linux-gnu/pkgconfig
+# {{ end }}
 
 # Enhanced PATH management
 function path_prepend
