@@ -18,7 +18,7 @@ idle-timeout = 150
 # crompletion-timeout = 100
 # end-of-line-diagnostics = "error"
 # This is needed for OSC52 and cutting and pasting in zellij
-clipboard-provider = "termcode"
+# clipboard-provider = "termcode"
 
 [editor.lsp]
 display-inlay-hints = false
@@ -59,7 +59,7 @@ right = [
   "file-type",
   "read-only-indicator",
 ]
-separator = "│"
+separator = " | "
 mode.normal = "N"
 mode.insert = "I"
 mode.select = "S"
@@ -160,6 +160,13 @@ A-R = "rotate_selection_contents_forward"
 o = "add_newline_below"
 O = "add_newline_above"
 q = ":reflow"
+R = ":reset-diff-change"
+
+[keys.normal.space.u]
+h = ":set-option lsp.display-inlay-hints true"
+H = ":set-option lsp.display-inlay-hints false"
+c = ":set-option clipboard-provider termcode"
+y = '@"+:yank-diagnostic<ret>'
 
 [keys.select]
 X = ["extend_line_above"]
