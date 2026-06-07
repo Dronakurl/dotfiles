@@ -167,6 +167,8 @@ h = ":set-option lsp.display-inlay-hints true"
 H = ":set-option lsp.display-inlay-hints false"
 c = ":set-option clipboard-provider termcode"
 y = '@"+:yank-diagnostic<ret>'
+F = "copy_between_registers"
+f = "@<space-u-F>%+"
 
 [keys.select]
 X = ["extend_line_above"]
