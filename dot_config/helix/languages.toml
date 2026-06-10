@@ -45,17 +45,11 @@ args = ["server"]
 [language-server.ruff.config.settings]
 args = ["--ignore", "E501"]
 
-# [[language]]
-# name = "toml"
-# auto-format = true
-# language-servers = ["taplo"]
-# formatter = { command = "taplo", args = ["fmt", "-"] }
-
 [[language]]
-name = "yaml"
-file-types = ["yaml", "yml"]
+name = "toml"
 auto-format = true
-formatter = { command = "bash", args = ["-c", " prettier --parser yaml"] }
+language-servers = ["taplo"]
+formatter = { command = "taplo", args = ["fmt", "-"] }
 
 [[language]]
 name = "docker-compose"
@@ -97,3 +91,27 @@ language-servers = ["typescript-language-server"]
 name = "javascript"
 auto-format = true
 language-servers = ["typescript-language-server"]
+
+# [language-server.rlsp-yaml]
+# command = "rlsp-yaml"
+
+# [language-server.rlsp-yaml.config]
+# customTags = ["!include", "!ref"]
+# keyOrdering = false
+# kubernetesVersion = "master"
+# schemaStore = true
+# formatValidation = true
+# formatPrintWidth = 80
+# formatSingleQuote = false
+# formatPreserveQuotes = false
+# # httpProxy = "http://proxy.corp:8080"
+
+# [language-server.rlsp-yaml.config.schemas]
+# "https://json.schemastore.org/github-workflow" = ".github/workflows/*.yml"
+
+# [[language]]
+# name = "yaml"
+# language-servers = ["rlsp-yaml"]
+# file-types = ["yml", "yaml"]
+# auto-format = true
+# # formatter = { command = "bash", args = ["-c", " prettier --parser yaml"] }
