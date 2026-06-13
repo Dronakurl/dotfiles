@@ -30,7 +30,7 @@ desc = "Calc size of selection or cwd"
 
 [[mgr.prepend_keymap]]
 on = ["s"]
-run = "search fd --args='-IHg -E .venv -E .archiv'"
+run = "search_do --via=fd --args='-IHg -E .venv -E .archiv'"
 desc = "Search files by name using fd"
 
 [[mgr.prepend_keymap]]
