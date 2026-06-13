@@ -1,20 +1,14 @@
+#!/usr/bin/env fish
 # vim: set filetype=fish :
 chezmoi:template:missing-key=invalid
 
 # Disable greeting
 set -g fish_greeting
 
-# Environment variables
-# set -gx LC_ALL en_US.UTF-8
-# set -gx LANG C.UTF-8
 set -gx PYTHONPYCACHEPREFIX /tmp/pycache
 set -gx TEXMFHOME $HOME/.local/share/texmf
 set -gx EDITOR {{ .editor | default "vim" }}
 set -gx VISUAL {{ .editor | default "vim" }}
-
-# {{ if eq .chezmoi.hostname "bigone" }}
-# set -gx PKG_CONFIG_PATH /usr/lib/x86_64-linux-gnu/pkgconfig
-# {{ end }}
 
 # Enhanced PATH management
 function path_prepend
@@ -70,7 +64,7 @@ alias vi="$HOME/.local/bin/vi.sh"
 alias hh="$HOME/.local/bin/hx.sh"
 alias hy="$HOME/.local/bin/hx.sh"
 alias h="$HOME/.local/bin/hx.sh"
-if test "$EDITOR" = "helix"
+if test "$EDITOR" = helix
     alias hx="helix"
 end
 alias dockerpruneall="$HOME/.local/bin/dockerpruneall.sh"
@@ -123,7 +117,6 @@ alias gss="git status -s"
 alias gsl="git status"
 alias nvimdiff='nvim -d'
 alias ur="uv run"
-alias zrc="chezmoi edit ~/.zshrc"
 alias zrc="chezmoi edit ~/.config/fish/config.fish"
 alias f="cd ~ && cd (find * -type d | fzf)"
 alias dropboxmama="rclone mount dropboxmama: ~/mnt --daemon --vfs-cache-mode writes --dropbox-encoding 'Slash,BackSlash,Del,RightSpace,InvalidUtf8,Dot,LeftPeriod' -vv"
@@ -181,8 +174,6 @@ if command -v just >/dev/null 2>&1
     just --completions fish | source
 end
 
-fish_vi_key_bindings
-
 # Start in insert mode
 function fish_default_mode_prompt
 end
@@ -194,10 +185,18 @@ set -g fish_cursor_insert line
 set -g fish_cursor_replace_one underscore
 set -g fish_cursor_visual block
 
-# Make sure we start in insert mode
-function fish_user_key_bindings
-    fish_vi_key_bindings insert
-end
+fish_helix_key_bindings
+
+# if command -v fish_helix_key_bindings >/dev/null 2>&1
+#     echo "helix keybindings"
+#     fish_helix_key_bindings
+# else
+#     echo "vim keybindings"
+#     fish_vi_key_bindings
+#     function fish_user_key_bindings
+#         fish_vi_key_bindings insert
+#     end
+# end
 
 bind -M insert \ck kill-line
 bind -M default \ck kill-line
