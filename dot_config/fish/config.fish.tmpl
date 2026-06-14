@@ -64,6 +64,9 @@ alias vi="$HOME/.local/bin/vi.sh"
 alias hh="$HOME/.local/bin/hx.sh"
 alias hy="$HOME/.local/bin/hx.sh"
 alias h="$HOME/.local/bin/hx.sh"
+if test -d $HOME/gallery/helix/runtime
+    export HELIX_RUNTIME=$HOME/gallery/helix/runtime
+end
 if test "$EDITOR" = helix
     alias hx="helix"
 end
@@ -75,7 +78,6 @@ alias ghc="gh copilot suggest"
 alias rclon_ssh='eval (ssh-agent -c); and ssh-add'
 
 function nj
-    export HELIX_RUNTIME=$HOME/gallery/helix/runtime
     neojoplin
 end
 
