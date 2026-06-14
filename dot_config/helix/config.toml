@@ -95,6 +95,12 @@ S-q = ":quit!"
   ":config-reload",
   ":open ~/.local/share/chezmoi/dot_config/helix/config.toml",
 ]
+"Z" = [
+  ":write",
+  ":insert-output chezmoi apply ~/.config/fish",
+  ":config-reload",
+  ":open ~/.local/share/chezmoi/dot_config/fish/config.fish.tmpl",
+]
 "." = [
   ':sh rm -f /tmp/unique-file',
   ':sh rm -f /tmp/unique-cwd-file',
