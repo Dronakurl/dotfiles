@@ -28,9 +28,14 @@ on = ["z"]
 run = "plugin what-size"
 desc = "Calc size of selection or cwd"
 
+# [[mgr.prepend_keymap]]
+# on = ["s"]
+# run = "search_do --via=fd --args='-IHg -E .venv -E .archiv'"
+# desc = "Search files by name using fd"
+
 [[mgr.prepend_keymap]]
 on = ["s"]
-run = "search_do --via=fd --args='-IHg -E .venv -E .archiv'"
+run = "search --via=fd"
 desc = "Search files by name using fd"
 
 [[mgr.prepend_keymap]]
