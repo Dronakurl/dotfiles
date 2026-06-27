@@ -7,7 +7,6 @@ theme = "tokyonight"
 # theme = "monokai"
 
 [editor]
-insecure = true
 line-number = "relative"
 bufferline = "always"
 gutters = ["diagnostics", "line-numbers", "diff"]
