@@ -88,6 +88,13 @@ language-servers = ["typescript-language-server"]
 # language-servers = ["rust-analyzer"]
 
 [[language]]
+name = "rust"
+auto-format = true
+#
+[language-server.rust-analyzer]
+config = { cargo = { allFeatures = true } }
+
+[[language]]
 name = "javascript"
 auto-format = true
 language-servers = ["typescript-language-server"]

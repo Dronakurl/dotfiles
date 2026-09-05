@@ -180,8 +180,11 @@ f = "@<A-S-r>%+"
 # d = [":set-option end-of-line-diagnostics error", ":set-option inline-diagnostics.cursor-line error"]
 # S-d = [":set-option end-of-line-diagnostics hint", ":set-option inline-diagnostics.cursor-line hint"]
 d = [
-  ":set-option inline-diagnostics.cursor-line error",
-  ":set-option end-of-line-diagnostics error",
+  ":toggle inline-diagnostics.cursor-line disable",
+  ":toggle inline-diagnostics.other-lines disable",
+  ":toggle end-of-line-diagnostics disable",
+  # ":set-option inline-diagnostics.cursor-line error",
+  # ":set-option end-of-line-diagnostics error",
 ]
 S-d = [
   ":set-option inline-diagnostics.cursor-line hint",
