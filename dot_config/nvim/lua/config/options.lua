@@ -5,7 +5,7 @@
 vim.lsp.config["harper_ls"] = {
   cmd = { "harper-ls", "--stdio" }, -- system binary in PATH
 
-  filetypes = { "markdown", "text", "gitcommit" },
+  filetypes = { "markdown", "text", "gitcommit", "typst" },
 
   root_markers = { ".git" },
 
