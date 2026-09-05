@@ -68,11 +68,11 @@ _hx_update_timestamp() {
 
 export HELIX_RUNTIME=$HOME/gallery/helix/runtime
 
-# Check if update is needed
-if _hx_needs_update; then
-    _hx_update || exit 1
-    _hx_update_timestamp
-fi
+# # Check if update is needed
+# if _hx_needs_update; then
+#     _hx_update || exit 1
+#     _hx_update_timestamp
+# fi
 
 # Run helix
 exec hx "$@"
