@@ -80,6 +80,7 @@ newline = "⏎"
 tabpad = "·"  # Tabs will look like "→···" (depending on tab width)
 
 [keys.normal.space]
+"M" = ":set-diff-base master"
 "m" = ":buffer-close"
 " " = "file_picker_in_current_buffer_directory"
 "," = "buffer_picker"
@@ -112,6 +113,7 @@ S-q = ":quit!"
 "t" = "@gOgoXms`ms`ms`"
 
 [keys.normal]
+K = "hover"
 C-r = "redo"
 C-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
 "+" = "switch_to_uppercase"
