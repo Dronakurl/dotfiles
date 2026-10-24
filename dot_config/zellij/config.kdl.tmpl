@@ -99,6 +99,8 @@ keybinds clear-defaults=true {
         bind "w" { SearchToggleOption "Wrap"; }
     }
     session {
+        bind "]" {FocusGuestSession; }
+        bind "[" {FocusHostSession; }
         bind "a" {
             LaunchOrFocusPlugin "zellij:about" {
                 floating true
@@ -309,7 +311,7 @@ theme "tokyo-night-dark"
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-default_layout "my-swap"
+// default_layout "my-swap"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
